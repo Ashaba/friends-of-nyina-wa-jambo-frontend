@@ -8,9 +8,7 @@ export default function Home() {
           <CardHeader>
             <CardTitle>Message of the Day</CardTitle>
           </CardHeader>
-          <CardContent>
-            Coming soon...
-          </CardContent>
+          <CardContent>Coming soon...</CardContent>
         </Card>
       </main>
     </div>
