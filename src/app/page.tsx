@@ -1,6 +1,6 @@
 import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
 
-export default function Home() {
+export default function Home(): React.ReactElement {
   return (
     <div className="min-h-screen bg-background">
       <main className="container mx-auto px-4 py-8">
