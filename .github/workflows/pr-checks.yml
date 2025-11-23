@@ -1,13 +1,12 @@
-name: test and build (push)
+name: PR checks (pull_request)
 
 on:
-  push:
+  pull_request:
     branches:
       - main
-  workflow_dispatch: {}
 
 jobs:
-  build-and-test:
+  pr-checks:
     runs-on: ubuntu-latest
 
     strategy:
@@ -36,8 +35,6 @@ jobs:
       - name: Check Prettier formatting
         run: npm run format:check
 
-      - name: Build project
-        run: npm run build
-
       - name: Run all checks
         run: npm run check
+
