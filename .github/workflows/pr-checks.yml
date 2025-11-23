@@ -37,4 +37,3 @@ jobs:
 
       - name: Run all checks
         run: npm run check
-
