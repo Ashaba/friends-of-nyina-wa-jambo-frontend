@@ -39,5 +39,20 @@ jobs:
       - name: Build project
         run: npm run build
 
+      - name: Start server
+        run: nohup npm run start &
+
+      - name: Wait for server
+        run: npx wait-on http://localhost:3000
+
+      - name: Install Playwright browsers
+        run: npx playwright install --with-deps
+
+      - name: Run unit tests
+        run: npm run test:ci
+
+      - name: Run E2E tests
+        run: npm run e2e:ci
+
       - name: Run all checks
         run: npm run check
