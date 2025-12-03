@@ -62,67 +62,44 @@ Check out our [Next.js deployment documentation](https://nextjs.org/docs/app/bui
 
 ## Testing
 
-This project includes a minimal test setup (Vitest for unit/DOM tests and Playwright for end-to-end tests). The repository contains example tests under `src` and `e2e/`.
-
-1) Install test dependencies
+### Unit Tests (Vitest)
 
 ```bash
-# Core unit test libs
-npm install -D vitest @vitest/ui jsdom @testing-library/react @testing-library/jest-dom @testing-library/user-event wait-on
+# Run once
+npm test
 
-# Playwright for E2E
-npm install -D @playwright/test
-# Install Playwright browsers (required once on each machine / CI)
-npx playwright install --with-deps
-```
-
-2) Unit tests (Vitest)
-
-```bash
-# Run tests once (CI-style)
-npm run test:ci
-
-# Run Vitest in interactive/watch mode
-npm run test:unit
+# Watch mode
 npm run test:watch
+
+# With UI
 npm run test:ui
+
+# CI mode
+npm run test:ci
 ```
 
-- Unit tests live under `src/**/*.test.{ts,tsx}` (example: `src/app/page.test.tsx`). The Vitest config is in `vitest.config.ts`.
+Unit tests: `src/**/*.test.{ts,tsx}`
 
-3) E2E tests (Playwright)
+### E2E Tests (Playwright)
 
 ```bash
-# Start the app (dev server or production-like)
-npm run dev
-# In another terminal run:
+# Build, start server, and run tests
+npm run build
+npm run start  # In separate terminal
 npm run e2e
 
-# Or run playwright tests directly (after building & starting server):
-# Build + start (production-like):
-npm run build
-npm run start
-# then
-npm run e2e
+# Run with visible browser
+npm run e2e:headed
 ```
 
-- E2E tests live under `e2e/` (example: `e2e/home.spec.ts`). Playwright config is in `playwright.config.ts` and it uses `http://localhost:3000` as the base URL.
+E2E tests: `e2e/*.spec.ts`
 
-4) CI behavior
+### Run All Checks
 
-The project's GitHub Actions workflows have been updated to:
-- install dependencies,
-- run type-check, lint, and format checks,
-- build the app,
-- start the server in the background and wait for port 3000,
-- install Playwright browsers,
-- run unit tests (Vitest) and E2E tests (Playwright).
+```bash
+# Type check, lint, and format check
+npm run check
 
-If you prefer running only unit tests on PRs and E2E on main pushes, I can update the workflows accordingly.
-
-5) Troubleshooting
-
-- If Playwright cannot connect to the app, ensure the server is running on port 3000 (the workflows and Playwright config expect that port).
-- If tests fail due to missing types, point your editor to `tsconfig.test.json` (included) so test globals like `vi` and `expect` are recognized.
-
-If you'd like, I can run the `npm install` and execute the tests in this environment to confirm everything passes — tell me to proceed.
+# All checks + build (CI)
+npm run ci
+```
