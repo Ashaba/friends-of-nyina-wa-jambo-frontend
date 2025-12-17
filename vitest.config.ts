@@ -21,5 +21,11 @@ export default defineConfig({
       "e2e",
       "playwright-report",
     ],
+    coverage: {
+      provider: "istanbul",
+      reporter: ["text", "json", "html"],
+      include: ["src/**/*.test.{ts,tsx}"],
+      exclude: ["**/node_modules/**", "dist"],
+    },
   },
 });

@@ -1,13 +1,18 @@
-name: PR checks (pull_request)
+name: PR Checks
 
 on:
   pull_request:
     branches:
       - main
 
+concurrency:
+  group: pr-${{ github.ref }}
+  cancel-in-progress: true
+
 jobs:
-  pr-checks:
+  quality-and-tests:
     runs-on: ubuntu-latest
+    name: Quality Checks & Tests
 
     strategy:
       matrix:
@@ -26,32 +31,23 @@ jobs:
       - name: Install dependencies
         run: npm ci
 
-      - name: Run TypeScript type checking
-        run: npm run type-check
+      - name: Verify code quality (type-check, lint, format)
+        run: npm run verify
 
-      - name: Run ESLint
-        run: npm run lint
-
-      - name: Check Prettier formatting
-        run: npm run format:check
-
-      - name: Run all checks
-        run: npm run check
-
-      - name: Build project for tests
+      - name: Build project
         run: npm run build
 
-      - name: Start server
+      - name: Run unit tests
+        run: npm run test
+
+      - name: Start application server
         run: nohup npm run start &
 
-      - name: Wait for server
-        run: npx wait-on http://localhost:3000
+      - name: Wait for server to be ready
+        run: npx wait-on --timeout 30000 http://localhost:3000
 
       - name: Install Playwright browsers
         run: npx playwright install --with-deps
 
-      - name: Run unit tests
-        run: npm run test:ci
-
       - name: Run E2E tests
-        run: npm run e2e:ci
+        run: npm run e2e -- --reporter=github
