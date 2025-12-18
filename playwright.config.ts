@@ -1,9 +1,11 @@
 import { defineConfig, devices } from "@playwright/test";
 
+const PORT = process.env.PORT || "3000";
+
 export default defineConfig({
   testDir: "e2e",
   use: {
-    baseURL: "http://localhost:3000",
+    baseURL: `http://localhost:${PORT}`,
     headless: true,
   },
   projects: [{ name: "chromium", use: { ...devices["Desktop Chrome"] } }],

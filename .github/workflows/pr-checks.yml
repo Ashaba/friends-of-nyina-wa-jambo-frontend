@@ -42,6 +42,8 @@ jobs:
 
       - name: Start application server
         run: nohup npm run start &
+        env:
+          PORT: 3000
 
       - name: Wait for server to be ready
         run: npx wait-on --timeout 30000 http://localhost:3000

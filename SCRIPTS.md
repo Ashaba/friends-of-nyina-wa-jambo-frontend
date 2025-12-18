@@ -22,12 +22,12 @@ make ship
 
 ### Core Development Scripts
 
-| Script  | Command                 | Purpose                                 |
-| ------- | ----------------------- | --------------------------------------- |
-| `dev`   | `next dev --turbopack`  | Start development server with Turbopack |
-| `build` | `next build`            | Build for production                    |
-| `start` | `next start -p 3000`    | Run production server                   |
-| `clean` | Removes build artifacts | Reset build state                       |
+| Script  | Command                 | Purpose                                       |
+| ------- | ----------------------- | --------------------------------------------- |
+| `dev`   | `next dev --turbopack`  | Start development server with Turbopack       |
+| `build` | `next build`            | Build for production                          |
+| `start` | `next start`            | Run production server (respects PORT env var) |
+| `clean` | Removes build artifacts | Reset build state                             |
 
 ### Code Quality Scripts
 
@@ -236,7 +236,7 @@ E2E test configuration with:
 
 ### E2E tests time out
 
-- Server not starting: Check port 3000 is available
+- Server not starting: Set PORT environment variable or use default 3000
 - Slow network: Increase timeout in `playwright.config.ts`
 - Browser issues: `npx playwright install --with-deps`
 
