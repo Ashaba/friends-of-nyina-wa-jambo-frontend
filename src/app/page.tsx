@@ -1,10 +1,10 @@
 import React from "react";
 import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
-import { getGlobalSettings } from "@/lib/strapi";
+import { getMessageOfTheDay } from "@/lib/strapi";
 
 export default async function Home(): Promise<React.ReactElement> {
-  const global = await getGlobalSettings();
-  const message = global?.siteDescription || "Coming soon...";
+  const messageOfTheDay = await getMessageOfTheDay();
+  const message = messageOfTheDay?.message || "Coming soon...";
 
   return (
     <div className="min-h-screen bg-background">
