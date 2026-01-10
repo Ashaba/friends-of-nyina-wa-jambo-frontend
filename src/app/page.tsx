@@ -1,7 +1,11 @@
 import React from "react";
 import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
+import { getMessageOfTheDay } from "@/lib/strapi";
 
-export default function Home(): React.ReactElement {
+export default async function Home(): Promise<React.ReactElement> {
+  const messageOfTheDay = await getMessageOfTheDay();
+  const message = messageOfTheDay?.message || "Coming soon...";
+
   return (
     <div className="min-h-screen bg-background">
       <main className="container mx-auto px-4 py-8">
@@ -9,7 +13,7 @@ export default function Home(): React.ReactElement {
           <CardHeader>
             <CardTitle>Message of the Day</CardTitle>
           </CardHeader>
-          <CardContent>Coming soon...</CardContent>
+          <CardContent>{message}</CardContent>
         </Card>
       </main>
     </div>
