@@ -31,7 +31,8 @@ function isError<T>(result: StrapiResult<T>): result is StrapiError {
 
 async function fetchStrapi<T>(
   endpoint: string,
-  options: RequestInit = {}
+  options: RequestInit = {},
+  revalidateSeconds: number = 60 // Revalidate cache every 60 seconds
 ): Promise<T> {
   const url = `${STRAPI_API_URL}/api${endpoint}`;
 
@@ -48,6 +49,7 @@ async function fetchStrapi<T>(
   const response = await fetch(url, {
     ...options,
     headers,
+    next: { revalidate: revalidateSeconds }, // ISR: revalidate cached data
   });
 
   const result: StrapiResult<T> = await response.json();
