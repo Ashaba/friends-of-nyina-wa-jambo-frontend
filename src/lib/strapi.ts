@@ -32,7 +32,7 @@ function isError<T>(result: StrapiResult<T>): result is StrapiError {
 async function fetchStrapi<T>(
   endpoint: string,
   options: RequestInit = {},
-  revalidateSeconds: number = 60 // Revalidate cache every 60 seconds
+  tags: string[] = ["strapi"] // Cache tags for on-demand revalidation
 ): Promise<T> {
   const url = `${STRAPI_API_URL}/api${endpoint}`;
 
@@ -49,7 +49,7 @@ async function fetchStrapi<T>(
   const response = await fetch(url, {
     ...options,
     headers,
-    next: { revalidate: revalidateSeconds }, // ISR: revalidate cached data
+    next: { tags }, // Use tags for on-demand revalidation via webhooks
   });
 
   const result: StrapiResult<T> = await response.json();
@@ -76,7 +76,11 @@ export interface MessageOfTheDay {
 
 export async function getMessageOfTheDay(): Promise<MessageOfTheDay | null> {
   try {
-    const data = await fetchStrapi<MessageOfTheDay>("/message-of-the-day");
+    const data = await fetchStrapi<MessageOfTheDay>(
+      "/message-of-the-day",
+      {},
+      ["strapi", "strapi-message-of-the-day"] // Tags for targeted revalidation
+    );
     return data;
   } catch (error) {
     console.error("Failed to fetch message of the day:", error);
