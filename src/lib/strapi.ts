@@ -1,38 +1,22 @@
+import type {
+  MessageOfTheDay,
+  StrapiError,
+  StrapiResult,
+} from "@/types/strapi";
+
+export type { MessageOfTheDay } from "@/types/strapi";
+
 const STRAPI_API_URL = process.env.STRAPI_API_URL || "http://localhost:1337";
 const STRAPI_API_TOKEN = process.env.STRAPI_API_TOKEN;
 
-interface StrapiResponse<T> {
-  data: T;
-  meta?: {
-    pagination?: {
-      page: number;
-      pageSize: number;
-      pageCount: number;
-      total: number;
-    };
-  };
-}
-
-interface StrapiError {
-  data: null;
-  error: {
-    status: number;
-    name: string;
-    message: string;
-    details: Record<string, unknown>;
-  };
-}
-
-type StrapiResult<T> = StrapiResponse<T> | StrapiError;
-
-function isError<T>(result: StrapiResult<T>): result is StrapiError {
+function isStrapiError<T>(result: StrapiResult<T>): result is StrapiError {
   return "error" in result && result.error !== undefined;
 }
 
 async function fetchStrapi<T>(
   endpoint: string,
   options: RequestInit = {},
-  tags: string[] = ["strapi"] // Cache tags for on-demand revalidation
+  tags: string[] = ["strapi"]
 ): Promise<T> {
   const url = `${STRAPI_API_URL}/api${endpoint}`;
 
@@ -49,38 +33,24 @@ async function fetchStrapi<T>(
   const response = await fetch(url, {
     ...options,
     headers,
-    next: { tags }, // Use tags for on-demand revalidation via webhooks
+    next: { tags },
   });
 
   const result: StrapiResult<T> = await response.json();
 
-  if (isError(result)) {
+  if (isStrapiError(result)) {
     throw new Error(result.error.message);
   }
 
   return result.data;
 }
 
-// Message of the Day types
-export interface MessageOfTheDay {
-  id: number;
-  documentId: string;
-  title: string;
-  message: string;
-  author?: string;
-  displayDate?: string;
-  createdAt: string;
-  updatedAt: string;
-  publishedAt?: string;
-}
-
 export async function getMessageOfTheDay(): Promise<MessageOfTheDay | null> {
   try {
-    const data = await fetchStrapi<MessageOfTheDay>(
-      "/message-of-the-day",
-      {},
-      ["strapi", "strapi-message-of-the-day"] // Tags for targeted revalidation
-    );
+    const data = await fetchStrapi<MessageOfTheDay>("/message-of-the-day", {}, [
+      "strapi",
+      "strapi-message-of-the-day",
+    ]);
     return data;
   } catch (error) {
     console.error("Failed to fetch message of the day:", error);
