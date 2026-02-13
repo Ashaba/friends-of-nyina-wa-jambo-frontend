@@ -2,7 +2,7 @@ import Link from "next/link";
 import { Button } from "@/components/ui/button";
 import { Heart, Mail } from "lucide-react";
 
-export function CtaSection() {
+export function CtaSection(): React.JSX.Element {
   return (
     <section className="px-6 py-20">
       <div className="mx-auto max-w-7xl">

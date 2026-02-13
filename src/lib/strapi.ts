@@ -11,7 +11,12 @@ import type {
   Video,
 } from "@/types/strapi";
 
-export type { MessageOfTheDay, DailyMessage, Event, Video } from "@/types/strapi";
+export type {
+  MessageOfTheDay,
+  DailyMessage,
+  Event,
+  Video,
+} from "@/types/strapi";
 
 const STRAPI_API_URL = process.env.STRAPI_API_URL || "";
 const STRAPI_API_TOKEN = process.env.STRAPI_API_TOKEN || "";
@@ -26,7 +31,7 @@ function isStrapiError<T>(result: StrapiResult<T>): result is StrapiError {
  */
 async function fetchAPI<T>(
   path: string,
-  params?: Record<string, string>,
+  params?: Record<string, string>
 ): Promise<T | null> {
   if (!STRAPI_API_URL) return null;
 
@@ -34,7 +39,7 @@ async function fetchAPI<T>(
     const url = new URL(`/api${path}`, STRAPI_API_URL);
     if (params) {
       Object.entries(params).forEach(([key, value]) =>
-        url.searchParams.set(key, value),
+        url.searchParams.set(key, value)
       );
     }
 
@@ -60,7 +65,7 @@ async function fetchAPI<T>(
  */
 async function fetchStrapi<T>(
   endpoint: string,
-  tags: string[] = ["strapi"],
+  tags: string[] = ["strapi"]
 ): Promise<T | null> {
   if (!STRAPI_API_URL) return null;
 
@@ -90,7 +95,7 @@ async function fetchStrapi<T>(
  */
 export async function postAPI(
   path: string,
-  data: Record<string, unknown>,
+  data: Record<string, unknown>
 ): Promise<boolean> {
   if (!STRAPI_API_URL) return false;
 
@@ -134,14 +139,15 @@ export async function getMessageOfTheDay(): Promise<MessageOfTheDay | null> {
 export async function getDailyMessage(): Promise<DailyMessage | null> {
   const today = new Date().toISOString().split("T")[0];
 
-  const response = await fetchAPI<
-    StrapiResponse<StrapiDailyMessageAttributes>
-  >("/daily-messages", {
-    "filters[date][$eq]": today,
-    "filters[active][$eq]": "true",
-    "pagination[limit]": "1",
-    sort: "createdAt:desc",
-  });
+  const response = await fetchAPI<StrapiResponse<StrapiDailyMessageAttributes>>(
+    "/daily-messages",
+    {
+      "filters[date][$eq]": today,
+      "filters[active][$eq]": "true",
+      "pagination[limit]": "1",
+      sort: "createdAt:desc",
+    }
+  );
 
   if (!response?.data?.length) return null;
 
@@ -163,7 +169,7 @@ export async function getEvents(): Promise<Event[] | null> {
       sort: "date:asc",
       populate: "image",
       "pagination[limit]": "50",
-    },
+    }
   );
 
   if (!response?.data?.length) return null;
@@ -195,7 +201,7 @@ export async function getVideos(): Promise<Video[] | null> {
       sort: "publishedDate:desc",
       populate: "thumbnail",
       "pagination[limit]": "50",
-    },
+    }
   );
 
   if (!response?.data?.length) return null;

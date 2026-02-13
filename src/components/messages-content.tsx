@@ -100,7 +100,7 @@ const keyThemes = [
   },
 ];
 
-export function MessagesContent() {
+export function MessagesContent(): React.JSX.Element {
   const [openVisionary, setOpenVisionary] = useState<number | null>(0);
   const [openMessage, setOpenMessage] = useState<string | null>(null);
 
@@ -197,7 +197,7 @@ export function MessagesContent() {
                   <ChevronDown
                     className={cn(
                       "ml-4 h-5 w-5 shrink-0 text-muted-foreground transition-transform duration-300",
-                      openVisionary === idx && "rotate-180",
+                      openVisionary === idx && "rotate-180"
                     )}
                   />
                 </button>
@@ -220,9 +220,7 @@ export function MessagesContent() {
                               type="button"
                               className="flex w-full items-center justify-between p-4 text-left"
                               onClick={() =>
-                                setOpenMessage(
-                                  openMessage === key ? null : key,
-                                )
+                                setOpenMessage(openMessage === key ? null : key)
                               }
                               aria-expanded={openMessage === key}
                             >
@@ -232,7 +230,7 @@ export function MessagesContent() {
                               <ChevronDown
                                 className={cn(
                                   "ml-4 h-4 w-4 shrink-0 text-muted-foreground transition-transform duration-300",
-                                  openMessage === key && "rotate-180",
+                                  openMessage === key && "rotate-180"
                                 )}
                               />
                             </button>

@@ -8,7 +8,7 @@ export const metadata = {
     "Pray the Novena to Our Lady of Kibeho. Nine days of dedicated prayer, Scripture readings, reflections, and intercessions.",
 };
 
-export default function NovenasPage() {
+export default function NovenasPage(): React.JSX.Element {
   return (
     <PageLayout>
       <PageHero

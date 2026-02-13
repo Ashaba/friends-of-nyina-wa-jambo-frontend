@@ -42,21 +42,23 @@ const benefits = [
   },
 ];
 
-export function NewsletterContent() {
+export function NewsletterContent(): React.JSX.Element {
   const [submitted, setSubmitted] = useState(false);
   const [isSubmitting, setIsSubmitting] = useState(false);
 
-  async function handleSubmit(e: React.FormEvent<HTMLFormElement>) {
+  async function handleSubmit(
+    e: React.FormEvent<HTMLFormElement>
+  ): Promise<void> {
     e.preventDefault();
     setIsSubmitting(true);
 
     const form = e.currentTarget;
     const formData = new FormData(form);
     const checkboxes = form.querySelectorAll<HTMLInputElement>(
-      'input[type="checkbox"]:checked',
+      'input[type="checkbox"]:checked'
     );
     const preferences = Array.from(checkboxes).map(
-      (cb) => cb.nextSibling?.textContent || "",
+      (cb) => cb.nextSibling?.textContent || ""
     );
 
     await postAPI("/newsletter-subscribers", {
@@ -141,18 +143,14 @@ export function NewsletterContent() {
                   </h2>
                 </div>
 
-                <form
-                  onSubmit={handleSubmit}
-                  className="flex flex-col gap-5"
-                >
+                <form onSubmit={handleSubmit} className="flex flex-col gap-5">
                   <div className="grid grid-cols-1 gap-4 sm:grid-cols-2">
                     <div className="flex flex-col gap-2">
                       <Label
                         htmlFor="firstName"
                         className="text-sm font-medium text-foreground"
                       >
-                        First Name{" "}
-                        <span className="text-destructive">*</span>
+                        First Name <span className="text-destructive">*</span>
                       </Label>
                       <Input
                         id="firstName"
@@ -183,8 +181,7 @@ export function NewsletterContent() {
                       htmlFor="nlEmail"
                       className="text-sm font-medium text-foreground"
                     >
-                      Email Address{" "}
-                      <span className="text-destructive">*</span>
+                      Email Address <span className="text-destructive">*</span>
                     </Label>
                     <Input
                       id="nlEmail"

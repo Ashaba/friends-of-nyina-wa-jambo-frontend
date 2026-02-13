@@ -3,7 +3,7 @@ import Link from "next/link";
 import { Button } from "@/components/ui/button";
 import { ArrowRight } from "lucide-react";
 
-export function AboutSection() {
+export function AboutSection(): React.JSX.Element {
   return (
     <section className="px-6 py-20">
       <div className="mx-auto max-w-7xl">

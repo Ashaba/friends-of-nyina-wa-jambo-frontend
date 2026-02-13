@@ -1,6 +1,6 @@
 "use client";
 
-import { useState, useEffect } from "react";
+import { useMemo } from "react";
 import { BookOpen } from "lucide-react";
 import type { DailyMessage as DailyMessageType } from "@/types/strapi";
 
@@ -61,23 +61,20 @@ interface DailyMessageProps {
   cmsMessage?: DailyMessageType | null;
 }
 
-export function DailyMessage({ cmsMessage }: DailyMessageProps) {
-  const [todayMessage, setTodayMessage] = useState<DailyMessageType>(
-    cmsMessage || fallbackMessages[0],
-  );
-
-  useEffect(() => {
+export function DailyMessage({
+  cmsMessage,
+}: DailyMessageProps): React.JSX.Element {
+  const todayMessage = useMemo<DailyMessageType>(() => {
     if (cmsMessage) {
-      setTodayMessage(cmsMessage);
-      return;
+      return cmsMessage;
     }
     const today = new Date();
     const dayOfYear = Math.floor(
       (today.getTime() - new Date(today.getFullYear(), 0, 0).getTime()) /
-        86400000,
+        86400000
     );
     const index = dayOfYear % fallbackMessages.length;
-    setTodayMessage(fallbackMessages[index]);
+    return fallbackMessages[index];
   }, [cmsMessage]);
 
   return (

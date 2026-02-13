@@ -10,7 +10,7 @@ const novenadays = [
     day: 1,
     theme: "Faith",
     scripture:
-      "\"Blessed is she who believed that the Lord's promises to her would be fulfilled.\" — Luke 1:45",
+      '"Blessed is she who believed that the Lord\'s promises to her would be fulfilled." — Luke 1:45',
     reflection:
       "On this first day, we ask Our Lady of Kibeho to strengthen our faith. She appeared to simple students and asked them to believe. Let us also open our hearts to the grace of deeper faith in God's promises.",
     prayer:
@@ -96,7 +96,7 @@ const novenadays = [
   },
 ];
 
-export function NovenasContent() {
+export function NovenasContent(): React.JSX.Element {
   const [activeDay, setActiveDay] = useState<number | null>(1);
 
   return (
@@ -144,7 +144,7 @@ export function NovenasContent() {
                 "min-w-[48px]",
                 activeDay === day.day
                   ? "bg-primary text-primary-foreground"
-                  : "border-border text-foreground hover:bg-secondary",
+                  : "border-border text-foreground hover:bg-secondary"
               )}
             >
               Day {day.day}
@@ -161,7 +161,7 @@ export function NovenasContent() {
                 "overflow-hidden rounded-lg border bg-card transition-all",
                 activeDay === day.day
                   ? "border-primary/30 shadow-md"
-                  : "border-border",
+                  : "border-border"
               )}
             >
               <button
@@ -185,7 +185,7 @@ export function NovenasContent() {
                 <ChevronDown
                   className={cn(
                     "ml-4 h-5 w-5 shrink-0 text-muted-foreground transition-transform duration-300",
-                    activeDay === day.day && "rotate-180",
+                    activeDay === day.day && "rotate-180"
                   )}
                 />
               </button>

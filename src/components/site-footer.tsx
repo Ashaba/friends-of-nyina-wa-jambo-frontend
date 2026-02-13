@@ -28,7 +28,7 @@ const footerLinks = [
   },
 ];
 
-export function SiteFooter() {
+export function SiteFooter(): React.JSX.Element {
   return (
     <footer className="border-t border-border bg-primary text-primary-foreground">
       <div className="mx-auto max-w-7xl px-6 py-16 lg:px-8">

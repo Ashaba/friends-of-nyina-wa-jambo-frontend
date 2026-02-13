@@ -19,12 +19,14 @@ const categories = [
   "Other",
 ];
 
-export function PrayerRequestForm() {
+export function PrayerRequestForm(): React.JSX.Element {
   const [submitted, setSubmitted] = useState(false);
   const [isSubmitting, setIsSubmitting] = useState(false);
   const [selectedCategory, setSelectedCategory] = useState<string | null>(null);
 
-  async function handleSubmit(e: React.FormEvent<HTMLFormElement>) {
+  async function handleSubmit(
+    e: React.FormEvent<HTMLFormElement>
+  ): Promise<void> {
     e.preventDefault();
     setIsSubmitting(true);
 
@@ -162,7 +164,7 @@ export function PrayerRequestForm() {
                       type="button"
                       onClick={() =>
                         setSelectedCategory(
-                          selectedCategory === cat ? null : cat,
+                          selectedCategory === cat ? null : cat
                         )
                       }
                       className={`rounded-full border px-4 py-2 text-sm font-medium transition-colors ${

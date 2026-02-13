@@ -8,7 +8,7 @@ export const metadata = {
     "Submit your prayer intentions to the Friends of Nyina wa Jambo community. We will pray for you through the intercession of Our Lady of Kibeho.",
 };
 
-export default function PrayerRequestsPage() {
+export default function PrayerRequestsPage(): React.JSX.Element {
   return (
     <PageLayout>
       <PageHero

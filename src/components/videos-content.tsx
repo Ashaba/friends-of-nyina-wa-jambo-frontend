@@ -73,7 +73,7 @@ const videoCategories = [
   "Prayers",
 ];
 
-function getCategoryColor(category: string) {
+function getCategoryColor(category: string): string {
   switch (category) {
     case "Pilgrimages":
       return "bg-primary text-primary-foreground";
@@ -92,9 +92,10 @@ interface VideosContentProps {
   cmsVideos?: Video[] | null;
 }
 
-export function VideosContent({ cmsVideos }: VideosContentProps) {
-  const videos =
-    cmsVideos && cmsVideos.length > 0 ? cmsVideos : fallbackVideos;
+export function VideosContent({
+  cmsVideos,
+}: VideosContentProps): React.JSX.Element {
+  const videos = cmsVideos && cmsVideos.length > 0 ? cmsVideos : fallbackVideos;
   const [filter, setFilter] = useState("All");
   const [activeVideo, setActiveVideo] = useState<Video | null>(null);
 
@@ -116,7 +117,7 @@ export function VideosContent({ cmsVideos }: VideosContentProps) {
                 className={cn(
                   filter === cat
                     ? "bg-primary text-primary-foreground"
-                    : "border-border text-foreground hover:bg-secondary",
+                    : "border-border text-foreground hover:bg-secondary"
                 )}
               >
                 {cat}
@@ -165,7 +166,7 @@ export function VideosContent({ cmsVideos }: VideosContentProps) {
                       <span
                         className={cn(
                           "inline-block rounded-full px-2 py-0.5 text-xs font-semibold",
-                          getCategoryColor(video.category),
+                          getCategoryColor(video.category)
                         )}
                       >
                         {video.category}
@@ -178,7 +179,7 @@ export function VideosContent({ cmsVideos }: VideosContentProps) {
                             month: "short",
                             day: "numeric",
                             year: "numeric",
-                          },
+                          }
                         )}
                       </span>
                     </div>
@@ -234,12 +235,16 @@ export function VideosContent({ cmsVideos }: VideosContentProps) {
         <div
           className="fixed inset-0 z-[100] flex items-center justify-center bg-foreground/80 p-4 backdrop-blur-sm"
           onClick={() => setActiveVideo(null)}
+          onKeyDown={(e) => {
+            if (e.key === "Escape") setActiveVideo(null);
+          }}
           role="dialog"
           aria-modal="true"
           aria-label={`Playing: ${activeVideo.title}`}
         >
           <div
             className="relative w-full max-w-4xl overflow-hidden rounded-lg bg-card shadow-2xl"
+            role="document"
             onClick={(e) => e.stopPropagation()}
           >
             {/* Close button */}
@@ -277,7 +282,7 @@ export function VideosContent({ cmsVideos }: VideosContentProps) {
               <span
                 className={cn(
                   "mb-2 inline-block rounded-full px-2 py-0.5 text-xs font-semibold",
-                  getCategoryColor(activeVideo.category),
+                  getCategoryColor(activeVideo.category)
                 )}
               >
                 {activeVideo.category}

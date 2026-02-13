@@ -8,7 +8,7 @@ export const metadata = {
     "Subscribe to the Friends of Nyina wa Jambo newsletter and stay connected with the latest messages, events, and prayer intentions.",
 };
 
-export default function NewsletterPage() {
+export default function NewsletterPage(): React.JSX.Element {
   return (
     <PageLayout>
       <PageHero

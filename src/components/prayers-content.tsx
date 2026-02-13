@@ -103,9 +103,9 @@ const prayers = [
   },
 ];
 
-export function PrayersContent() {
+export function PrayersContent(): React.JSX.Element {
   const [expandedPrayer, setExpandedPrayer] = useState<string | null>(
-    "seven-sorrows",
+    "seven-sorrows"
   );
   const [expandedSection, setExpandedSection] = useState<string | null>(null);
 
@@ -125,7 +125,7 @@ export function PrayersContent() {
                 className="flex w-full items-center justify-between p-8 text-left"
                 onClick={() =>
                   setExpandedPrayer(
-                    expandedPrayer === prayer.id ? null : prayer.id,
+                    expandedPrayer === prayer.id ? null : prayer.id
                   )
                 }
                 aria-expanded={expandedPrayer === prayer.id}
@@ -147,7 +147,7 @@ export function PrayersContent() {
                 <ChevronDown
                   className={cn(
                     "ml-4 h-5 w-5 shrink-0 text-muted-foreground transition-transform duration-300",
-                    expandedPrayer === prayer.id && "rotate-180",
+                    expandedPrayer === prayer.id && "rotate-180"
                   )}
                 />
               </button>
@@ -168,7 +168,7 @@ export function PrayersContent() {
                               className="flex w-full items-center justify-between p-4 text-left"
                               onClick={() =>
                                 setExpandedSection(
-                                  expandedSection === key ? null : key,
+                                  expandedSection === key ? null : key
                                 )
                               }
                               aria-expanded={expandedSection === key}
@@ -179,7 +179,7 @@ export function PrayersContent() {
                               <ChevronDown
                                 className={cn(
                                   "ml-4 h-4 w-4 shrink-0 text-muted-foreground transition-transform duration-300",
-                                  expandedSection === key && "rotate-180",
+                                  expandedSection === key && "rotate-180"
                                 )}
                               />
                             </button>
@@ -223,7 +223,7 @@ export function PrayersContent() {
                   className="flex w-full items-center justify-between p-6 text-left"
                   onClick={() =>
                     setExpandedPrayer(
-                      expandedPrayer === prayer.id ? null : prayer.id,
+                      expandedPrayer === prayer.id ? null : prayer.id
                     )
                   }
                   aria-expanded={expandedPrayer === prayer.id}
@@ -239,7 +239,7 @@ export function PrayersContent() {
                   <ChevronDown
                     className={cn(
                       "ml-4 h-5 w-5 shrink-0 text-muted-foreground transition-transform duration-300",
-                      expandedPrayer === prayer.id && "rotate-180",
+                      expandedPrayer === prayer.id && "rotate-180"
                     )}
                   />
                 </button>

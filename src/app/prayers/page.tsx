@@ -8,7 +8,7 @@ export const metadata = {
     "Pray the Rosary of the Seven Sorrows and other devotional prayers given through Our Lady of Kibeho.",
 };
 
-export default function PrayersPage() {
+export default function PrayersPage(): React.JSX.Element {
   return (
     <PageLayout>
       <PageHero

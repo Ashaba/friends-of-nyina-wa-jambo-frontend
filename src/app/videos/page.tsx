@@ -9,7 +9,7 @@ export const metadata = {
     "Watch pilgrimage recordings, visionary encounters, prayer guides, and testimonies from the Friends of Nyina wa Jambo community.",
 };
 
-export default async function VideosPage() {
+export default async function VideosPage(): Promise<React.JSX.Element> {
   const videos = await getVideos();
 
   return (

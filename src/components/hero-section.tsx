@@ -3,7 +3,7 @@ import Link from "next/link";
 import { Button } from "@/components/ui/button";
 import { ArrowRight } from "lucide-react";
 
-export function HeroSection() {
+export function HeroSection(): React.JSX.Element {
   return (
     <section className="relative flex min-h-[85vh] items-center justify-center overflow-hidden">
       {/* Background image */}

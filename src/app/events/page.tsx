@@ -9,7 +9,7 @@ export const metadata = {
     "Discover upcoming pilgrimages, prayer gatherings, retreats, and community events organised by the Friends of Nyina wa Jambo.",
 };
 
-export default async function EventsPage() {
+export default async function EventsPage(): Promise<React.JSX.Element> {
   const events = await getEvents();
 
   return (

@@ -26,7 +26,10 @@ test("homepage has working navigation", async ({ page }) => {
 
 test("can navigate to prayers page", async ({ page }) => {
   await page.goto("/prayers");
-  const heading = page.getByRole("heading", { name: /Prayers & Devotions/i });
+  const heading = page.getByRole("heading", {
+    name: "Prayers & Devotions",
+    exact: true,
+  });
   await expect(heading).toBeVisible();
 });
 

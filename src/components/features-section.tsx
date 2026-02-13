@@ -26,7 +26,7 @@ const features = [
   },
 ];
 
-export function FeaturesSection() {
+export function FeaturesSection(): React.JSX.Element {
   return (
     <section className="bg-secondary px-6 py-20">
       <div className="mx-auto max-w-7xl">

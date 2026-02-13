@@ -8,7 +8,7 @@ export const metadata = {
     "Explore the messages given by Our Lady of Kibeho to the three visionaries: Alphonsine, Nathalie, and Marie Claire.",
 };
 
-export default function MessagesPage() {
+export default function MessagesPage(): React.JSX.Element {
   return (
     <PageLayout>
       <PageHero

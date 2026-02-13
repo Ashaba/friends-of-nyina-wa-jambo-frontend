@@ -15,7 +15,7 @@ const navigation = [
   { name: "Prayer Requests", href: "/prayer-requests" },
 ];
 
-export function SiteHeader() {
+export function SiteHeader(): React.JSX.Element {
   const [mobileMenuOpen, setMobileMenuOpen] = useState(false);
 
   return (
@@ -83,10 +83,7 @@ export function SiteHeader() {
                 {item.name}
               </Link>
             ))}
-            <Link
-              href="/newsletter"
-              onClick={() => setMobileMenuOpen(false)}
-            >
+            <Link href="/newsletter" onClick={() => setMobileMenuOpen(false)}>
               <Button className="mt-2 w-full bg-primary text-primary-foreground hover:bg-primary/90">
                 Subscribe to Newsletter
               </Button>

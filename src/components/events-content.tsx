@@ -87,7 +87,7 @@ const eventTypes = [
   "Vigil",
 ];
 
-function getTypeColor(type: string) {
+function getTypeColor(type: string): string {
   switch (type) {
     case "Feast Day":
       return "bg-accent text-accent-foreground";
@@ -106,12 +106,13 @@ interface EventsContentProps {
   cmsEvents?: Event[] | null;
 }
 
-export function EventsContent({ cmsEvents }: EventsContentProps) {
-  const events =
-    cmsEvents && cmsEvents.length > 0 ? cmsEvents : fallbackEvents;
+export function EventsContent({
+  cmsEvents,
+}: EventsContentProps): React.JSX.Element {
+  const events = cmsEvents && cmsEvents.length > 0 ? cmsEvents : fallbackEvents;
   const [filter, setFilter] = useState("All");
   const [expandedEvent, setExpandedEvent] = useState<number | null>(
-    events[0]?.id ?? 1,
+    events[0]?.id ?? 1
   );
 
   const filteredEvents =
@@ -131,7 +132,7 @@ export function EventsContent({ cmsEvents }: EventsContentProps) {
               className={cn(
                 filter === type
                   ? "bg-primary text-primary-foreground"
-                  : "border-border text-foreground hover:bg-secondary",
+                  : "border-border text-foreground hover:bg-secondary"
               )}
             >
               {type}
@@ -161,7 +162,7 @@ export function EventsContent({ cmsEvents }: EventsContentProps) {
                       <span
                         className={cn(
                           "mb-3 inline-block rounded-full px-3 py-1 text-xs font-semibold",
-                          getTypeColor(event.type),
+                          getTypeColor(event.type)
                         )}
                       >
                         {event.type}
@@ -208,7 +209,7 @@ export function EventsContent({ cmsEvents }: EventsContentProps) {
                   className="flex w-full items-center justify-between p-6 text-left"
                   onClick={() =>
                     setExpandedEvent(
-                      expandedEvent === event.id ? null : event.id,
+                      expandedEvent === event.id ? null : event.id
                     )
                   }
                   aria-expanded={expandedEvent === event.id}
@@ -222,7 +223,7 @@ export function EventsContent({ cmsEvents }: EventsContentProps) {
                         <span
                           className={cn(
                             "inline-block rounded-full px-2 py-0.5 text-xs font-semibold",
-                            getTypeColor(event.type),
+                            getTypeColor(event.type)
                           )}
                         >
                           {event.type}
@@ -239,7 +240,7 @@ export function EventsContent({ cmsEvents }: EventsContentProps) {
                   <ChevronRight
                     className={cn(
                       "ml-4 h-5 w-5 shrink-0 text-muted-foreground transition-transform duration-300",
-                      expandedEvent === event.id && "rotate-90",
+                      expandedEvent === event.id && "rotate-90"
                     )}
                   />
                 </button>

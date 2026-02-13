@@ -4,7 +4,11 @@ interface PageHeroProps {
   description?: string;
 }
 
-export function PageHero({ title, subtitle, description }: PageHeroProps) {
+export function PageHero({
+  title,
+  subtitle,
+  description,
+}: PageHeroProps): React.JSX.Element {
   return (
     <section className="bg-primary px-6 py-20">
       <div className="mx-auto max-w-4xl text-center">

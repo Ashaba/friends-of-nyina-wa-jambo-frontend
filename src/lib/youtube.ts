@@ -33,7 +33,7 @@ export function getYouTubeThumbnail(
     | "maxresdefault"
     | "hqdefault"
     | "mqdefault"
-    | "sddefault" = "hqdefault",
+    | "sddefault" = "hqdefault"
 ): string | null {
   const id = getYouTubeId(url);
   if (!id) return null;
