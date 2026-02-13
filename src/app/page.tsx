@@ -1,21 +1,26 @@
-import React from "react";
-import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
-import { getMessageOfTheDay } from "@/lib/strapi";
+import { getDailyMessage } from "@/lib/strapi";
+import { SiteHeader } from "@/components/site-header";
+import { SiteFooter } from "@/components/site-footer";
+import { HeroSection } from "@/components/hero-section";
+import { DailyMessage } from "@/components/daily-message";
+import { AboutSection } from "@/components/about-section";
+import { FeaturesSection } from "@/components/features-section";
+import { CtaSection } from "@/components/cta-section";
 
-export default async function Home(): Promise<React.ReactElement> {
-  const messageOfTheDay = await getMessageOfTheDay();
-  const message = messageOfTheDay?.message || "Coming soon...";
+export default async function Home() {
+  const cmsMessage = await getDailyMessage();
 
   return (
-    <div className="min-h-screen bg-background">
-      <main className="container mx-auto px-4 py-8">
-        <Card className="max-w-lg mx-auto mt-10 text-center">
-          <CardHeader>
-            <CardTitle>Message of the Day</CardTitle>
-          </CardHeader>
-          <CardContent>{message}</CardContent>
-        </Card>
+    <>
+      <SiteHeader />
+      <main className="min-h-screen">
+        <HeroSection />
+        <DailyMessage cmsMessage={cmsMessage} />
+        <AboutSection />
+        <FeaturesSection />
+        <CtaSection />
       </main>
-    </div>
+      <SiteFooter />
+    </>
   );
 }
