@@ -7,9 +7,11 @@ const REVALIDATION_SECRET = process.env.REVALIDATION_SECRET;
 // Map Strapi model names to cache tags
 const MODEL_TO_TAG: Record<string, string> = {
   "message-of-the-day": "strapi-message-of-the-day",
-  // Add more mappings as you add content types
-  // "article": "strapi-articles",
-  // "page": "strapi-pages",
+  "daily-message": "strapi-daily-message",
+  event: "strapi-events",
+  video: "strapi-videos",
+  "newsletter-subscriber": "strapi-newsletter",
+  "prayer-request": "strapi-prayer-requests",
 };
 
 export async function POST(request: NextRequest): Promise<NextResponse> {

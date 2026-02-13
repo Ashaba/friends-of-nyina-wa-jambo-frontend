@@ -1,16 +1,22 @@
 import type { Metadata } from "next";
-import { Nunito } from "next/font/google";
+import { Inter, Playfair_Display } from "next/font/google";
 import { SpeedInsights } from "@vercel/speed-insights/next";
 import "./globals.css";
 
-const nunito = Nunito({
+const inter = Inter({
   subsets: ["latin"],
-  variable: "--font-nunito",
+  variable: "--font-inter",
+});
+
+const playfair = Playfair_Display({
+  subsets: ["latin"],
+  variable: "--font-playfair",
 });
 
 export const metadata: Metadata = {
-  title: "Friends of Nyina wa Jambo",
-  description: "Spreading the Message of Our Lady of Kibeho",
+  title: "Friends of Nyina wa Jambo | Our Lady of Kibeho",
+  description:
+    "Friends of Nyina wa Jambo - A movement spreading the messages of Our Lady of Kibeho, Mother of the Word. Join us in prayer, novenas, and sharing the message of hope, repentance, and peace to the world.",
 };
 
 export default function RootLayout({
@@ -19,11 +25,8 @@ export default function RootLayout({
   children: React.ReactNode;
 }>): React.ReactElement {
   return (
-    <html lang="en">
-      <body className={`${nunito.variable} antialiased`}>
-        <header className="bg-primary text-white py-4 text-center text-2xl font-semibold">
-          Friends of Nyina wa Jambo
-        </header>
+    <html lang="en" className={`${inter.variable} ${playfair.variable}`}>
+      <body className="font-sans antialiased">
         {children}
         <SpeedInsights />
       </body>
