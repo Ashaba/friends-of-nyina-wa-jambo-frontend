@@ -30,8 +30,8 @@ export function HeroSection(): React.JSX.Element {
           Mother of the Word
         </p>
         <p className="mx-auto mt-6 max-w-2xl text-lg leading-relaxed text-background/85 md:text-xl">
-          &ldquo;I have come to prepare the way for my Son, for his return. The
-          world is on the edge of catastrophe. Repent, repent, repent!&rdquo;
+          &ldquo;The World is in danger, its on the verge of falling into a deep
+          ditch. Repent, repent, repent!&rdquo;
         </p>
         <div className="mt-10 flex flex-col items-center justify-center gap-4 sm:flex-row">
           <Link href="/messages">

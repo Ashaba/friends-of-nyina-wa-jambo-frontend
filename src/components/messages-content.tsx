@@ -144,7 +144,16 @@ export function MessagesContent(): React.JSX.Element {
                   Remarkably, during the visions on August 19, 1982, the
                   visionaries were shown terrifying images of Rwanda engulfed in
                   violence and bloodshed &mdash; a prophetic warning that was
-                  tragically fulfilled during the 1994 Rwandan genocide.
+                  tragically fulfilled during the{" "}
+                  <a
+                    href="https://en.wikipedia.org/wiki/Rwandan_genocide"
+                    target="_blank"
+                    rel="noopener noreferrer"
+                    className="underline underline-offset-2 hover:text-primary"
+                  >
+                    1994 Rwandan genocide
+                  </a>
+                  .
                 </p>
               </div>
             </div>
