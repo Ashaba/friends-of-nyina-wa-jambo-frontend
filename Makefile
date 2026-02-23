@@ -19,62 +19,62 @@ help: ## Show this help message
 
 # Setup & Installation
 setup: ## Install dependencies and initialize project
-	npm ci
-	npx playwright install --with-deps
+	pnpm install --frozen-lockfile
+	pnpx playwright install --with-deps
 
 # Development
 dev: ## Start development server with Turbopack
-	npm run dev
+	pnpm run dev
 
 build: ## Build for production
-	npm run build
+	pnpm run build
 
 start: ## Start production server
-	npm run start
+	pnpm run start
 
 clean: ## Clean build artifacts, test results, and cache
-	npm run clean
+	pnpm run clean
 
 # Code Quality
 lint: ## Run ESLint on all files
-	npm run lint
+	pnpm run lint
 
 lint-fix: ## Fix ESLint issues automatically
-	npm run lint:fix
+	pnpm run lint:fix
 
 format: ## Format code with Prettier
-	npm run format
+	pnpm run format
 
 format-check: ## Check code formatting without changes
-	npm run format:check
+	pnpm run format:check
 
 type-check: ## Run TypeScript type checking
-	npm run type-check
+	pnpm run type-check
 
 verify: ## Run all code quality checks (lint, format, types)
-	npm run verify
+	pnpm run verify
 
 # Testing
 test: ## Run unit tests once
-	npm run test
+	pnpm run test
 
 test-watch: ## Run unit tests in watch mode
-	npm run test:watch
+	pnpm run test:watch
 
 test-ui: ## Run unit tests with UI dashboard
-	npm run test:ui
+	pnpm run test:ui
 
 test-coverage: ## Run unit tests with coverage report
-	npm run test:coverage
+	pnpm run test:coverage
 
 e2e: ## Run E2E tests
-	npm run e2e
+	pnpm run e2e
 
 e2e-headed: ## Run E2E tests with visible browser
-	npm run e2e:headed
+	pnpm run e2e:headed
 
 e2e-debug: ## Debug E2E tests step by step
-	npm run e2e:debug
+	pnpm run e2e:debug
 
 # Composite Commands
 ready: verify ## Alias for 'verify' - full quality checks
@@ -82,19 +82,19 @@ ready: verify ## Alias for 'verify' - full quality checks
 
 ship: ## Production-ready: verify → build → test → e2e
 	@echo "$(YELLOW)Running comprehensive verification...$(NC)"
-	npm run verify
+	pnpm run verify
 	@echo "$(YELLOW)Building for production...$(NC)"
-	npm run build
+	pnpm run build
 	@echo "$(YELLOW)Running unit tests...$(NC)"
-	npm run test
+	pnpm run test
 	@echo "$(YELLOW)Running E2E tests...$(NC)"
-	npm run e2e
+	pnpm run e2e
 	@echo "$(GREEN)✓ Project is ready for production!$(NC)"
 
 ci: ## CI environment - full verification and build
-	npm run ci
+	pnpm run ci
 
 analyze: ## Analyze project with coverage and quality metrics
-	npm run analyze
+	pnpm run analyze
 
 .DEFAULT_GOAL := help
