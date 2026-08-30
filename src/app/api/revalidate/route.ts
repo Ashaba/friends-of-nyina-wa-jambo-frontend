@@ -1,12 +1,14 @@
 import { revalidateTag } from "next/cache";
 import { NextRequest, NextResponse } from "next/server";
+import { createLogger } from "@/lib/logger";
+
+const log = createLogger("revalidate");
 
 // Webhook secret to verify requests from Strapi
 const REVALIDATION_SECRET = process.env.REVALIDATION_SECRET;
 
 // Map Strapi model names to cache tags
 const MODEL_TO_TAG: Record<string, string> = {
-  "message-of-the-day": "strapi-message-of-the-day",
   "daily-message": "strapi-daily-message",
   event: "strapi-events",
   video: "strapi-videos",
@@ -20,7 +22,7 @@ export async function POST(request: NextRequest): Promise<NextResponse> {
     const secret = request.headers.get("x-webhook-secret");
 
     if (!REVALIDATION_SECRET) {
-      console.error("REVALIDATION_SECRET is not configured");
+      log.error("secret.missing");
       return NextResponse.json(
         { error: "Server configuration error" },
         { status: 500 }
@@ -28,7 +30,7 @@ export async function POST(request: NextRequest): Promise<NextResponse> {
     }
 
     if (secret !== REVALIDATION_SECRET) {
-      console.error("Invalid webhook secret");
+      log.warn("secret.invalid");
       return NextResponse.json({ error: "Unauthorized" }, { status: 401 });
     }
 
@@ -49,11 +51,11 @@ export async function POST(request: NextRequest): Promise<NextResponse> {
     if (tag) {
       // Revalidate the specific tag
       revalidateTag(tag, "default");
-      console.log(`Revalidated tag: ${tag} for model: ${model}`);
+      log.info("tag.revalidated", { model, tag });
     } else {
       // If no specific tag, revalidate all strapi content
       revalidateTag("strapi", "default");
-      console.log(`Revalidated all strapi content for model: ${model}`);
+      log.info("tag.revalidated", { model, tag: "strapi", fallback: true });
     }
 
     return NextResponse.json({
@@ -63,7 +65,9 @@ export async function POST(request: NextRequest): Promise<NextResponse> {
       timestamp: new Date().toISOString(),
     });
   } catch (error) {
-    console.error("Revalidation error:", error);
+    log.error("request.failed", {
+      error: error instanceof Error ? error.message : String(error),
+    });
     return NextResponse.json(
       { error: "Failed to revalidate" },
       { status: 500 }
