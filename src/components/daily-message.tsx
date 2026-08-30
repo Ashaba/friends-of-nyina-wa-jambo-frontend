@@ -1,8 +1,13 @@
 "use client";
 
-import { useMemo } from "react";
+import { useEffect, useMemo } from "react";
 import { BookOpen } from "lucide-react";
-import type { DailyMessage as DailyMessageType } from "@/types/strapi";
+import { createLogger } from "@/lib/logger";
+import { FETCH_FAILURE_COPY } from "@/lib/content-source-status";
+import type {
+  DailyMessage as DailyMessageType,
+  StrapiFetchStatus,
+} from "@/types/strapi";
 
 const fallbackMessages: DailyMessageType[] = [
   {
@@ -56,14 +61,48 @@ const fallbackMessages: DailyMessageType[] = [
   },
 ];
 
+const log = createLogger("DailyMessage");
+
 interface DailyMessageProps {
   /** CMS-provided message for today. If null/undefined, falls back to rotating hardcoded messages. */
   cmsMessage?: DailyMessageType | null;
+  /** Outcome of the server-side content fetch, logged to the browser console. */
+  fetchStatus?: StrapiFetchStatus;
+  /** Vendor-neutral failure reason from the content fetch, if any. */
+  fetchDetail?: string;
 }
 
 export function DailyMessage({
   cmsMessage,
+  fetchStatus,
+  fetchDetail,
 }: DailyMessageProps): React.JSX.Element {
+  useEffect(() => {
+    if (!fetchStatus) return;
+
+    log.debug("fetch.attempted", { status: fetchStatus });
+
+    if (fetchStatus === "success") {
+      if (cmsMessage) {
+        log.debug("fetch.loaded", { status: fetchStatus });
+      } else {
+        // Reported success with nothing to render: the data layer and the
+        // component disagree, which the hardcoded rotation would otherwise hide.
+        log.warn("fetch.fallback", {
+          status: fetchStatus,
+          reason: "the content source reported success but returned no message",
+        });
+      }
+      return;
+    }
+
+    log.warn("fetch.fallback", {
+      status: fetchStatus,
+      reason: FETCH_FAILURE_COPY[fetchStatus].reason,
+      detail: fetchDetail,
+    });
+  }, [fetchStatus, fetchDetail, cmsMessage]);
+
   const todayMessage = useMemo<DailyMessageType>(() => {
     if (cmsMessage) {
       return cmsMessage;

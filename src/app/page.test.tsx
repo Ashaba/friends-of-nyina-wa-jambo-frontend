@@ -42,7 +42,11 @@ describe("Home Page", () => {
   });
 
   test("renders hero section with site branding", async () => {
-    vi.mocked(strapiLib.getDailyMessage).mockResolvedValue(null);
+    vi.mocked(strapiLib.getDailyMessage).mockResolvedValue({
+      data: null,
+      status: "network-error",
+      detail: "Content source could not be reached",
+    });
 
     const component = await Home();
     render(component);
@@ -56,7 +60,11 @@ describe("Home Page", () => {
   });
 
   test("renders daily message section with fallback when API returns null", async () => {
-    vi.mocked(strapiLib.getDailyMessage).mockResolvedValue(null);
+    vi.mocked(strapiLib.getDailyMessage).mockResolvedValue({
+      data: null,
+      status: "network-error",
+      detail: "Content source could not be reached",
+    });
 
     const component = await Home();
     render(component);
@@ -67,7 +75,11 @@ describe("Home Page", () => {
   });
 
   test("renders navigation links", async () => {
-    vi.mocked(strapiLib.getDailyMessage).mockResolvedValue(null);
+    vi.mocked(strapiLib.getDailyMessage).mockResolvedValue({
+      data: null,
+      status: "network-error",
+      detail: "Content source could not be reached",
+    });
 
     const component = await Home();
     render(component);
@@ -77,8 +89,56 @@ describe("Home Page", () => {
     expect(prayersLink.length).toBeGreaterThan(0);
   });
 
+  test("Home when the content fetch fails logs a vendor-neutral fallback warning", async () => {
+    // Arrange
+    vi.mocked(strapiLib.getDailyMessage).mockResolvedValue({
+      data: null,
+      status: "http-error",
+      detail: "Content source returned an error response",
+    });
+    const warn = vi.spyOn(console, "warn").mockImplementation(() => {});
+
+    // Act
+    const component = await Home();
+    render(component);
+
+    // Assert
+    expect(warn).toHaveBeenCalledWith(
+      "[DailyMessage] fetch.fallback",
+      expect.objectContaining({
+        status: "http-error",
+        detail: "Content source returned an error response",
+      })
+    );
+    warn.mockRestore();
+  });
+
+  test("Home when the content fetch fails logs nothing that names the CMS vendor", async () => {
+    // Arrange
+    vi.mocked(strapiLib.getDailyMessage).mockResolvedValue({
+      data: null,
+      status: "http-error",
+      detail: "Content source returned an error response",
+    });
+    const warn = vi.spyOn(console, "warn").mockImplementation(() => {});
+
+    // Act
+    const component = await Home();
+    render(component);
+
+    // Assert
+    expect(JSON.stringify(warn.mock.calls).toLowerCase()).not.toContain(
+      "strapi"
+    );
+    warn.mockRestore();
+  });
+
   test("renders footer", async () => {
-    vi.mocked(strapiLib.getDailyMessage).mockResolvedValue(null);
+    vi.mocked(strapiLib.getDailyMessage).mockResolvedValue({
+      data: null,
+      status: "network-error",
+      detail: "Content source could not be reached",
+    });
 
     const component = await Home();
     render(component);

@@ -8,14 +8,18 @@ import { FeaturesSection } from "@/components/features-section";
 import { CtaSection } from "@/components/cta-section";
 
 export default async function Home(): Promise<React.JSX.Element> {
-  const cmsMessage = await getDailyMessage();
+  const dailyMessage = await getDailyMessage();
 
   return (
     <>
       <SiteHeader />
       <main className="min-h-screen">
         <HeroSection />
-        <DailyMessage cmsMessage={cmsMessage} />
+        <DailyMessage
+          cmsMessage={dailyMessage.data}
+          fetchStatus={dailyMessage.status}
+          fetchDetail={dailyMessage.detail}
+        />
         <AboutSection />
         <FeaturesSection />
         <CtaSection />

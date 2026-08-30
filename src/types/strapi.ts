@@ -1,4 +1,9 @@
-// Strapi API response types for Friends of Nyina wa Jambo CMS
+// Strapi API response types for Friends of Nyina wa Jambo CMS.
+//
+// Shaped for Strapi 5 (see the backend's @strapi/strapi dependency). In v5 an
+// entry is FLAT — its fields sit directly on the object alongside `id` and
+// `documentId`. There is no `attributes` wrapper and no `data`/`attributes`
+// nesting on relations or media; that was the v4 format.
 
 export interface StrapiResponse<T> {
   data: StrapiEntry<T>[];
@@ -17,13 +22,23 @@ export interface StrapiSingleResponse<T> {
   meta: Record<string, unknown>;
 }
 
-export interface StrapiEntry<T> {
+/** A Strapi 5 entry: content fields flattened onto the entry itself. */
+export type StrapiEntry<T> = T & {
   id: number;
-  attributes: T & {
-    createdAt: string;
-    updatedAt: string;
-    publishedAt: string;
-  };
+  documentId: string;
+  createdAt: string;
+  updatedAt: string;
+  publishedAt: string | null;
+};
+
+/** A Strapi 5 media field, returned flat when populated (null when empty). */
+export interface StrapiMedia {
+  id: number;
+  documentId: string;
+  url: string;
+  alternativeText?: string | null;
+  width?: number;
+  height?: number;
 }
 
 export interface StrapiError {
@@ -40,7 +55,7 @@ export type StrapiResult<T> = StrapiResponse<T> | StrapiError;
 
 // --- Content Type Attribute Interfaces ---
 
-export interface StrapiDailyMessageAttributes {
+export interface StrapiDailyMessageFields {
   message: string;
   source: string;
   reflection: string;
@@ -48,7 +63,7 @@ export interface StrapiDailyMessageAttributes {
   active: boolean;
 }
 
-export interface StrapiEventAttributes {
+export interface StrapiEventFields {
   title: string;
   date: string;
   time: string;
@@ -61,60 +76,32 @@ export interface StrapiEventAttributes {
     | "Recurring"
     | "Vigil";
   description: string;
-  image?: {
-    data: {
-      attributes: {
-        url: string;
-        alternativeText?: string;
-      };
-    } | null;
-  };
+  image?: StrapiMedia | null;
   featured: boolean;
 }
 
-export interface StrapiVideoAttributes {
+export interface StrapiVideoFields {
   title: string;
   youtubeUrl: string;
   description: string;
   category: "Pilgrimages" | "Visionary Encounters" | "Testimonies" | "Prayers";
   publishedDate: string;
-  thumbnail?: {
-    data: {
-      attributes: {
-        url: string;
-        alternativeText?: string;
-      };
-    } | null;
-  };
+  thumbnail?: StrapiMedia | null;
 }
 
-export interface StrapiNewsletterSubscriberAttributes {
+export interface StrapiNewsletterSubscriberFields {
   firstName: string;
   lastName?: string;
   email: string;
   preferences: string[];
 }
 
-export interface StrapiPrayerRequestAttributes {
+export interface StrapiPrayerRequestFields {
   name?: string;
   email?: string;
   category: string;
   intention: string;
   isPublic: boolean;
-}
-
-// --- Legacy single-item response (message-of-the-day endpoint) ---
-
-export interface MessageOfTheDay {
-  id: number;
-  documentId: string;
-  title: string;
-  message: string;
-  author?: string;
-  displayDate?: string;
-  createdAt: string;
-  updatedAt: string;
-  publishedAt?: string;
 }
 
 // --- Flattened types for use in components ---
@@ -146,3 +133,21 @@ export interface Video {
   publishedDate: string;
   thumbnail?: string;
 }
+
+// --- Fetch diagnostics (used for logging CMS fetch attempts/failures) ---
+
+export type StrapiFetchStatus =
+  | "success"
+  | "not-configured"
+  | "empty"
+  | "http-error"
+  | "network-error";
+
+export interface StrapiFetchOutcome<T> {
+  data: T | null;
+  status: StrapiFetchStatus;
+  /** Human-readable reason, present whenever status is not "success". */
+  detail?: string;
+}
+
+export type DailyMessageResult = StrapiFetchOutcome<DailyMessage>;
