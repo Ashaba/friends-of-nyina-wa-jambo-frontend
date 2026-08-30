@@ -4,6 +4,7 @@ import { useState } from "react";
 import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
 import { Label } from "@/components/ui/label";
+import { HoneypotField } from "@/components/honeypot-field";
 import {
   Mail,
   BookOpen,
@@ -12,8 +13,9 @@ import {
   Bell,
   CheckCircle2,
   Loader2,
+  AlertCircle,
 } from "lucide-react";
-import { postAPI } from "@/lib/strapi";
+import { subscribeToNewsletter } from "@/lib/form-actions";
 
 const benefits = [
   {
@@ -45,30 +47,34 @@ const benefits = [
 export function NewsletterContent(): React.JSX.Element {
   const [submitted, setSubmitted] = useState(false);
   const [isSubmitting, setIsSubmitting] = useState(false);
+  const [error, setError] = useState<string | null>(null);
 
   async function handleSubmit(
     e: React.FormEvent<HTMLFormElement>
   ): Promise<void> {
     e.preventDefault();
+    setError(null);
     setIsSubmitting(true);
 
-    const form = e.currentTarget;
-    const formData = new FormData(form);
-    const checkboxes = form.querySelectorAll<HTMLInputElement>(
-      'input[type="checkbox"]:checked'
-    );
-    const preferences = Array.from(checkboxes).map(
-      (cb) => cb.nextSibling?.textContent || ""
-    );
+    // Read the fields before awaiting: `currentTarget` is null once React
+    // has moved past the event.
+    const formData = new FormData(e.currentTarget);
 
-    await postAPI("/newsletter-subscribers", {
-      firstName: formData.get("firstName") as string,
-      lastName: formData.get("lastName") as string,
-      email: formData.get("nlEmail") as string,
-      preferences,
+    const result = await subscribeToNewsletter({
+      firstName: String(formData.get("firstName") ?? ""),
+      lastName: String(formData.get("lastName") ?? ""),
+      email: String(formData.get("nlEmail") ?? ""),
+      preferences: formData.getAll("preferences").map(String),
+      website: String(formData.get("website") ?? ""),
     });
 
     setIsSubmitting(false);
+
+    // Only show the welcome once the address is actually stored.
+    if (!result.ok) {
+      setError(result.error ?? null);
+      return;
+    }
     setSubmitted(true);
   }
 
@@ -143,7 +149,12 @@ export function NewsletterContent(): React.JSX.Element {
                   </h2>
                 </div>
 
-                <form onSubmit={handleSubmit} className="flex flex-col gap-5">
+                <form
+                  onSubmit={handleSubmit}
+                  className="relative flex flex-col gap-5"
+                >
+                  <HoneypotField />
+
                   <div className="grid grid-cols-1 gap-4 sm:grid-cols-2">
                     <div className="flex flex-col gap-2">
                       <Label
@@ -211,6 +222,8 @@ export function NewsletterContent(): React.JSX.Element {
                         >
                           <input
                             type="checkbox"
+                            name="preferences"
+                            value={pref}
                             defaultChecked
                             className="h-4 w-4 rounded border-border text-primary focus:ring-primary"
                           />
@@ -219,6 +232,16 @@ export function NewsletterContent(): React.JSX.Element {
                       ))}
                     </div>
                   </div>
+
+                  {error && (
+                    <div
+                      role="alert"
+                      className="flex items-start gap-3 rounded-lg border border-destructive/40 bg-destructive/5 p-4 text-sm text-destructive"
+                    >
+                      <AlertCircle className="mt-0.5 h-4 w-4 shrink-0" />
+                      <p className="leading-relaxed">{error}</p>
+                    </div>
+                  )}
 
                   <Button
                     type="submit"

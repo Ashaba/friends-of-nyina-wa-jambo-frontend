@@ -7,6 +7,7 @@ import type {
   StrapiEventFields,
   StrapiVideoFields,
   StrapiFetchOutcome,
+  StrapiPostOutcome,
   DailyMessageResult,
   Event,
   Video,
@@ -153,13 +154,35 @@ async function fetchAPI<T>(
 }
 
 /**
+ * Reads the correction out of a 400 body.
+ *
+ * Only 400 is surfaced to visitors: those messages come from our own form
+ * controllers ("A first name is required."). Other 4xx/5xx bodies are
+ * infrastructure talk ("Forbidden") that would only confuse someone filling in
+ * a form, so callers show generic copy for those instead.
+ */
+async function readCorrection(res: Response): Promise<string | undefined> {
+  try {
+    const body = (await res.json()) as { error?: { message?: unknown } };
+    const message = body?.error?.message;
+    if (typeof message !== "string" || !message.trim()) return undefined;
+    return message.trim().slice(0, 200);
+  } catch {
+    return undefined;
+  }
+}
+
+/**
  * POST helper for Strapi — used for form submissions (prayer requests, newsletter).
- * Returns true on success, false on failure.
+ *
+ * Server-only: it reads the API token, so it must never be reached from a
+ * client component. Call it through the server actions in `lib/form-actions`.
+ * Never throws; returns an outcome the caller turns into visitor-facing copy.
  */
 export async function postAPI(
   path: string,
   data: Record<string, unknown>
-): Promise<boolean> {
+): Promise<StrapiPostOutcome> {
   const label = describeRequest(path);
 
   if (!STRAPI_API_URL) {
@@ -168,7 +191,7 @@ export async function postAPI(
       path: label,
       reason: "STRAPI_API_URL is not set",
     });
-    return false;
+    return { ok: false, status: "not-configured" };
   }
 
   const url = new URL(`/api${path}`, STRAPI_API_URL);
@@ -193,7 +216,15 @@ export async function postAPI(
         status: res.status,
         statusText: res.statusText,
       });
-      return false;
+
+      if (res.status === 400) {
+        return {
+          ok: false,
+          status: "invalid",
+          message: await readCorrection(res),
+        };
+      }
+      return { ok: false, status: "http-error" };
     }
 
     log.debug("request.succeeded", {
@@ -201,13 +232,13 @@ export async function postAPI(
       path: label,
       status: res.status,
     });
-    return true;
+    return { ok: true, status: "success" };
   } catch (error) {
     const detail = redact(
       error instanceof Error ? error.message : String(error)
     );
     log.error("request.threw", { method: "POST", path: label, error: detail });
-    return false;
+    return { ok: false, status: "network-error" };
   }
 }
 
