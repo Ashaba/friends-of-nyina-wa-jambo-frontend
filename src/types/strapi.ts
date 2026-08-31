@@ -94,9 +94,65 @@ export interface StrapiNewsletterSubscriberFields {
   lastName?: string;
   email: string;
   preferences: string[];
+  active: boolean;
 }
 
 export interface StrapiPrayerRequestFields {
+  name?: string;
+  email?: string;
+  category: string;
+  intention: string;
+  isPublic: boolean;
+}
+
+// --- Form submission (write path) ---
+
+/**
+ * Why a write to the content source ended as it did.
+ *
+ * `invalid` is the one status the visitor can act on: the content source
+ * rejected the payload and said why. Every other failure is ours, not theirs.
+ */
+export type StrapiPostStatus =
+  | "success"
+  | "not-configured"
+  | "invalid"
+  | "http-error"
+  | "network-error";
+
+export interface StrapiPostOutcome {
+  ok: boolean;
+  status: StrapiPostStatus;
+  /** Only set for `invalid`: a correction the visitor can be shown verbatim. */
+  message?: string;
+}
+
+/** What a form action reports back to the component that called it. */
+export interface FormResult {
+  ok: boolean;
+  /** Shown beside the form when `ok` is false. Never set on success. */
+  error?: string;
+}
+
+/**
+ * Anti-spam fields carried by both public forms.
+ *
+ * `website` is a honeypot: it is rendered off-screen and hidden from assistive
+ * technology, so a person never fills it in and a form-filling bot usually
+ * does. Any value at all marks the submission as automated.
+ */
+export interface SpamGuardFields {
+  website?: string;
+}
+
+export interface NewsletterSubscription extends SpamGuardFields {
+  firstName: string;
+  lastName?: string;
+  email: string;
+  preferences: string[];
+}
+
+export interface PrayerRequestSubmission extends SpamGuardFields {
   name?: string;
   email?: string;
   category: string;

@@ -5,8 +5,9 @@ import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
 import { Textarea } from "@/components/ui/textarea";
 import { Label } from "@/components/ui/label";
-import { Heart, Send, CheckCircle2, Loader2 } from "lucide-react";
-import { postAPI } from "@/lib/strapi";
+import { HoneypotField } from "@/components/honeypot-field";
+import { Heart, Send, CheckCircle2, Loader2, AlertCircle } from "lucide-react";
+import { submitPrayerRequest } from "@/lib/form-actions";
 
 const categories = [
   "Healing",
@@ -22,28 +23,37 @@ const categories = [
 export function PrayerRequestForm(): React.JSX.Element {
   const [submitted, setSubmitted] = useState(false);
   const [isSubmitting, setIsSubmitting] = useState(false);
+  const [error, setError] = useState<string | null>(null);
   const [selectedCategory, setSelectedCategory] = useState<string | null>(null);
 
   async function handleSubmit(
     e: React.FormEvent<HTMLFormElement>
   ): Promise<void> {
     e.preventDefault();
+    setError(null);
     setIsSubmitting(true);
 
-    const form = e.currentTarget;
-    const formData = new FormData(form);
-    const isPublic =
-      form.querySelector<HTMLInputElement>("#public")?.checked || false;
+    // Read the fields before awaiting: `currentTarget` is null once React
+    // has moved past the event.
+    const formData = new FormData(e.currentTarget);
 
-    await postAPI("/prayer-requests", {
-      name: formData.get("name") as string,
-      email: formData.get("email") as string,
+    const result = await submitPrayerRequest({
+      name: String(formData.get("name") ?? ""),
+      email: String(formData.get("email") ?? ""),
       category: selectedCategory || "General",
-      intention: formData.get("intention") as string,
-      isPublic,
+      intention: String(formData.get("intention") ?? ""),
+      isPublic: formData.get("isPublic") === "on",
+      website: String(formData.get("website") ?? ""),
     });
 
     setIsSubmitting(false);
+
+    // Only claim the intention was received once it actually was — a silent
+    // failure here means someone believes they are being prayed for.
+    if (!result.ok) {
+      setError(result.error ?? null);
+      return;
+    }
     setSubmitted(true);
   }
 
@@ -114,7 +124,12 @@ export function PrayerRequestForm(): React.JSX.Element {
 
           {/* Form */}
           <div className="lg:col-span-3">
-            <form onSubmit={handleSubmit} className="flex flex-col gap-6">
+            <form
+              onSubmit={handleSubmit}
+              className="relative flex flex-col gap-6"
+            >
+              <HoneypotField />
+
               <div className="flex flex-col gap-2">
                 <Label
                   htmlFor="name"
@@ -201,6 +216,7 @@ export function PrayerRequestForm(): React.JSX.Element {
                 <input
                   type="checkbox"
                   id="public"
+                  name="isPublic"
                   className="mt-1 h-4 w-4 rounded border-border text-primary focus:ring-primary"
                 />
                 <Label
@@ -211,6 +227,16 @@ export function PrayerRequestForm(): React.JSX.Element {
                   others can pray for me as well.
                 </Label>
               </div>
+
+              {error && (
+                <div
+                  role="alert"
+                  className="flex items-start gap-3 rounded-lg border border-destructive/40 bg-destructive/5 p-4 text-sm text-destructive"
+                >
+                  <AlertCircle className="mt-0.5 h-4 w-4 shrink-0" />
+                  <p className="leading-relaxed">{error}</p>
+                </div>
+              )}
 
               <Button
                 type="submit"
