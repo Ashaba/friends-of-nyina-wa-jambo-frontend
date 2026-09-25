@@ -48,15 +48,16 @@ export function AboutSection(): React.JSX.Element {
                 entire world.
               </p>
             </div>
-            <Link href="/messages" className="mt-2">
-              <Button
-                variant="outline"
-                className="border-primary text-primary hover:bg-primary hover:text-primary-foreground"
-              >
+            <Button
+              asChild
+              variant="outline"
+              className="mt-2 border-primary text-primary hover:bg-primary hover:text-primary-foreground"
+            >
+              <Link href="/messages">
                 Read the Full Messages
                 <ArrowRight className="ml-2 h-4 w-4" />
-              </Button>
-            </Link>
+              </Link>
+            </Button>
           </div>
         </div>
       </div>

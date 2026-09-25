@@ -18,14 +18,13 @@ export function CtaSection(): React.JSX.Element {
               We pray together for all who seek Our Lady&apos;s intercession and
               the grace of God in their lives.
             </p>
-            <Link href="/prayer-requests" className="mt-2">
-              <Button
-                size="lg"
-                className="bg-accent font-semibold text-accent-foreground hover:bg-accent/90"
-              >
-                Submit Your Intention
-              </Button>
-            </Link>
+            <Button
+              asChild
+              size="lg"
+              className="mt-2 bg-accent font-semibold text-accent-foreground hover:bg-accent/90"
+            >
+              <Link href="/prayer-requests">Submit Your Intention</Link>
+            </Button>
           </div>
 
           {/* Newsletter CTA */}
@@ -38,15 +37,14 @@ export function CtaSection(): React.JSX.Element {
               Receive daily messages, upcoming event notifications, prayer
               reflections, and community updates delivered to your inbox.
             </p>
-            <Link href="/newsletter" className="mt-2">
-              <Button
-                size="lg"
-                variant="outline"
-                className="border-primary font-semibold text-primary hover:bg-primary hover:text-primary-foreground"
-              >
-                Subscribe to Newsletter
-              </Button>
-            </Link>
+            <Button
+              asChild
+              size="lg"
+              variant="outline"
+              className="mt-2 border-primary font-semibold text-primary hover:bg-primary hover:text-primary-foreground"
+            >
+              <Link href="/newsletter">Subscribe to Newsletter</Link>
+            </Button>
           </div>
         </div>
       </div>

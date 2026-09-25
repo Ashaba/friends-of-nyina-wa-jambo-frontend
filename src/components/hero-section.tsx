@@ -34,24 +34,24 @@ export function HeroSection(): React.JSX.Element {
           ditch. Repent, repent, repent!&rdquo;
         </p>
         <div className="mt-10 flex flex-col items-center justify-center gap-4 sm:flex-row">
-          <Link href="/messages">
-            <Button
-              size="lg"
-              className="bg-accent px-8 text-base font-semibold text-accent-foreground hover:bg-accent/90"
-            >
+          <Button
+            asChild
+            size="lg"
+            className="bg-accent px-8 text-base font-semibold text-accent-foreground hover:bg-accent/90"
+          >
+            <Link href="/messages">
               Discover the Messages
               <ArrowRight className="ml-2 h-4 w-4" />
-            </Button>
-          </Link>
-          <Link href="/prayer-requests">
-            <Button
-              size="lg"
-              variant="outline"
-              className="border-background/40 bg-background/10 px-8 text-base font-semibold text-background hover:bg-background/20 hover:text-background"
-            >
-              Request a Prayer
-            </Button>
-          </Link>
+            </Link>
+          </Button>
+          <Button
+            asChild
+            size="lg"
+            variant="outline"
+            className="border-background/40 bg-background/10 px-8 text-base font-semibold text-background hover:bg-background/20 hover:text-background"
+          >
+            <Link href="/prayer-requests">Request a Prayer</Link>
+          </Button>
         </div>
       </div>
     </section>
