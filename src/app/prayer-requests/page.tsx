@@ -1,11 +1,13 @@
+import type { Metadata } from "next";
 import { PageLayout } from "@/components/page-layout";
 import { PageHero } from "@/components/page-hero";
 import { PrayerRequestForm } from "@/components/prayer-request-form";
 
-export const metadata = {
+export const metadata: Metadata = {
   title: "Prayer Requests | Friends of Nyina wa Jambo",
   description:
     "Submit your prayer intentions to the Friends of Nyina wa Jambo community. We will pray for you through the intercession of Our Lady of Kibeho.",
+  alternates: { canonical: "/prayer-requests" },
 };
 
 export default function PrayerRequestsPage(): React.JSX.Element {

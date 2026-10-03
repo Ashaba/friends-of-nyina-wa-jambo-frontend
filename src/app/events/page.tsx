@@ -1,12 +1,14 @@
+import type { Metadata } from "next";
 import { getEvents } from "@/lib/strapi";
 import { PageLayout } from "@/components/page-layout";
 import { PageHero } from "@/components/page-hero";
 import { EventsContent } from "@/components/events-content";
 
-export const metadata = {
+export const metadata: Metadata = {
   title: "Events | Friends of Nyina wa Jambo",
   description:
     "Discover upcoming pilgrimages, prayer gatherings, retreats, and community events organised by the Friends of Nyina wa Jambo.",
+  alternates: { canonical: "/events" },
 };
 
 export default async function EventsPage(): Promise<React.JSX.Element> {

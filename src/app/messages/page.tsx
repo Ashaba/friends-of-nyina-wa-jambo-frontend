@@ -1,11 +1,13 @@
+import type { Metadata } from "next";
 import { PageLayout } from "@/components/page-layout";
 import { PageHero } from "@/components/page-hero";
 import { MessagesContent } from "@/components/messages-content";
 
-export const metadata = {
+export const metadata: Metadata = {
   title: "Messages | Friends of Nyina wa Jambo",
   description:
     "Explore the messages given by Our Lady of Kibeho to the three visionaries: Alphonsine, Nathalie, and Marie Claire.",
+  alternates: { canonical: "/messages" },
 };
 
 export default function MessagesPage(): React.JSX.Element {
