@@ -40,3 +40,14 @@ test("can navigate to events page", async ({ page }) => {
   });
   await expect(heading).toBeVisible();
 });
+
+test("homepage calls to action are links, not buttons nested in links", async ({
+  page,
+}) => {
+  await page.goto("/");
+
+  await expect(
+    page.getByRole("link", { name: /Discover the Messages/i })
+  ).toBeVisible();
+  await expect(page.locator("a button, a [role='button']")).toHaveCount(0);
+});

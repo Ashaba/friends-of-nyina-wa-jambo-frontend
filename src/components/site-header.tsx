@@ -44,14 +44,13 @@ export function SiteHeader(): React.JSX.Element {
               {item.name}
             </Link>
           ))}
-          <Link href="/newsletter">
-            <Button
-              size="sm"
-              className="bg-primary text-primary-foreground hover:bg-primary/90"
-            >
-              Subscribe
-            </Button>
-          </Link>
+          <Button
+            asChild
+            size="sm"
+            className="bg-primary text-primary-foreground hover:bg-primary/90"
+          >
+            <Link href="/newsletter">Subscribe</Link>
+          </Button>
         </div>
 
         {/* Mobile menu button */}
@@ -83,11 +82,14 @@ export function SiteHeader(): React.JSX.Element {
                 {item.name}
               </Link>
             ))}
-            <Link href="/newsletter" onClick={() => setMobileMenuOpen(false)}>
-              <Button className="mt-2 w-full bg-primary text-primary-foreground hover:bg-primary/90">
+            <Button
+              asChild
+              className="mt-2 w-full bg-primary text-primary-foreground hover:bg-primary/90"
+            >
+              <Link href="/newsletter" onClick={() => setMobileMenuOpen(false)}>
                 Subscribe to Newsletter
-              </Button>
-            </Link>
+              </Link>
+            </Button>
           </div>
         </div>
       )}

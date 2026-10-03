@@ -213,19 +213,20 @@ export function VideosContent({
               visionary encounters, prayer guides, and testimonies from the
               Friends of Nyina wa Jambo community.
             </p>
-            <a
-              href="https://www.youtube.com/@FriendsOfNyinaWaJambo"
-              target="_blank"
-              rel="noopener noreferrer"
+            <Button
+              asChild
+              size="lg"
+              className="bg-[#c4302b] font-semibold text-background hover:bg-[#a82723]"
             >
-              <Button
-                size="lg"
-                className="bg-[#c4302b] font-semibold text-background hover:bg-[#a82723]"
+              <a
+                href="https://www.youtube.com/@FriendsOfNyinaWaJambo"
+                target="_blank"
+                rel="noopener noreferrer"
               >
                 <Play className="mr-2 h-4 w-4" />
                 Visit Our YouTube Channel
-              </Button>
-            </a>
+              </a>
+            </Button>
           </div>
         </div>
       </section>
