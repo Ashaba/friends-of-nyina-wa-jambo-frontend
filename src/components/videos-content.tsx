@@ -1,6 +1,6 @@
 "use client";
 
-import { useState } from "react";
+import { useEffect, useRef, useState } from "react";
 import Image from "next/image";
 import { Play, X, Calendar } from "lucide-react";
 import { Button } from "@/components/ui/button";
@@ -230,73 +230,90 @@ export function VideosContent({
         </div>
       </section>
 
-      {/* Video Modal */}
       {activeVideo && (
-        <div
-          className="fixed inset-0 z-[100] flex items-center justify-center bg-foreground/80 p-4 backdrop-blur-sm"
-          onClick={() => setActiveVideo(null)}
-          onKeyDown={(e) => {
-            if (e.key === "Escape") setActiveVideo(null);
-          }}
-          role="dialog"
-          aria-modal="true"
-          aria-label={`Playing: ${activeVideo.title}`}
-        >
-          <div
-            className="relative w-full max-w-4xl overflow-hidden rounded-lg bg-card shadow-2xl"
-            role="document"
-            onClick={(e) => e.stopPropagation()}
-          >
-            {/* Close button */}
-            <button
-              type="button"
-              className="absolute right-3 top-3 z-10 flex h-9 w-9 items-center justify-center rounded-full bg-foreground/60 text-background transition-colors hover:bg-foreground/80"
-              onClick={() => setActiveVideo(null)}
-              aria-label="Close video"
-            >
-              <X className="h-5 w-5" />
-            </button>
-
-            {/* YouTube iframe */}
-            <div className="relative aspect-video">
-              {getYouTubeEmbedUrl(activeVideo.youtubeUrl) ? (
-                <iframe
-                  src={getYouTubeEmbedUrl(activeVideo.youtubeUrl)!}
-                  title={activeVideo.title}
-                  className="absolute inset-0 h-full w-full"
-                  allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
-                  allowFullScreen
-                />
-              ) : (
-                <div className="absolute inset-0 flex flex-col items-center justify-center gap-4 bg-muted">
-                  <Play className="h-16 w-16 text-muted-foreground" />
-                  <p className="text-sm text-muted-foreground">
-                    Video URL will be available soon
-                  </p>
-                </div>
-              )}
-            </div>
-
-            {/* Video info below player */}
-            <div className="p-6">
-              <span
-                className={cn(
-                  "mb-2 inline-block rounded-full px-2 py-0.5 text-xs font-semibold",
-                  getCategoryColor(activeVideo.category)
-                )}
-              >
-                {activeVideo.category}
-              </span>
-              <h3 className="mb-2 font-serif text-xl font-bold text-foreground">
-                {activeVideo.title}
-              </h3>
-              <p className="text-sm leading-relaxed text-muted-foreground">
-                {activeVideo.description}
-              </p>
-            </div>
-          </div>
-        </div>
+        <VideoModal video={activeVideo} onClose={() => setActiveVideo(null)} />
       )}
     </>
+  );
+}
+
+/**
+ * Plays one video in a native modal `<dialog>`, which moves focus inside,
+ * traps it there, closes on Escape, and hands focus back to the card that
+ * opened it.
+ */
+function VideoModal({
+  video,
+  onClose,
+}: {
+  video: Video;
+  onClose: () => void;
+}): React.ReactElement {
+  const dialogRef = useRef<HTMLDialogElement>(null);
+  const embedUrl = getYouTubeEmbedUrl(video.youtubeUrl);
+
+  useEffect(() => {
+    dialogRef.current?.showModal();
+  }, []);
+
+  return (
+    // A click on the backdrop targets the dialog itself; clicks on its content
+    // target a descendant. Keyboard users close it with Escape, which the
+    // native dialog already handles.
+    // eslint-disable-next-line jsx-a11y/click-events-have-key-events, jsx-a11y/no-noninteractive-element-interactions
+    <dialog
+      ref={dialogRef}
+      className="m-auto w-[calc(100%-2rem)] max-w-4xl overflow-hidden rounded-lg bg-card p-0 shadow-2xl backdrop:bg-foreground/80 backdrop:backdrop-blur-sm"
+      aria-label={`Playing: ${video.title}`}
+      onClose={onClose}
+      onClick={(e) => {
+        if (e.target === e.currentTarget) e.currentTarget.close();
+      }}
+    >
+      <button
+        type="button"
+        className="absolute right-3 top-3 z-10 flex h-9 w-9 items-center justify-center rounded-full bg-foreground/60 text-background transition-colors hover:bg-foreground/80"
+        onClick={() => dialogRef.current?.close()}
+        aria-label="Close video"
+      >
+        <X className="h-5 w-5" />
+      </button>
+
+      <div className="relative aspect-video">
+        {embedUrl ? (
+          <iframe
+            src={embedUrl}
+            title={video.title}
+            className="absolute inset-0 h-full w-full"
+            allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
+            allowFullScreen
+          />
+        ) : (
+          <div className="absolute inset-0 flex flex-col items-center justify-center gap-4 bg-muted">
+            <Play className="h-16 w-16 text-muted-foreground" />
+            <p className="text-sm text-muted-foreground">
+              Video URL will be available soon
+            </p>
+          </div>
+        )}
+      </div>
+
+      <div className="p-6">
+        <span
+          className={cn(
+            "mb-2 inline-block rounded-full px-2 py-0.5 text-xs font-semibold",
+            getCategoryColor(video.category)
+          )}
+        >
+          {video.category}
+        </span>
+        <h3 className="mb-2 font-serif text-xl font-bold text-foreground">
+          {video.title}
+        </h3>
+        <p className="text-sm leading-relaxed text-muted-foreground">
+          {video.description}
+        </p>
+      </div>
+    </dialog>
   );
 }
