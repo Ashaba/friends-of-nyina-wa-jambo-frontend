@@ -26,12 +26,12 @@ export function HeroSection(): React.JSX.Element {
         <h1 className="text-balance font-serif text-4xl font-bold leading-tight tracking-tight text-background sm:text-5xl md:text-6xl lg:text-7xl">
           Our Lady of Kibeho
         </h1>
-        <p className="mt-2 font-serif text-base italic text-background/70">
+        <p className="mt-3 font-serif text-xl italic text-background/90 md:text-2xl">
           Mother of the Word
         </p>
         <p className="mx-auto mt-6 max-w-2xl text-lg leading-relaxed text-background/85 md:text-xl">
-          &ldquo;The World is in danger, its on the verge of falling into a deep
-          ditch. Repent, repent, repent!&rdquo;
+          &ldquo;The world is in danger. It is on the verge of falling into a
+          deep ditch. Repent, repent, repent!&rdquo;
         </p>
         <div className="mt-10 flex flex-col items-center justify-center gap-4 sm:flex-row">
           <Button

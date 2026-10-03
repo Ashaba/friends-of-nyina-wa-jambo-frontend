@@ -1,9 +1,9 @@
 // vitest.setup.ts
 // Mock common Next.js runtime modules used in client components to avoid import-time side effects.
 
-// Mock next/font/google (Nunito) used in layout
+// Mock next/font/google (Lora) used by the prayer and novena content
 vi.mock("next/font/google", () => ({
-  Nunito: () => ({ className: "mock-nunito" }),
+  Lora: () => ({ className: "mock-lora", variable: "mock-lora" }),
 }));
 
 // Mock next/image to render a plain img element

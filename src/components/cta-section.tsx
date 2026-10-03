@@ -15,8 +15,8 @@ export function CtaSection(): React.JSX.Element {
             </h3>
             <p className="leading-relaxed text-primary-foreground/75">
               Share your prayer intentions with the Friends of Nyina wa Jambo.
-              We pray together for all who seek Our Lady&apos;s intercession and
-              the grace of God in their lives.
+              We pray together for all who seek Our Lady&rsquo;s intercession
+              and the grace of God in their lives.
             </p>
             <Button
               asChild

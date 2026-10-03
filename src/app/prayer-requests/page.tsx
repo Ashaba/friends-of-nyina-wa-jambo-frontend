@@ -16,7 +16,7 @@ export default function PrayerRequestsPage(): React.JSX.Element {
       <PageHero
         title="Prayer Requests"
         subtitle="We are here to pray with you"
-        description="Share your intentions and let our community lift them in prayer through the intercession of Our Lady of Kibeho, Nyina wa Jambo — Mother of the Word."
+        description="Share your intentions and let our community lift them in prayer through the intercession of Our Lady of Kibeho, Nyina wa Jambo, Mother of the Word."
       />
       <PrayerRequestForm />
     </PageLayout>

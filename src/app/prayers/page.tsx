@@ -16,7 +16,7 @@ export default function PrayersPage(): React.JSX.Element {
       <PageHero
         title="Prayers & Devotions"
         subtitle="Draw closer to God through prayer"
-        description='Our Lady asked the visionaries to promote prayer, especially the Rosary of the Seven Sorrows. "Pray, pray, pray" was her constant refrain.'
+        description="Our Lady asked the visionaries to promote prayer, especially the Rosary of the Seven Sorrows. “Pray, pray, pray” was her constant refrain."
       />
       <PrayersContent />
     </PageLayout>

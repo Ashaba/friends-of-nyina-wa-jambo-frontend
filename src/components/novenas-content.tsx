@@ -4,15 +4,16 @@ import { useState } from "react";
 import { ChevronDown, Calendar } from "lucide-react";
 import { cn } from "@/lib/utils";
 import { Button } from "@/components/ui/button";
+import { lora } from "@/lib/fonts";
 
 const novenadays = [
   {
     day: 1,
     theme: "Faith",
     scripture:
-      '"Blessed is she who believed that the Lord\'s promises to her would be fulfilled." — Luke 1:45',
+      "“Blessed is she who believed that the Lord’s promises to her would be fulfilled.” (Luke 1:45)",
     reflection:
-      "On this first day, we ask Our Lady of Kibeho to strengthen our faith. She appeared to simple students and asked them to believe. Let us also open our hearts to the grace of deeper faith in God's promises.",
+      "On this first day, we ask Our Lady of Kibeho to strengthen our faith. She appeared to simple students and asked them to believe. Let us also open our hearts to the grace of deeper faith in God’s promises.",
     prayer:
       "Our Lady of Kibeho, Mother of the Word, you called your children to faith. Help me to believe with all my heart, even when the path is unclear. Strengthen my trust in your Son, Jesus Christ. Through your intercession, may my faith be unwavering. Amen.",
   },
@@ -20,7 +21,7 @@ const novenadays = [
     day: 2,
     theme: "Repentance",
     scripture:
-      '"Repent, for the kingdom of heaven has come near." — Matthew 4:17',
+      "“Repent, for the kingdom of heaven has come near.” (Matthew 4:17)",
     reflection:
       "Our Lady repeatedly called for repentance at Kibeho. Today, let us examine our consciences honestly and turn back to God with sincere sorrow for our sins and a firm resolve to amend our lives.",
     prayer:
@@ -29,7 +30,7 @@ const novenadays = [
   {
     day: 3,
     theme: "Prayer",
-    scripture: '"Pray without ceasing." — 1 Thessalonians 5:17',
+    scripture: "“Pray without ceasing.” (1 Thessalonians 5:17)",
     reflection:
       "Mary asked her children to pray, pray, pray. Prayer is our lifeline to God. Today, let us recommit to a life of faithful prayer, especially the Holy Rosary, which Our Lady so strongly encouraged.",
     prayer:
@@ -39,9 +40,9 @@ const novenadays = [
     day: 4,
     theme: "Suffering",
     scripture:
-      '"I consider that our present sufferings are not worth comparing with the glory that will be revealed in us." — Romans 8:18',
+      "“I consider that our present sufferings are not worth comparing with the glory that will be revealed in us.” (Romans 8:18)",
     reflection:
-      "Our Lady told the visionaries that no one arrives in Heaven without suffering. Today, let us offer our sufferings in union with Christ's sacrifice, trusting that they have redemptive value.",
+      "Our Lady told the visionaries that no one arrives in Heaven without suffering. Today, let us offer our sufferings in union with Christ’s sacrifice, trusting that they have redemptive value.",
     prayer:
       "Our Lady of Kibeho, Mother of Sorrows, you walked the way of the Cross with your Son. Help me to accept my sufferings with courage and to unite them with the suffering of Christ for the salvation of souls. Amen.",
   },
@@ -49,16 +50,16 @@ const novenadays = [
     day: 5,
     theme: "Love",
     scripture:
-      '"A new command I give you: Love one another. As I have loved you, so you must love one another." — John 13:34',
+      "“A new command I give you: Love one another. As I have loved you, so you must love one another.” (John 13:34)",
     reflection:
-      "Our Lady reminded us that there is no more love in the world. Today, let us be instruments of God's love, choosing kindness, patience, and compassion in all our interactions.",
+      "Our Lady reminded us that there is no more love in the world. Today, let us be instruments of God’s love, choosing kindness, patience, and compassion in all our interactions.",
     prayer:
-      "Our Lady of Kibeho, your heart overflows with love for all your children. Help me to love as Christ loves — selflessly, generously, and without condition. Remove all hatred and bitterness from my heart. Amen.",
+      "Our Lady of Kibeho, your heart overflows with love for all your children. Help me to love as Christ loves: selflessly, generously, and without condition. Remove all hatred and bitterness from my heart. Amen.",
   },
   {
     day: 6,
     theme: "Reconciliation",
-    scripture: '"Forgive, and you will be forgiven." — Luke 6:37',
+    scripture: "“Forgive, and you will be forgiven.” (Luke 6:37)",
     reflection:
       "The messages of Kibeho carried a profound call to reconciliation, especially significant for Rwanda. Today, let us pray for the grace to forgive those who have hurt us and to seek forgiveness from those we have wounded.",
     prayer:
@@ -68,7 +69,7 @@ const novenadays = [
     day: 7,
     theme: "Peace",
     scripture:
-      '"Blessed are the peacemakers, for they will be called children of God." — Matthew 5:9',
+      "“Blessed are the peacemakers, for they will be called children of God.” (Matthew 5:9)",
     reflection:
       "Our Lady came as a messenger of peace. Today, let us pray for peace in our hearts, our families, our communities, and throughout the world, especially in places of conflict and suffering.",
     prayer:
@@ -78,7 +79,7 @@ const novenadays = [
     day: 8,
     theme: "Perseverance",
     scripture:
-      '"Let us not become weary in doing good, for at the proper time we will reap a harvest if we do not give up." — Galatians 6:9',
+      "“Let us not become weary in doing good, for at the proper time we will reap a harvest if we do not give up.” (Galatians 6:9)",
     reflection:
       "Our Lady asked us never to tire of praying. The spiritual life requires perseverance. Today, let us ask for the grace to remain faithful even when the journey is long and difficult.",
     prayer:
@@ -88,7 +89,7 @@ const novenadays = [
     day: 9,
     theme: "Trust & Surrender",
     scripture:
-      '"Trust in the Lord with all your heart and lean not on your own understanding." — Proverbs 3:5',
+      "“Trust in the Lord with all your heart and lean not on your own understanding.” (Proverbs 3:5)",
     reflection:
       "On this final day, let us place all our intentions, our lives, and our futures in the hands of God through Our Lady. She has promised to help all who call upon her. Let us surrender with total trust.",
     prayer:
@@ -100,7 +101,7 @@ export function NovenasContent(): React.JSX.Element {
   const [activeDay, setActiveDay] = useState<number | null>(1);
 
   return (
-    <section className="px-6 py-20">
+    <section className={cn(lora.variable, "px-6 py-20")}>
       <div className="mx-auto max-w-4xl">
         {/* Instructions */}
         <div className="mb-12 rounded-lg border border-border bg-secondary p-8">
@@ -177,7 +178,7 @@ export function NovenasContent(): React.JSX.Element {
                     {day.day}
                   </span>
                   <div>
-                    <h3 className="font-serif text-lg font-bold text-foreground">
+                    <h3 className="font-serif text-xl font-bold text-foreground">
                       Day {day.day}: {day.theme}
                     </h3>
                   </div>
@@ -195,7 +196,7 @@ export function NovenasContent(): React.JSX.Element {
                 className="flex animate-fade-in flex-col gap-6 px-6 pb-8"
               >
                 {/* Scripture */}
-                <blockquote className="border-l-4 border-accent py-2 pl-4 text-sm italic leading-relaxed text-foreground/80">
+                <blockquote className="border-l-4 border-accent py-2 pl-4 font-serif-body text-base italic leading-relaxed text-foreground/80">
                   {day.scripture}
                 </blockquote>
 
@@ -214,7 +215,7 @@ export function NovenasContent(): React.JSX.Element {
                   <h4 className="mb-3 text-sm font-semibold uppercase tracking-wider text-primary">
                     Prayer
                   </h4>
-                  <p className="whitespace-pre-line italic leading-relaxed text-foreground/80">
+                  <p className="whitespace-pre-line font-serif-body text-lg italic leading-relaxed text-foreground/80">
                     {day.prayer}
                   </p>
                 </div>

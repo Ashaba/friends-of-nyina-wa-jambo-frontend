@@ -10,22 +10,22 @@ const visionaries = [
     name: "Alphonsine Mumureke",
     date: "November 28, 1981 - November 28, 1989",
     description:
-      'The first visionary to receive apparitions. A 16-year-old student at Kibeho College, Alphonsine was in the school dining hall when she first heard a voice calling "My child." Our Lady identified herself as "Nyina wa Jambo" — the Mother of the Word.',
+      "The first visionary to receive apparitions. A 16-year-old student at Kibeho College, Alphonsine was in the school dining hall when she first heard a voice calling “My child.” Our Lady identified herself as “Nyina wa Jambo,” which means “Mother of the Word.”",
     messages: [
       {
         title: "The Call to Prayer",
         content:
-          'Our Lady repeatedly asked for prayer, especially the Rosary. She said: "When I tell you to pray, I am not addressing myself merely to you, child, but I am addressing myself to the whole world. My children, pray, pray, pray."',
+          "Our Lady repeatedly asked for prayer, especially the Rosary. She said: “When I tell you to pray, I am not addressing myself merely to you, child, but I am addressing myself to the whole world. My children, pray, pray, pray.”",
       },
       {
         title: "The Call to Repentance",
         content:
-          '"Repent, repent, repent! The world is in rebellion against God. Too many sins are committed. There is no more love, no more peace. If you do not repent and convert your hearts, you will all fall into an abyss."',
+          "“Repent, repent, repent! The world is in rebellion against God. Too many sins are committed. There is no more love, no more peace. If you do not repent and convert your hearts, you will all fall into an abyss.”",
       },
       {
-        title: "A Mother's Love",
+        title: "A Mother’s Love",
         content:
-          '"I have come to calm you because I have heard your prayers. I would like your companions also to have faith. I have not come only for you; I have come for all my children. Every person in the world is my child."',
+          "“I have come to calm you because I have heard your prayers. I would like your companions also to have faith. I have not come only for you; I have come for all my children. Every person in the world is my child.”",
       },
     ],
   },
@@ -38,7 +38,7 @@ const visionaries = [
       {
         title: "Prayer Without Ceasing",
         content:
-          '"What I ask of you is prayer. Pray without ceasing, pray, pray. The world is going badly. If you want to know what is happening, listen: the world is in revolt against God."',
+          "“What I ask of you is prayer. Pray without ceasing, pray, pray. The world is going badly. If you want to know what is happening, listen: the world is in revolt against God.”",
       },
       {
         title: "Voluntary Suffering",
@@ -48,7 +48,7 @@ const visionaries = [
       {
         title: "Hope in God",
         content:
-          '"No one arrives in Heaven without suffering. Do not be afraid of suffering. I am suffering along with you. I will help you if you desire. Have courage."',
+          "“No one arrives in Heaven without suffering. Do not be afraid of suffering. I am suffering along with you. I will help you if you desire. Have courage.”",
       },
     ],
   },
@@ -61,17 +61,17 @@ const visionaries = [
       {
         title: "The Rosary of the Seven Sorrows",
         content:
-          "Our Lady asked Marie Claire to reintroduce the world to the Rosary of the Seven Sorrows, a powerful prayer meditating on Mary's suffering. She said this rosary has the power to bring great graces and even avert disaster.",
+          "Our Lady asked Marie Claire to reintroduce the world to the Rosary of the Seven Sorrows, a powerful prayer meditating on Mary’s suffering. She said this rosary has the power to bring great graces and even avert disaster.",
       },
       {
         title: "Sincerity in Prayer",
         content:
-          '"When you pray, do not just say words. Pray with your heart. Pray sincerely, with true devotion. God hears the prayer of the heart, not merely the movement of the lips."',
+          "“When you pray, do not just say words. Pray with your heart. Pray sincerely, with true devotion. God hears the prayer of the heart, not merely the movement of the lips.”",
       },
       {
         title: "Reconciliation",
         content:
-          "Marie Claire received strong messages about the need for reconciliation, forgiveness, and unity — messages that proved prophetically significant in the years that followed in Rwanda.",
+          "Marie Claire received strong messages about the need for reconciliation, forgiveness, and unity. These messages proved prophetically significant in the years that followed in Rwanda.",
       },
     ],
   },
@@ -127,9 +127,9 @@ export function MessagesContent(): React.JSX.Element {
                   identified herself as{" "}
                   <strong className="text-foreground">
                     &ldquo;Nyina wa Jambo&rdquo;
-                  </strong>{" "}
-                  &mdash; the Mother of the Word &mdash; and delivered messages
-                  of profound urgency and maternal love.
+                  </strong>
+                  , which means &ldquo;Mother of the Word.&rdquo; She delivered
+                  urgent messages filled with a mother&rsquo;s love.
                 </p>
                 <p>
                   On June 29, 2001, Bishop Augustin Misago of the Diocese of
@@ -143,8 +143,8 @@ export function MessagesContent(): React.JSX.Element {
                 <p>
                   Remarkably, during the visions on August 19, 1982, the
                   visionaries were shown terrifying images of Rwanda engulfed in
-                  violence and bloodshed &mdash; a prophetic warning that was
-                  tragically fulfilled during the{" "}
+                  violence and bloodshed. This prophetic warning was tragically
+                  fulfilled during the{" "}
                   <a
                     href="https://en.wikipedia.org/wiki/Rwandan_genocide"
                     target="_blank"
@@ -177,7 +177,7 @@ export function MessagesContent(): React.JSX.Element {
               The Three Visionaries
             </p>
             <h2 className="text-balance font-serif text-3xl font-bold text-foreground md:text-4xl">
-              Chosen to Deliver Heaven&apos;s Message
+              Chosen to Deliver Heaven&rsquo;s Message
             </h2>
           </div>
 
@@ -272,7 +272,7 @@ export function MessagesContent(): React.JSX.Element {
               Core Themes
             </p>
             <h2 className="text-balance font-serif text-3xl font-bold text-foreground md:text-4xl">
-              The Heart of Our Lady&apos;s Message
+              The Heart of Our Lady&rsquo;s Message
             </h2>
           </div>
 

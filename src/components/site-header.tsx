@@ -24,7 +24,7 @@ export function SiteHeader(): React.JSX.Element {
         <Link href="/" className="flex items-center gap-2">
           <Cross className="h-6 w-6 text-primary" />
           <div className="flex flex-col">
-            <span className="font-serif text-lg font-bold leading-tight text-primary">
+            <span className="font-serif text-xl font-bold leading-tight text-primary">
               Nyina wa Jambo
             </span>
             <span className="hidden text-xs leading-tight text-muted-foreground sm:block">
