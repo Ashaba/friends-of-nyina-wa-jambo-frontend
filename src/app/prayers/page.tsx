@@ -1,8 +1,9 @@
+import type { Metadata } from "next";
 import { PageLayout } from "@/components/page-layout";
 import { PageHero } from "@/components/page-hero";
 import { PrayersContent } from "@/components/prayers-content";
 
-export const metadata = {
+export const metadata: Metadata = {
   title: "Prayers | Friends of Nyina wa Jambo",
   description:
     "Pray the Rosary of the Seven Sorrows and other devotional prayers given through Our Lady of Kibeho.",

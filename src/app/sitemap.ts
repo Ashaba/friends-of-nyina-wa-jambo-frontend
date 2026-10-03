@@ -1,7 +1,7 @@
 import type { MetadataRoute } from "next";
 import { siteUrl } from "@/lib/site";
 
-const paths = [
+const pagePaths = [
   "/",
   "/messages",
   "/prayers",
@@ -13,5 +13,5 @@ const paths = [
 ];
 
 export default function sitemap(): MetadataRoute.Sitemap {
-  return paths.map((path) => ({ url: new URL(path, siteUrl).href }));
+  return pagePaths.map((path) => ({ url: new URL(path, siteUrl).href }));
 }

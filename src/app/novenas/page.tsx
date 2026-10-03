@@ -1,8 +1,9 @@
+import type { Metadata } from "next";
 import { PageLayout } from "@/components/page-layout";
 import { PageHero } from "@/components/page-hero";
 import { NovenasContent } from "@/components/novenas-content";
 
-export const metadata = {
+export const metadata: Metadata = {
   title: "Novenas | Friends of Nyina wa Jambo",
   description:
     "Pray the Novena to Our Lady of Kibeho. Nine days of dedicated prayer, Scripture readings, reflections, and intercessions.",

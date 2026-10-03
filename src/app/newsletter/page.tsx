@@ -1,8 +1,9 @@
+import type { Metadata } from "next";
 import { PageLayout } from "@/components/page-layout";
 import { PageHero } from "@/components/page-hero";
 import { NewsletterContent } from "@/components/newsletter-content";
 
-export const metadata = {
+export const metadata: Metadata = {
   title: "Newsletter | Friends of Nyina wa Jambo",
   description:
     "Subscribe to the Friends of Nyina wa Jambo newsletter and stay connected with the latest messages, events, and prayer intentions.",
