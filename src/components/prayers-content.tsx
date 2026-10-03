@@ -152,57 +152,59 @@ export function PrayersContent(): React.JSX.Element {
                 />
               </button>
 
-              {expandedPrayer === prayer.id && (
-                <div className="flex animate-fade-in flex-col gap-3 px-8 pb-8">
-                  {prayer.sections.map((section) => {
-                    const key = `${prayer.id}-${section.heading}`;
-                    return (
-                      <div
-                        key={section.heading || "main"}
-                        className="rounded-md border border-border bg-background"
-                      >
-                        {section.heading ? (
-                          <>
-                            <button
-                              type="button"
-                              className="flex w-full items-center justify-between p-4 text-left"
-                              onClick={() =>
-                                setExpandedSection(
-                                  expandedSection === key ? null : key
-                                )
-                              }
-                              aria-expanded={expandedSection === key}
-                            >
-                              <span className="text-sm font-semibold text-foreground">
-                                {section.heading}
-                              </span>
-                              <ChevronDown
-                                className={cn(
-                                  "ml-4 h-4 w-4 shrink-0 text-muted-foreground transition-transform duration-300",
-                                  expandedSection === key && "rotate-180"
-                                )}
-                              />
-                            </button>
-                            {expandedSection === key && (
-                              <div className="px-4 pb-4">
-                                <p className="whitespace-pre-line text-sm leading-relaxed text-foreground/75">
-                                  {section.content}
-                                </p>
-                              </div>
-                            )}
-                          </>
-                        ) : (
-                          <div className="p-4">
+              <div
+                hidden={expandedPrayer !== prayer.id}
+                className="flex animate-fade-in flex-col gap-3 px-8 pb-8"
+              >
+                {prayer.sections.map((section) => {
+                  const key = `${prayer.id}-${section.heading}`;
+                  return (
+                    <div
+                      key={section.heading || "main"}
+                      className="rounded-md border border-border bg-background"
+                    >
+                      {section.heading ? (
+                        <>
+                          <button
+                            type="button"
+                            className="flex w-full items-center justify-between p-4 text-left"
+                            onClick={() =>
+                              setExpandedSection(
+                                expandedSection === key ? null : key
+                              )
+                            }
+                            aria-expanded={expandedSection === key}
+                          >
+                            <span className="text-sm font-semibold text-foreground">
+                              {section.heading}
+                            </span>
+                            <ChevronDown
+                              className={cn(
+                                "ml-4 h-4 w-4 shrink-0 text-muted-foreground transition-transform duration-300",
+                                expandedSection === key && "rotate-180"
+                              )}
+                            />
+                          </button>
+                          <div
+                            hidden={expandedSection !== key}
+                            className="px-4 pb-4"
+                          >
                             <p className="whitespace-pre-line text-sm leading-relaxed text-foreground/75">
                               {section.content}
                             </p>
                           </div>
-                        )}
-                      </div>
-                    );
-                  })}
-                </div>
-              )}
+                        </>
+                      ) : (
+                        <div className="p-4">
+                          <p className="whitespace-pre-line text-sm leading-relaxed text-foreground/75">
+                            {section.content}
+                          </p>
+                        </div>
+                      )}
+                    </div>
+                  );
+                })}
+              </div>
             </div>
           ))}
 
@@ -244,22 +246,23 @@ export function PrayersContent(): React.JSX.Element {
                   />
                 </button>
 
-                {expandedPrayer === prayer.id && (
-                  <div className="animate-fade-in px-6 pb-6">
-                    {prayer.sections.map((section) => (
-                      <div key={section.heading || "main"}>
-                        {section.heading && (
-                          <h4 className="mb-2 text-sm font-semibold text-foreground">
-                            {section.heading}
-                          </h4>
-                        )}
-                        <p className="whitespace-pre-line text-sm leading-relaxed text-foreground/75">
-                          {section.content}
-                        </p>
-                      </div>
-                    ))}
-                  </div>
-                )}
+                <div
+                  hidden={expandedPrayer !== prayer.id}
+                  className="animate-fade-in px-6 pb-6"
+                >
+                  {prayer.sections.map((section) => (
+                    <div key={section.heading || "main"}>
+                      {section.heading && (
+                        <h4 className="mb-2 text-sm font-semibold text-foreground">
+                          {section.heading}
+                        </h4>
+                      )}
+                      <p className="whitespace-pre-line text-sm leading-relaxed text-foreground/75">
+                        {section.content}
+                      </p>
+                    </div>
+                  ))}
+                </div>
               </div>
             ))}
         </div>

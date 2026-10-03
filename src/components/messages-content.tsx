@@ -211,51 +211,53 @@ export function MessagesContent(): React.JSX.Element {
                   />
                 </button>
 
-                {openVisionary === idx && (
-                  <div className="flex animate-fade-in flex-col gap-6 px-6 pb-6">
-                    <p className="leading-relaxed text-foreground/75">
-                      {visionary.description}
-                    </p>
+                <div
+                  hidden={openVisionary !== idx}
+                  className="flex animate-fade-in flex-col gap-6 px-6 pb-6"
+                >
+                  <p className="leading-relaxed text-foreground/75">
+                    {visionary.description}
+                  </p>
 
-                    <div className="flex flex-col gap-3">
-                      {visionary.messages.map((msg) => {
-                        const key = `${idx}-${msg.title}`;
-                        return (
-                          <div
-                            key={msg.title}
-                            className="rounded-md border border-border bg-secondary"
+                  <div className="flex flex-col gap-3">
+                    {visionary.messages.map((msg) => {
+                      const key = `${idx}-${msg.title}`;
+                      return (
+                        <div
+                          key={msg.title}
+                          className="rounded-md border border-border bg-secondary"
+                        >
+                          <button
+                            type="button"
+                            className="flex w-full items-center justify-between p-4 text-left"
+                            onClick={() =>
+                              setOpenMessage(openMessage === key ? null : key)
+                            }
+                            aria-expanded={openMessage === key}
                           >
-                            <button
-                              type="button"
-                              className="flex w-full items-center justify-between p-4 text-left"
-                              onClick={() =>
-                                setOpenMessage(openMessage === key ? null : key)
-                              }
-                              aria-expanded={openMessage === key}
-                            >
-                              <span className="text-sm font-semibold text-foreground">
-                                {msg.title}
-                              </span>
-                              <ChevronDown
-                                className={cn(
-                                  "ml-4 h-4 w-4 shrink-0 text-muted-foreground transition-transform duration-300",
-                                  openMessage === key && "rotate-180"
-                                )}
-                              />
-                            </button>
-                            {openMessage === key && (
-                              <div className="px-4 pb-4">
-                                <p className="text-sm leading-relaxed text-foreground/75">
-                                  {msg.content}
-                                </p>
-                              </div>
-                            )}
+                            <span className="text-sm font-semibold text-foreground">
+                              {msg.title}
+                            </span>
+                            <ChevronDown
+                              className={cn(
+                                "ml-4 h-4 w-4 shrink-0 text-muted-foreground transition-transform duration-300",
+                                openMessage === key && "rotate-180"
+                              )}
+                            />
+                          </button>
+                          <div
+                            hidden={openMessage !== key}
+                            className="px-4 pb-4"
+                          >
+                            <p className="text-sm leading-relaxed text-foreground/75">
+                              {msg.content}
+                            </p>
                           </div>
-                        );
-                      })}
-                    </div>
+                        </div>
+                      );
+                    })}
                   </div>
-                )}
+                </div>
               </div>
             ))}
           </div>
