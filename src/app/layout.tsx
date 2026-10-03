@@ -1,5 +1,5 @@
 import type { Metadata } from "next";
-import { Inter, Lora, Playfair_Display } from "next/font/google";
+import { Inter, Playfair_Display } from "next/font/google";
 import { SpeedInsights } from "@vercel/speed-insights/next";
 import { GoogleAnalytics } from "@next/third-parties/google";
 import { siteDescription, siteName, siteUrl } from "@/lib/site";
@@ -19,12 +19,6 @@ const playfair = Playfair_Display({
   variable: "--font-playfair",
 });
 
-const lora = Lora({
-  subsets: ["latin"],
-  style: ["normal", "italic"],
-  variable: "--font-lora",
-});
-
 // Canonical URLs are set per page: a canonical here would be inherited by every
 // page and point them all at the homepage.
 export const metadata: Metadata = {
@@ -41,10 +35,7 @@ export default function RootLayout({
   children: React.ReactNode;
 }>): React.ReactElement {
   return (
-    <html
-      lang="en"
-      className={`${inter.variable} ${playfair.variable} ${lora.variable}`}
-    >
+    <html lang="en" className={`${inter.variable} ${playfair.variable}`}>
       <body className="font-sans antialiased">
         {children}
         <SpeedInsights />

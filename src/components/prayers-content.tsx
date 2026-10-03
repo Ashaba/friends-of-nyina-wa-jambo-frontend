@@ -3,6 +3,7 @@
 import { useState } from "react";
 import { ChevronDown, Heart } from "lucide-react";
 import { cn } from "@/lib/utils";
+import { lora } from "@/lib/fonts";
 
 const prayers = [
   {
@@ -110,7 +111,7 @@ export function PrayersContent(): React.JSX.Element {
   const [expandedSection, setExpandedSection] = useState<string | null>(null);
 
   return (
-    <section className="px-6 py-20">
+    <section className={cn(lora.variable, "px-6 py-20")}>
       <div className="mx-auto max-w-4xl">
         {/* Featured Prayer */}
         {prayers
