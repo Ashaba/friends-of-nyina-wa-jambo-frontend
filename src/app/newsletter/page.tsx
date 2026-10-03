@@ -6,6 +6,7 @@ export const metadata = {
   title: "Newsletter | Friends of Nyina wa Jambo",
   description:
     "Subscribe to the Friends of Nyina wa Jambo newsletter and stay connected with the latest messages, events, and prayer intentions.",
+  alternates: { canonical: "/newsletter" },
 };
 
 export default function NewsletterPage(): React.JSX.Element {

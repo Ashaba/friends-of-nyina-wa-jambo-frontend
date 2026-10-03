@@ -6,6 +6,7 @@ export const metadata = {
   title: "Messages | Friends of Nyina wa Jambo",
   description:
     "Explore the messages given by Our Lady of Kibeho to the three visionaries: Alphonsine, Nathalie, and Marie Claire.",
+  alternates: { canonical: "/messages" },
 };
 
 export default function MessagesPage(): React.JSX.Element {

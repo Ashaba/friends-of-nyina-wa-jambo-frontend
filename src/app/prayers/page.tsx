@@ -6,6 +6,7 @@ export const metadata = {
   title: "Prayers | Friends of Nyina wa Jambo",
   description:
     "Pray the Rosary of the Seven Sorrows and other devotional prayers given through Our Lady of Kibeho.",
+  alternates: { canonical: "/prayers" },
 };
 
 export default function PrayersPage(): React.JSX.Element {

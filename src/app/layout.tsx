@@ -2,6 +2,7 @@ import type { Metadata } from "next";
 import { Inter, Playfair_Display } from "next/font/google";
 import { SpeedInsights } from "@vercel/speed-insights/next";
 import { GoogleAnalytics } from "@next/third-parties/google";
+import { siteDescription, siteName, siteUrl } from "@/lib/site";
 import "./globals.css";
 
 // Left unset in local and preview environments so their traffic never reaches
@@ -18,10 +19,14 @@ const playfair = Playfair_Display({
   variable: "--font-playfair",
 });
 
+// Canonical URLs are set per page: a canonical here would be inherited by every
+// page and point them all at the homepage.
 export const metadata: Metadata = {
-  title: "Friends of Nyina wa Jambo | Our Lady of Kibeho",
-  description:
-    "Friends of Nyina wa Jambo - A movement spreading the messages of Our Lady of Kibeho, Mother of the Word. Join us in prayer, novenas, and sharing the message of hope, repentance, and peace to the world.",
+  metadataBase: siteUrl,
+  title: `${siteName} | Our Lady of Kibeho`,
+  description: siteDescription,
+  openGraph: { siteName, type: "website", locale: "en" },
+  twitter: { card: "summary_large_image" },
 };
 
 export default function RootLayout({

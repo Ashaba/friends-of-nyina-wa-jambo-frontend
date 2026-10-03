@@ -6,6 +6,7 @@ export const metadata = {
   title: "Prayer Requests | Friends of Nyina wa Jambo",
   description:
     "Submit your prayer intentions to the Friends of Nyina wa Jambo community. We will pray for you through the intercession of Our Lady of Kibeho.",
+  alternates: { canonical: "/prayer-requests" },
 };
 
 export default function PrayerRequestsPage(): React.JSX.Element {

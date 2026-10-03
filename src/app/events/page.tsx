@@ -7,6 +7,7 @@ export const metadata = {
   title: "Events | Friends of Nyina wa Jambo",
   description:
     "Discover upcoming pilgrimages, prayer gatherings, retreats, and community events organised by the Friends of Nyina wa Jambo.",
+  alternates: { canonical: "/events" },
 };
 
 export default async function EventsPage(): Promise<React.JSX.Element> {
