@@ -23,7 +23,7 @@ const fallbackVideos: Video[] = [
     title: "Encounter with the Visionary Alphonsine",
     youtubeUrl: "https://www.youtube.com/watch?v=VIDEO_ID_2",
     description:
-      "A rare and moving encounter with Alphonsine Mumureke, the first visionary of Kibeho, as she shares her experience of the apparitions and Our Lady's enduring messages for the world.",
+      "A rare and moving encounter with Alphonsine Mumureke, the first visionary of Kibeho, as she shares her experience of the apparitions and Our Lady’s enduring messages for the world.",
     category: "Visionary Encounters",
     publishedDate: "2025-09-15",
   },
@@ -59,7 +59,7 @@ const fallbackVideos: Video[] = [
     title: "Interview with Nathalie Mukamazimpaka",
     youtubeUrl: "https://www.youtube.com/watch?v=VIDEO_ID_6",
     description:
-      "An intimate interview with Nathalie, one of the three visionaries, as she recounts Our Lady's messages about prayer, penance, and the importance of faith in the modern world.",
+      "An intimate interview with Nathalie, one of the three visionaries, as she recounts Our Lady’s messages about prayer, penance, and the importance of faith in the modern world.",
     category: "Visionary Encounters",
     publishedDate: "2025-05-14",
   },
@@ -183,7 +183,7 @@ export function VideosContent({
                         )}
                       </span>
                     </div>
-                    <h3 className="mb-2 line-clamp-2 font-serif text-lg font-bold text-foreground">
+                    <h3 className="mb-2 line-clamp-2 font-serif text-xl font-bold text-foreground">
                       {video.title}
                     </h3>
                     <p className="line-clamp-2 text-sm leading-relaxed text-muted-foreground">

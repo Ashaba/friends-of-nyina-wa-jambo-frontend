@@ -115,7 +115,7 @@ export function PrayerRequestForm(): React.JSX.Element {
                   &ldquo;Pray, pray, pray! Never tire of praying.&rdquo;
                   <br />
                   <span className="not-italic text-muted-foreground">
-                    &mdash; Our Lady of Kibeho
+                    Our Lady of Kibeho
                   </span>
                 </p>
               </div>
@@ -162,7 +162,7 @@ export function PrayerRequestForm(): React.JSX.Element {
                   className="bg-background"
                 />
                 <p className="text-xs text-muted-foreground">
-                  We&apos;ll only use this to let you know your prayer is being
+                  We&rsquo;ll only use this to let you know your prayer is being
                   prayed for.
                 </p>
               </div>

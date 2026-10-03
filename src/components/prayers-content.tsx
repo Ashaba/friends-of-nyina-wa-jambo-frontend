@@ -20,17 +20,17 @@ const prayers = [
       {
         heading: "The First Sorrow: The Prophecy of Simeon",
         content:
-          '"And Simeon blessed them and said to Mary his mother: Behold this child is set for the fall and for the resurrection of many in Israel, and for a sign which shall be contradicted. And thy own soul a sword shall pierce." (Luke 2:34-35)\n\nPray: 1 Our Father, 7 Hail Marys',
+          "“And Simeon blessed them and said to Mary his mother: Behold this child is set for the fall and for the resurrection of many in Israel, and for a sign which shall be contradicted. And thy own soul a sword shall pierce.” (Luke 2:34-35)\n\nPray: 1 Our Father, 7 Hail Marys",
       },
       {
         heading: "The Second Sorrow: The Flight into Egypt",
         content:
-          '"And after they were departed, behold an angel of the Lord appeared in sleep to Joseph, saying: Arise, and take the child and his mother, and fly into Egypt: and be there until I shall tell thee." (Matthew 2:13)\n\nPray: 1 Our Father, 7 Hail Marys',
+          "“And after they were departed, behold an angel of the Lord appeared in sleep to Joseph, saying: Arise, and take the child and his mother, and fly into Egypt: and be there until I shall tell thee.” (Matthew 2:13)\n\nPray: 1 Our Father, 7 Hail Marys",
       },
       {
         heading: "The Third Sorrow: The Loss of Jesus in the Temple",
         content:
-          '"And not finding him, they returned into Jerusalem, seeking him... And seeing him, they wondered. And his mother said to him: Son, why hast thou done so to us? Behold thy father and I have sought thee sorrowing." (Luke 2:45-48)\n\nPray: 1 Our Father, 7 Hail Marys',
+          "“And not finding him, they returned into Jerusalem, seeking him... And seeing him, they wondered. And his mother said to him: Son, why hast thou done so to us? Behold thy father and I have sought thee sorrowing.” (Luke 2:45-48)\n\nPray: 1 Our Father, 7 Hail Marys",
       },
       {
         heading: "The Fourth Sorrow: Mary Meets Jesus on the Way to Calvary",
@@ -40,17 +40,17 @@ const prayers = [
       {
         heading: "The Fifth Sorrow: The Crucifixion and Death of Jesus",
         content:
-          '"Now there stood by the cross of Jesus, his mother... When Jesus therefore had seen his mother and the disciple standing whom he loved, he saith to his mother: Woman, behold thy son." (John 19:25-26)\n\nPray: 1 Our Father, 7 Hail Marys',
+          "“Now there stood by the cross of Jesus, his mother... When Jesus therefore had seen his mother and the disciple standing whom he loved, he saith to his mother: Woman, behold thy son.” (John 19:25-26)\n\nPray: 1 Our Father, 7 Hail Marys",
       },
       {
         heading: "The Sixth Sorrow: Jesus Is Taken Down from the Cross",
         content:
-          "The lifeless body of Jesus was placed in Mary's arms. She held her Son, the Savior of the world, as she had held Him as an infant in Bethlehem.\n\nPray: 1 Our Father, 7 Hail Marys",
+          "The lifeless body of Jesus was placed in Mary’s arms. She held her Son, the Savior of the world, as she had held Him as an infant in Bethlehem.\n\nPray: 1 Our Father, 7 Hail Marys",
       },
       {
         heading: "The Seventh Sorrow: The Burial of Jesus",
         content:
-          "Jesus was laid in the tomb, and Mary's heart was buried with Him. Yet even in her deepest sorrow, she trusted in God's promise of resurrection.\n\nPray: 1 Our Father, 7 Hail Marys",
+          "Jesus was laid in the tomb, and Mary’s heart was buried with Him. Yet even in her deepest sorrow, she trusted in God’s promise of resurrection.\n\nPray: 1 Our Father, 7 Hail Marys",
       },
       {
         heading: "Concluding Prayer",
@@ -189,14 +189,14 @@ export function PrayersContent(): React.JSX.Element {
                             hidden={expandedSection !== key}
                             className="px-4 pb-4"
                           >
-                            <p className="whitespace-pre-line text-sm leading-relaxed text-foreground/75">
+                            <p className="whitespace-pre-line font-serif-body text-base leading-relaxed text-foreground/75">
                               {section.content}
                             </p>
                           </div>
                         </>
                       ) : (
                         <div className="p-4">
-                          <p className="whitespace-pre-line text-sm leading-relaxed text-foreground/75">
+                          <p className="whitespace-pre-line font-serif-body text-base leading-relaxed text-foreground/75">
                             {section.content}
                           </p>
                         </div>
@@ -231,7 +231,7 @@ export function PrayersContent(): React.JSX.Element {
                   aria-expanded={expandedPrayer === prayer.id}
                 >
                   <div>
-                    <h3 className="font-serif text-lg font-bold text-foreground">
+                    <h3 className="font-serif text-xl font-bold text-foreground">
                       {prayer.title}
                     </h3>
                     <p className="mt-1 text-sm text-muted-foreground">
@@ -257,7 +257,7 @@ export function PrayersContent(): React.JSX.Element {
                           {section.heading}
                         </h4>
                       )}
-                      <p className="whitespace-pre-line text-sm leading-relaxed text-foreground/75">
+                      <p className="whitespace-pre-line font-serif-body text-base leading-relaxed text-foreground/75">
                         {section.content}
                       </p>
                     </div>

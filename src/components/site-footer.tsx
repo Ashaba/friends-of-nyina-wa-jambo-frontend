@@ -38,7 +38,7 @@ export function SiteFooter(): React.JSX.Element {
             <Link href="/" className="flex items-center gap-2">
               <Cross className="h-6 w-6" />
               <div className="flex flex-col">
-                <span className="font-serif text-lg font-bold">
+                <span className="font-serif text-xl font-bold">
                   Nyina wa Jambo
                 </span>
                 <span className="text-xs text-primary-foreground/50">
@@ -47,9 +47,9 @@ export function SiteFooter(): React.JSX.Element {
               </div>
             </Link>
             <p className="max-w-xs text-sm leading-relaxed text-primary-foreground/70">
-              A movement dedicated to spreading the messages of hope,
-              repentance, and peace given by the Blessed Virgin Mary at Kibeho,
-              Rwanda.
+              An organization helping people everywhere learn about Our Lady of
+              Kibeho, Mother of the Word, and her messages of hope, repentance,
+              and peace.
             </p>
           </div>
 

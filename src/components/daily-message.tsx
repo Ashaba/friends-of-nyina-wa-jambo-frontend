@@ -29,14 +29,14 @@ const fallbackMessages: DailyMessageType[] = [
       "Pray, pray, pray! Never tire of praying. The Rosary is a powerful weapon against evil.",
     source: "Our Lady to the Visionaries",
     reflection:
-      "Take time today to pray the Rosary and experience the power of Our Lady's intercession.",
+      "Take time today to pray the Rosary and experience the power of Our Lady’s intercession.",
   },
   {
     message:
       "I have come to calm you, because I have heard your prayers. I would like your companions also to have faith, because I have not come only for you, I have come for all my children.",
     source: "Our Lady to Alphonsine, November 28, 1981",
     reflection:
-      "Remember that Mary's love extends to all her children. Share this message of hope with someone today.",
+      "Remember that Mary’s love extends to all her children. Share this message of hope with someone today.",
   },
   {
     message:
@@ -57,7 +57,7 @@ const fallbackMessages: DailyMessageType[] = [
       "My children, I love you. Love one another as I love you. Forgive one another and ask God to forgive you.",
     source: "Our Lady of Kibeho",
     reflection:
-      "Is there someone you need to forgive today? Let Mary's love inspire you to extend mercy.",
+      "Is there someone you need to forgive today? Let Mary’s love inspire you to extend mercy.",
   },
 ];
 
@@ -126,14 +126,14 @@ export function DailyMessage({
           </p>
         </div>
         <blockquote className="text-balance font-serif text-2xl font-medium italic leading-relaxed text-foreground md:text-3xl">
-          {`"${todayMessage.message}"`}
+          {`“${todayMessage.message}”`}
         </blockquote>
         <p className="mt-6 text-sm font-medium text-muted-foreground">
           {todayMessage.source}
         </p>
         <div className="mx-auto mt-8 max-w-xl rounded-lg border border-border bg-background p-6">
           <p className="mb-2 text-sm font-semibold uppercase tracking-wider text-primary">
-            Today&apos;s Reflection
+            Today&rsquo;s Reflection
           </p>
           <p className="leading-relaxed text-foreground/80">
             {todayMessage.reflection}

@@ -21,10 +21,10 @@ export function AboutSection(): React.JSX.Element {
           {/* Content */}
           <div className="flex flex-col gap-6">
             <p className="text-sm font-medium uppercase tracking-[0.15em] text-primary">
-              Nyina wa Jambo &mdash; The Apparitions
+              The Apparitions of Nyina wa Jambo
             </p>
             <h2 className="text-balance font-serif text-3xl font-bold text-foreground md:text-4xl">
-              A Mother&apos;s Call to Her Children
+              A Mother&rsquo;s Call to Her Children
             </h2>
             <div className="flex flex-col gap-4 leading-relaxed text-foreground/75">
               <p>
@@ -42,8 +42,8 @@ export function AboutSection(): React.JSX.Element {
                 repentance, conversion of hearts, and reconciliation.
               </p>
               <p>
-                The three visionaries &mdash; Alphonsine Mumureke, Nathalie
-                Mukamazimpaka, and Marie Claire Mukangango &mdash; each received
+                The three visionaries were Alphonsine Mumureke, Nathalie
+                Mukamazimpaka, and Marie Claire Mukangango. Each received
                 distinct messages that together form a powerful call for the
                 entire world.
               </p>

@@ -85,7 +85,7 @@ export function NewsletterContent(): React.JSX.Element {
           {/* Benefits */}
           <div>
             <h2 className="mb-8 font-serif text-2xl font-bold text-foreground">
-              What You&apos;ll Receive
+              What You&rsquo;ll Receive
             </h2>
             <div className="flex flex-col gap-6">
               {benefits.map((benefit) => (
@@ -112,7 +112,7 @@ export function NewsletterContent(): React.JSX.Element {
                 world.&rdquo;
               </p>
               <p className="mt-2 text-xs text-muted-foreground">
-                &mdash; Our Lady of Kibeho
+                Our Lady of Kibeho
               </p>
             </div>
           </div>
@@ -129,7 +129,7 @@ export function NewsletterContent(): React.JSX.Element {
                 </h2>
                 <p className="leading-relaxed text-muted-foreground">
                   Thank you for joining the Friends of Nyina wa Jambo.
-                  You&apos;ll receive your first message soon. May Our Lady of
+                  You&rsquo;ll receive your first message soon. May Our Lady of
                   Kibeho, Mother of the Word, bless you and your family.
                 </p>
                 <Button
@@ -207,7 +207,7 @@ export function NewsletterContent(): React.JSX.Element {
                   {/* Preferences */}
                   <div className="flex flex-col gap-3">
                     <Label className="text-sm font-medium text-foreground">
-                      I&apos;m interested in:
+                      I&rsquo;m interested in:
                     </Label>
                     <div className="flex flex-col gap-2">
                       {[

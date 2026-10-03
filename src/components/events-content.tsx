@@ -72,7 +72,7 @@ const fallbackEvents: Event[] = [
     location: "Online",
     type: "Vigil",
     description:
-      "A special prayer vigil for young people on the Solemnity of the Assumption, reflecting on Our Lady's messages to the young visionaries of Kibeho and their relevance for youth today.",
+      "A special prayer vigil for young people on the Solemnity of the Assumption, reflecting on Our Lady’s messages to the young visionaries of Kibeho and their relevance for youth today.",
     featured: false,
   },
 ];
@@ -229,7 +229,7 @@ export function EventsContent({
                           {event.type}
                         </span>
                       </div>
-                      <h3 className="font-serif text-lg font-bold text-foreground">
+                      <h3 className="font-serif text-xl font-bold text-foreground">
                         {event.title}
                       </h3>
                       <p className="mt-1 text-sm text-muted-foreground">
