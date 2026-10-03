@@ -245,30 +245,31 @@ export function EventsContent({
                   />
                 </button>
 
-                {expandedEvent === event.id && (
-                  <div className="animate-fade-in px-6 pb-6">
-                    <div className="mb-4 flex flex-wrap gap-6 text-sm text-muted-foreground">
-                      <span className="flex items-center gap-2">
-                        <Clock className="h-4 w-4" />
-                        {event.time}
-                      </span>
-                      <span className="flex items-center gap-2">
-                        <MapPin className="h-4 w-4" />
-                        {event.location}
-                      </span>
-                    </div>
-                    <p className="leading-relaxed text-foreground/75">
-                      {event.description}
-                    </p>
-                    <Button
-                      className="mt-4 bg-primary text-primary-foreground hover:bg-primary/90"
-                      size="sm"
-                    >
-                      <Users className="mr-2 h-4 w-4" />
-                      Register Interest
-                    </Button>
+                <div
+                  hidden={expandedEvent !== event.id}
+                  className="animate-fade-in px-6 pb-6"
+                >
+                  <div className="mb-4 flex flex-wrap gap-6 text-sm text-muted-foreground">
+                    <span className="flex items-center gap-2">
+                      <Clock className="h-4 w-4" />
+                      {event.time}
+                    </span>
+                    <span className="flex items-center gap-2">
+                      <MapPin className="h-4 w-4" />
+                      {event.location}
+                    </span>
                   </div>
-                )}
+                  <p className="leading-relaxed text-foreground/75">
+                    {event.description}
+                  </p>
+                  <Button
+                    className="mt-4 bg-primary text-primary-foreground hover:bg-primary/90"
+                    size="sm"
+                  >
+                    <Users className="mr-2 h-4 w-4" />
+                    Register Interest
+                  </Button>
+                </div>
               </div>
             ))}
         </div>

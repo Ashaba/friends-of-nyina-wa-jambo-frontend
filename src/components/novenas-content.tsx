@@ -190,34 +190,35 @@ export function NovenasContent(): React.JSX.Element {
                 />
               </button>
 
-              {activeDay === day.day && (
-                <div className="flex animate-fade-in flex-col gap-6 px-6 pb-8">
-                  {/* Scripture */}
-                  <blockquote className="border-l-4 border-accent py-2 pl-4 text-sm italic leading-relaxed text-foreground/80">
-                    {day.scripture}
-                  </blockquote>
+              <div
+                hidden={activeDay !== day.day}
+                className="flex animate-fade-in flex-col gap-6 px-6 pb-8"
+              >
+                {/* Scripture */}
+                <blockquote className="border-l-4 border-accent py-2 pl-4 text-sm italic leading-relaxed text-foreground/80">
+                  {day.scripture}
+                </blockquote>
 
-                  {/* Reflection */}
-                  <div>
-                    <h4 className="mb-2 text-sm font-semibold uppercase tracking-wider text-primary">
-                      Reflection
-                    </h4>
-                    <p className="leading-relaxed text-foreground/75">
-                      {day.reflection}
-                    </p>
-                  </div>
-
-                  {/* Prayer */}
-                  <div className="rounded-md border border-border bg-secondary p-6">
-                    <h4 className="mb-3 text-sm font-semibold uppercase tracking-wider text-primary">
-                      Prayer
-                    </h4>
-                    <p className="whitespace-pre-line italic leading-relaxed text-foreground/80">
-                      {day.prayer}
-                    </p>
-                  </div>
+                {/* Reflection */}
+                <div>
+                  <h4 className="mb-2 text-sm font-semibold uppercase tracking-wider text-primary">
+                    Reflection
+                  </h4>
+                  <p className="leading-relaxed text-foreground/75">
+                    {day.reflection}
+                  </p>
                 </div>
-              )}
+
+                {/* Prayer */}
+                <div className="rounded-md border border-border bg-secondary p-6">
+                  <h4 className="mb-3 text-sm font-semibold uppercase tracking-wider text-primary">
+                    Prayer
+                  </h4>
+                  <p className="whitespace-pre-line italic leading-relaxed text-foreground/80">
+                    {day.prayer}
+                  </p>
+                </div>
+              </div>
             </div>
           ))}
         </div>
