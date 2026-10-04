@@ -12,7 +12,7 @@ const fallbackEvents: Event[] = [
   {
     id: 1,
     title: "Feast of Our Lady of Kibeho",
-    date: "November 28, 2026",
+    startDate: "2026-11-28",
     time: "9:00 AM - 5:00 PM",
     location: "Kibeho Shrine, Rwanda",
     type: "Feast Day",
@@ -24,7 +24,8 @@ const fallbackEvents: Event[] = [
   {
     id: 2,
     title: "Novena to Our Lady of Kibeho",
-    date: "November 19 - 27, 2026",
+    startDate: "2026-11-19",
+    endDate: "2026-11-27",
     time: "7:00 PM nightly",
     location: "Online & Local Parishes",
     type: "Novena",
@@ -35,7 +36,8 @@ const fallbackEvents: Event[] = [
   {
     id: 3,
     title: "Pilgrimage to Kibeho",
-    date: "March 15 - 25, 2026",
+    startDate: "2026-03-15",
+    endDate: "2026-03-25",
     time: "Full Day",
     location: "Rwanda",
     type: "Pilgrimage",
@@ -46,7 +48,8 @@ const fallbackEvents: Event[] = [
   {
     id: 4,
     title: "Rosary of the Seven Sorrows Retreat",
-    date: "September 12 - 14, 2026",
+    startDate: "2026-09-12",
+    endDate: "2026-09-14",
     time: "Friday evening - Sunday afternoon",
     location: "Retreat Center TBD",
     type: "Retreat",
@@ -57,7 +60,8 @@ const fallbackEvents: Event[] = [
   {
     id: 5,
     title: "Monthly First Saturday Devotion",
-    date: "First Saturday of each month",
+    startDate: "2026-01-03",
+    when: "First Saturday of each month",
     time: "8:00 AM - 12:00 PM",
     location: "Various Parishes Worldwide",
     type: "Recurring",
@@ -68,7 +72,7 @@ const fallbackEvents: Event[] = [
   {
     id: 6,
     title: "Youth Prayer Vigil",
-    date: "August 15, 2026",
+    startDate: "2026-08-15",
     time: "7:00 PM - 12:00 AM",
     location: "Online",
     type: "Vigil",
@@ -101,6 +105,19 @@ function getTypeColor(type: string): string {
     default:
       return "bg-muted text-muted-foreground";
   }
+}
+
+// Event dates are calendar dates, so format them in UTC to keep the visitor's
+// time zone from moving them to the day before.
+const eventDateFormat = new Intl.DateTimeFormat("en", {
+  dateStyle: "long",
+  timeZone: "UTC",
+});
+
+function describeEventDates({ startDate, endDate, when }: Event): string {
+  if (when) return when;
+  if (!endDate) return eventDateFormat.format(new Date(startDate));
+  return eventDateFormat.formatRange(new Date(startDate), new Date(endDate));
 }
 
 interface EventsContentProps {
@@ -179,7 +196,7 @@ export function EventsContent({
                   <div className="mb-4 flex flex-wrap gap-6 text-sm text-muted-foreground">
                     <span className="flex items-center gap-2">
                       <Calendar className="h-4 w-4" />
-                      {event.date}
+                      {describeEventDates(event)}
                     </span>
                     <span className="flex items-center gap-2">
                       <Clock className="h-4 w-4" />
@@ -235,7 +252,7 @@ export function EventsContent({
                         {event.title}
                       </h3>
                       <p className="mt-1 text-sm text-muted-foreground">
-                        {event.date}
+                        {describeEventDates(event)}
                       </p>
                     </div>
                   </div>

@@ -219,12 +219,18 @@ test("getVideos when the thumbnail URL is relative resolves it against the API o
 });
 
 /** Builds a Strapi 5 event entry with the given image field. */
-function eventEntry(id: number, image: unknown): Record<string, unknown> {
+function eventEntry(
+  id: number,
+  image: unknown,
+  overrides: Record<string, unknown> = {}
+): Record<string, unknown> {
   return {
     id,
     documentId: `e${id}`,
     title: "Feast Day",
-    date: "2026-09-01",
+    startDate: "2026-09-01",
+    endDate: null,
+    when: null,
     time: "10:00",
     location: "Kibeho",
     type: "Feast Day",
@@ -234,8 +240,70 @@ function eventEntry(id: number, image: unknown): Record<string, unknown> {
     createdAt: "2026-08-01T00:00:00.000Z",
     updatedAt: "2026-08-01T00:00:00.000Z",
     publishedAt: "2026-08-01T00:00:00.000Z",
+    ...overrides,
   };
 }
+
+test("getEvents requests events soonest first with their image", async () => {
+  // Arrange
+  stubJsonResponse({ data: [], meta: {} });
+
+  // Act
+  const { getEvents } = await loadStrapi();
+  await getEvents();
+
+  // Assert
+  const [url] = vi.mocked(fetch).mock.calls[0];
+  const { pathname, searchParams } = new URL(String(url));
+  expect(pathname).toBe("/api/events");
+  expect(searchParams.get("sort")).toBe("startDate:asc");
+  expect(searchParams.get("populate")).toBe("image");
+});
+
+test("getEvents maps the start date, end date and when text", async () => {
+  // Arrange
+  stubJsonResponse({
+    data: [
+      eventEntry(1, null, {
+        startDate: "2026-11-19",
+        endDate: "2026-11-27",
+      }),
+      eventEntry(2, null, {
+        startDate: "2026-01-03",
+        when: "First Saturday of each month",
+      }),
+    ],
+    meta: {},
+  });
+
+  // Act
+  const { getEvents } = await loadStrapi();
+  const [range, recurring] = (await getEvents())!;
+
+  // Assert
+  expect(range).toMatchObject({
+    startDate: "2026-11-19",
+    endDate: "2026-11-27",
+    when: undefined,
+  });
+  expect(recurring).toMatchObject({
+    startDate: "2026-01-03",
+    endDate: undefined,
+    when: "First Saturday of each month",
+  });
+});
+
+test("getEvents when the when text was emptied leaves it undefined", async () => {
+  // Arrange
+  stubJsonResponse({ data: [eventEntry(1, null, { when: "" })], meta: {} });
+
+  // Act
+  const { getEvents } = await loadStrapi();
+  const events = await getEvents();
+
+  // Assert
+  expect(events![0].when).toBeUndefined();
+});
 
 test("getEvents when the image URL is already absolute leaves it unchanged", async () => {
   // Arrange — uploads served by S3 or Cloudinary come back absolute.
