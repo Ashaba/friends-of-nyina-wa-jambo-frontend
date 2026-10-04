@@ -4,9 +4,13 @@ const DAY_MS = 24 * 60 * 60 * 1000;
 const NOVENA_DAYS = 9;
 
 // The feast is celebrated in Kibeho, so a day there decides the count.
+export const KIBEHO_TIME_ZONE = "Africa/Kigali";
 const kibehoDateFormat = new Intl.DateTimeFormat("en-CA", {
-  timeZone: "Africa/Kigali",
+  timeZone: KIBEHO_TIME_ZONE,
 });
+
+export const formatDayCount = (count: number): string =>
+  count === 1 ? "1 day" : `${count} days`;
 
 /** Today's date in Kibeho as YYYY-MM-DD (the en-CA date format). */
 export function todayInKibeho(now: Date = new Date()): string {
@@ -58,6 +62,35 @@ export function getFeastSeason(today: string): FeastSeason {
     daysUntilFeast,
     novenaStartDate: addDays(feastDate, -NOVENA_DAYS),
   };
+}
+
+/**
+ * The feast season while the site-wide banner is up, from 1 October to the
+ * feast. Earlier in the year a count of hundreds of days is just noise.
+ */
+export function getFeastBannerSeason(today: string): FeastSeason | undefined {
+  const season = getFeastSeason(today);
+  const bannerStartDate = `${season.feastDate.slice(0, 4)}-10-01`;
+  return today >= bannerStartDate ? season : undefined;
+}
+
+export type EventCountdown =
+  | { kind: "upcoming"; daysUntilStart: number }
+  | { kind: "startsToday" }
+  | { kind: "underway" }
+  | { kind: "past" };
+
+/** Where `today` falls relative to an event's start and end dates. */
+export function getEventCountdown(
+  { startDate, endDate = startDate }: Pick<Event, "startDate" | "endDate">,
+  today: string
+): EventCountdown {
+  if (today < startDate) {
+    return { kind: "upcoming", daysUntilStart: daysBetween(today, startDate) };
+  }
+  if (today === startDate) return { kind: "startsToday" };
+  if (today <= endDate) return { kind: "underway" };
+  return { kind: "past" };
 }
 
 export interface UpcomingPilgrimage {

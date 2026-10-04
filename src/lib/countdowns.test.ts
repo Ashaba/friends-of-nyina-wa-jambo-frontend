@@ -1,5 +1,7 @@
 import { expect, test } from "vitest";
 import {
+  getEventCountdown,
+  getFeastBannerSeason,
   getFeastSeason,
   getUpcomingPilgrimages,
   todayInKibeho,
@@ -61,6 +63,54 @@ test.each([
 ])("getFeastSeason on %s", (_scenario, today, season) => {
   // Act & Assert
   expect(getFeastSeason(today)).toEqual(season);
+});
+
+test.each([
+  ["the last day of September", "2026-09-30", undefined],
+  ["1 October", "2026-10-01", "countdown"],
+  ["the novena", "2026-11-21", "novena"],
+  ["the feast", "2026-11-28", "feastDay"],
+  ["the day after the feast", "2026-11-29", undefined],
+  ["New Year's Day", "2027-01-01", undefined],
+])("getFeastBannerSeason on %s", (_scenario, today, kind) => {
+  // Act & Assert
+  expect(getFeastBannerSeason(today)?.kind).toBe(kind);
+});
+
+test.each([
+  [
+    "a single-day event tomorrow",
+    { startDate: "2026-10-04" },
+    { kind: "upcoming", daysUntilStart: 1 },
+  ],
+  [
+    "a multi-day event that starts later",
+    { startDate: "2026-12-01", endDate: "2026-12-05" },
+    { kind: "upcoming", daysUntilStart: 59 },
+  ],
+  [
+    "an event that starts today",
+    { startDate: "2026-10-03" },
+    { kind: "startsToday" },
+  ],
+  [
+    "an event on its last day",
+    { startDate: "2026-10-01", endDate: "2026-10-03" },
+    { kind: "underway" },
+  ],
+  [
+    "a multi-day event that has ended",
+    { startDate: "2026-09-25", endDate: "2026-10-02" },
+    { kind: "past" },
+  ],
+  [
+    "a single-day event yesterday",
+    { startDate: "2026-10-02" },
+    { kind: "past" },
+  ],
+])("getEventCountdown for %s", (_scenario, dates, countdown) => {
+  // Act & Assert
+  expect(getEventCountdown(dates, "2026-10-03")).toEqual(countdown);
 });
 
 test("todayInKibeho when it is already past midnight in Kibeho returns the Kibeho date", () => {

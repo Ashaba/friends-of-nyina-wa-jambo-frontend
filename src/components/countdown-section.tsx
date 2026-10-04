@@ -2,6 +2,7 @@ import Link from "next/link";
 import { ArrowRight, CalendarHeart, MapPin } from "lucide-react";
 import { Button } from "@/components/ui/button";
 import {
+  formatDayCount,
   getFeastSeason,
   getUpcomingPilgrimages,
   type FeastSeason,
@@ -15,9 +16,6 @@ interface CountdownSectionProps {
   today: string;
   events: Event[];
 }
-
-const days = (count: number): string =>
-  count === 1 ? "1 day" : `${count} days`;
 
 export function CountdownSection({
   today,
@@ -48,7 +46,8 @@ export function CountdownSection({
                     {event.title}
                   </p>
                   <p className="mt-1 text-sm text-muted-foreground">
-                    {describeEventDates(event)}, in {days(daysUntilStart)}
+                    {describeEventDates(event)}, in{" "}
+                    {formatDayCount(daysUntilStart)}
                   </p>
                 </li>
               ))}
@@ -89,7 +88,7 @@ function FeastSeasonDetails({
       return (
         <>
           <p className="font-serif text-5xl font-bold text-foreground md:text-6xl">
-            {days(season.daysUntilFeast)}
+            {formatDayCount(season.daysUntilFeast)}
           </p>
           <p className="mt-3 flex-1 leading-relaxed text-foreground/75">
             until the feast on {feastDate}. The novena to prepare for it begins
