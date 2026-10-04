@@ -25,7 +25,7 @@ export default function OpengraphImage(): ImageResponse {
           fontSize: 32,
           letterSpacing: 6,
           textTransform: "uppercase",
-          color: "#e0a608",
+          color: "#f0c13e",
         }}
       >
         {siteName}
