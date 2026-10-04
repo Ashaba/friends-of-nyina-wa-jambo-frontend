@@ -65,7 +65,9 @@ export interface StrapiDailyMessageFields {
 
 export interface StrapiEventFields {
   title: string;
-  date: string;
+  startDate: string;
+  endDate: string | null;
+  when: string | null;
   time: string;
   location: string;
   type:
@@ -177,7 +179,10 @@ export interface DailyMessage {
 export interface Event {
   id: number;
   title: string;
-  date: string;
+  startDate: string;
+  endDate?: string;
+  /** Shown instead of the dates, for schedules like "First Saturday of each month". */
+  when?: string;
   time: string;
   location: string;
   type: string;

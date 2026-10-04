@@ -88,6 +88,13 @@ function getCategoryColor(category: string): string {
   }
 }
 
+// publishedDate is a calendar date, so format it in UTC to keep the visitor's
+// time zone from moving it to the day before.
+const publishedDateFormat = new Intl.DateTimeFormat("en-US", {
+  dateStyle: "medium",
+  timeZone: "UTC",
+});
+
 interface VideosContentProps {
   cmsVideos?: Video[] | null;
 }
@@ -174,13 +181,8 @@ export function VideosContent({
                       </span>
                       <span className="flex items-center gap-1 text-xs text-muted-foreground">
                         <Calendar className="h-3 w-3" />
-                        {new Date(video.publishedDate).toLocaleDateString(
-                          "en-US",
-                          {
-                            month: "short",
-                            day: "numeric",
-                            year: "numeric",
-                          }
+                        {publishedDateFormat.format(
+                          new Date(video.publishedDate)
                         )}
                       </span>
                     </div>

@@ -294,13 +294,13 @@ export async function getDailyMessage(): Promise<DailyMessageResult> {
 }
 
 /**
- * Fetch all events from Strapi, sorted by date.
+ * Fetch all events from Strapi, soonest first.
  */
 export async function getEvents(): Promise<Event[] | null> {
   const { data: response } = await fetchAPI<StrapiResponse<StrapiEventFields>>(
     "/events",
     {
-      sort: "date:asc",
+      sort: "startDate:asc",
       populate: "image",
       "pagination[limit]": "50",
     }
@@ -311,7 +311,10 @@ export async function getEvents(): Promise<Event[] | null> {
   return response.data.map((entry) => ({
     id: entry.id,
     title: entry.title,
-    date: entry.date,
+    startDate: entry.startDate,
+    endDate: entry.endDate ?? undefined,
+    // An emptied field counts as never filled in, so the dates are shown.
+    when: entry.when || undefined,
     time: entry.time,
     location: entry.location,
     type: entry.type,
