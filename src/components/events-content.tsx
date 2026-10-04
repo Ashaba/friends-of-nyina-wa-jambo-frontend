@@ -5,6 +5,7 @@ import Image from "next/image";
 import { Calendar, MapPin, Clock, Users, ChevronRight } from "lucide-react";
 import { Button } from "@/components/ui/button";
 import { cn } from "@/lib/utils";
+import { describeEventDates } from "@/lib/event-dates";
 import { sitePhotos } from "@/lib/site-photos";
 import type { Event } from "@/types/strapi";
 
@@ -105,19 +106,6 @@ function getTypeColor(type: string): string {
     default:
       return "bg-muted text-muted-foreground";
   }
-}
-
-// Event dates are calendar dates, so format them in UTC to keep the visitor's
-// time zone from moving them to the day before.
-const eventDateFormat = new Intl.DateTimeFormat("en", {
-  dateStyle: "long",
-  timeZone: "UTC",
-});
-
-function describeEventDates({ startDate, endDate, when }: Event): string {
-  if (when) return when;
-  if (!endDate) return eventDateFormat.format(new Date(startDate));
-  return eventDateFormat.formatRange(new Date(startDate), new Date(endDate));
 }
 
 interface EventsContentProps {

@@ -7,6 +7,7 @@ import * as strapiLib from "@/lib/strapi";
 // Mock the strapi module to avoid backend dependencies
 vi.mock("@/lib/strapi", () => ({
   getDailyMessage: vi.fn(),
+  getEvents: vi.fn().mockResolvedValue(null),
 }));
 
 // Mock next/image to render a plain img
