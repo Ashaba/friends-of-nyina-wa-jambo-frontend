@@ -4,9 +4,8 @@ const DAY_MS = 24 * 60 * 60 * 1000;
 const NOVENA_DAYS = 9;
 
 // The feast is celebrated in Kibeho, so a day there decides the count.
-export const KIBEHO_TIME_ZONE = "Africa/Kigali";
 const kibehoDateFormat = new Intl.DateTimeFormat("en-CA", {
-  timeZone: KIBEHO_TIME_ZONE,
+  timeZone: "Africa/Kigali",
 });
 
 export const formatDayCount = (count: number): string =>

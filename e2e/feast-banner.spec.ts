@@ -33,3 +33,18 @@ test("a dismissed feast banner stays closed after reloading and on other pages",
   await page.goto("/events");
   await expect(banner).toBeHidden();
 });
+
+test("a dismissed feast banner shows again in a new session", async ({
+  page,
+  context,
+}) => {
+  await page.goto("/prayers");
+  await page.getByRole("button", { name: "Dismiss countdown" }).click();
+
+  const newTab = await context.newPage();
+  await newTab.clock.setFixedTime(new Date("2026-10-10T10:00:00Z"));
+  await newTab.goto("/prayers");
+  await expect(
+    newTab.getByRole("complementary", { name: "Feast countdown" })
+  ).toBeVisible();
+});

@@ -13,9 +13,8 @@ function setKibehoNoonOn(date: string): void {
 const runHeadScript = (): void =>
   new Function(hideDismissedFeastBannerScript)();
 
-// Node 25 ships its own localStorage, which hides the test DOM's unless Node
-// is given a file to store it in.
-function inMemoryStorage(): Pick<Storage, "getItem" | "setItem"> {
+// A fresh store stands in for a new browser session.
+function newSessionStorage(): Pick<Storage, "getItem" | "setItem"> {
   const items = new Map<string, string>();
   return {
     getItem: (key) => items.get(key) ?? null,
@@ -25,7 +24,7 @@ function inMemoryStorage(): Pick<Storage, "getItem" | "setItem"> {
 
 beforeEach(() => {
   vi.useFakeTimers({ toFake: ["Date"] });
-  vi.stubGlobal("localStorage", inMemoryStorage());
+  vi.stubGlobal("sessionStorage", newSessionStorage());
 });
 
 afterEach(() => {
@@ -73,7 +72,7 @@ test("FeastBanner before 1 October is not shown", () => {
   expect(screen.queryByRole("complementary")).not.toBeInTheDocument();
 });
 
-test("FeastBanner dismiss hides the banner and remembers it for this feast", () => {
+test("FeastBanner dismiss hides the banner and remembers it for this session", () => {
   // Arrange
   setKibehoNoonOn("2026-10-03");
   render(<FeastBanner builtOn="2026-10-03" />);
@@ -92,7 +91,7 @@ test("FeastBanner dismiss hides the banner and remembers it for this feast", () 
   );
 });
 
-test("FeastBanner dismissed last year shows again for this year's feast", () => {
+test("FeastBanner dismissed in an earlier session shows again", () => {
   // Arrange
   setKibehoNoonOn("2026-10-03");
   render(<FeastBanner builtOn="2026-10-03" />);
@@ -100,7 +99,7 @@ test("FeastBanner dismissed last year shows again for this year's feast", () => 
   document.documentElement.removeAttribute(FEAST_BANNER_DISMISSED_ATTRIBUTE);
 
   // Act
-  setKibehoNoonOn("2027-10-01");
+  vi.stubGlobal("sessionStorage", newSessionStorage());
   runHeadScript();
 
   // Assert

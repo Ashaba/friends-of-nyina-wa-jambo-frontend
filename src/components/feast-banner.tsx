@@ -44,7 +44,7 @@ export function FeastBanner({
           type="button"
           aria-label="Dismiss countdown"
           className="-mr-1.5 rounded-sm p-1.5 text-primary-foreground/80 transition-colors hover:text-primary-foreground"
-          onClick={() => dismissFeastBanner(season.feastDate)}
+          onClick={dismissFeastBanner}
         >
           <X className="h-4 w-4" />
         </button>

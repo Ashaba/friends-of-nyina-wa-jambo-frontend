@@ -1,8 +1,6 @@
-import { KIBEHO_TIME_ZONE } from "@/lib/countdowns";
+const DISMISSED_KEY = "feastBannerDismissed";
 
-const DISMISSED_FOR_FEAST_KEY = "feastBannerDismissedForFeast";
-
-/** Set on <html> once the visitor closes the banner for this year's feast. */
+/** Set on <html> once the visitor closes the banner in this browser session. */
 export const FEAST_BANNER_DISMISSED_ATTRIBUTE = "data-feast-banner-dismissed";
 
 /**
@@ -11,13 +9,12 @@ export const FEAST_BANNER_DISMISSED_ATTRIBUTE = "data-feast-banner-dismissed";
  * each page load until React caught up.
  */
 export const hideDismissedFeastBannerScript = `
-if ((localStorage.getItem("${DISMISSED_FOR_FEAST_KEY}") ?? "") >=
-  new Intl.DateTimeFormat("en-CA", { timeZone: "${KIBEHO_TIME_ZONE}" }).format(new Date())) {
+if (sessionStorage.getItem("${DISMISSED_KEY}")) {
   document.documentElement.setAttribute("${FEAST_BANNER_DISMISSED_ATTRIBUTE}", "");
 }`;
 
-/** Hides the banner until the feast on `feastDate` has passed. */
-export function dismissFeastBanner(feastDate: string): void {
+/** Hides the banner for the rest of this browser session. */
+export function dismissFeastBanner(): void {
   document.documentElement.setAttribute(FEAST_BANNER_DISMISSED_ATTRIBUTE, "");
-  localStorage.setItem(DISMISSED_FOR_FEAST_KEY, feastDate);
+  sessionStorage.setItem(DISMISSED_KEY, "true");
 }
