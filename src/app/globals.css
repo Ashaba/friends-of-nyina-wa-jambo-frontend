@@ -11,7 +11,7 @@
   --popover-foreground: oklch(0.213 0.025 262);
   --primary: oklch(0.39 0.09 250); /* Deep Marian blue */
   --primary-foreground: oklch(1 0 0); /* White */
-  --secondary: oklch(0.928 0.022 85); /* Warm light */
+  --secondary: oklch(0.95 0.025 236); /* Soft sky blue */
   --secondary-foreground: oklch(0.213 0.025 262);
   --muted: oklch(0.94 0.01 85); /* Very light warm */
   --muted-foreground: oklch(0.53 0.02 260); /* Medium gray */

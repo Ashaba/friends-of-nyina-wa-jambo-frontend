@@ -23,6 +23,7 @@ const footerLinks = [
     links: [
       { name: "Events", href: "/events" },
       { name: "Videos & Testimonies", href: "/videos" },
+      { name: "Photo Gallery", href: "/gallery" },
       { name: "Newsletter", href: "/newsletter" },
     ],
   },

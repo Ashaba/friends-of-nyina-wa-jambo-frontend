@@ -12,6 +12,7 @@ const navigation = [
   { name: "Novenas", href: "/novenas" },
   { name: "Events", href: "/events" },
   { name: "Videos", href: "/videos" },
+  { name: "Gallery", href: "/gallery" },
   { name: "Prayer Requests", href: "/prayer-requests" },
 ];
 
@@ -34,12 +35,12 @@ export function SiteHeader(): React.JSX.Element {
         </Link>
 
         {/* Desktop navigation */}
-        <div className="hidden lg:flex lg:items-center lg:gap-x-8">
+        <div className="hidden lg:flex lg:items-center lg:gap-x-5 xl:gap-x-8">
           {navigation.map((item) => (
             <Link
               key={item.name}
               href={item.href}
-              className="text-sm font-medium text-foreground/80 transition-colors hover:text-primary"
+              className="whitespace-nowrap text-sm font-medium text-foreground/80 transition-colors hover:text-primary"
             >
               {item.name}
             </Link>

@@ -144,6 +144,7 @@ export function VideosContent({
                         src={thumbnail}
                         alt={video.title}
                         fill
+                        sizes="(min-width: 1152px) 368px, (min-width: 1024px) 33vw, (min-width: 768px) 50vw, 100vw"
                         className="object-cover transition-transform duration-300 group-hover:scale-105"
                         crossOrigin="anonymous"
                       />

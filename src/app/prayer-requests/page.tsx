@@ -1,6 +1,7 @@
 import type { Metadata } from "next";
 import { PageLayout } from "@/components/page-layout";
 import { PageHero } from "@/components/page-hero";
+import { sitePhotos } from "@/lib/site-photos";
 import { PrayerRequestForm } from "@/components/prayer-request-form";
 
 export const metadata: Metadata = {
@@ -14,6 +15,7 @@ export default function PrayerRequestsPage(): React.JSX.Element {
   return (
     <PageLayout>
       <PageHero
+        photo={sitePhotos.shrineLawns}
         title="Prayer Requests"
         subtitle="We are here to pray with you"
         description="Share your intentions and let our community lift them in prayer through the intercession of Our Lady of Kibeho, Nyina wa Jambo, Mother of the Word."

@@ -8,6 +8,7 @@ const pagePaths = [
   "/novenas",
   "/events",
   "/videos",
+  "/gallery",
   "/prayer-requests",
   "/newsletter",
 ];

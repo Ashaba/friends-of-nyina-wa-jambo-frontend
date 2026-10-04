@@ -1,6 +1,7 @@
 import Link from "next/link";
 import Image from "next/image";
 import { ArrowRight } from "lucide-react";
+import { sitePhotos } from "@/lib/site-photos";
 
 const features = [
   {
@@ -8,21 +9,21 @@ const features = [
     description:
       "A collection of powerful prayers including the Rosary of the Seven Sorrows, prayers for peace, and devotions to Our Lady.",
     href: "/prayers",
-    image: "/images/rosary.svg",
+    photo: sitePhotos.altarDuringMass,
   },
   {
     title: "Novenas",
     description:
       "Nine-day prayers to deepen your devotion and seek the intercession of Our Lady of Kibeho for your intentions.",
     href: "/novenas",
-    image: "/images/candles.svg",
+    photo: sitePhotos.cloudsAndLight,
   },
   {
     title: "Events & Pilgrimages",
     description:
       "Join upcoming pilgrimages, retreats, feast day celebrations, and community gatherings honoring Our Lady.",
     href: "/events",
-    image: "/images/pilgrimage.svg",
+    photo: sitePhotos.offertoryProcession,
   },
 ];
 
@@ -48,9 +49,11 @@ export function FeaturesSection(): React.JSX.Element {
             >
               <div className="relative aspect-[16/10] overflow-hidden">
                 <Image
-                  src={feature.image}
-                  alt={feature.title}
+                  src={feature.photo.src}
+                  alt={feature.photo.alt}
                   fill
+                  placeholder="blur"
+                  sizes="(min-width: 1280px) 400px, (min-width: 768px) 33vw, 100vw"
                   className="object-cover transition-transform duration-500 group-hover:scale-105"
                 />
               </div>

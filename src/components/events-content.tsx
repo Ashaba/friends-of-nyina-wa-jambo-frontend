@@ -5,6 +5,7 @@ import Image from "next/image";
 import { Calendar, MapPin, Clock, Users, ChevronRight } from "lucide-react";
 import { Button } from "@/components/ui/button";
 import { cn } from "@/lib/utils";
+import { sitePhotos } from "@/lib/site-photos";
 import type { Event } from "@/types/strapi";
 
 const fallbackEvents: Event[] = [
@@ -17,7 +18,7 @@ const fallbackEvents: Event[] = [
     type: "Feast Day",
     description:
       "The annual feast day celebrating the first apparition of Our Lady to Alphonsine Mumureke. Join pilgrims from around the world for Holy Mass, processions, the Rosary of the Seven Sorrows, and all-day adoration.",
-    image: "/images/pilgrimage.svg",
+    image: sitePhotos.pilgrimsAtTheChurch.src.src,
     featured: true,
   },
   {
@@ -155,9 +156,10 @@ export function EventsContent({
                       src={event.image}
                       alt={event.title}
                       fill
+                      sizes="(min-width: 1024px) 1024px, 100vw"
                       className="object-cover"
                     />
-                    <div className="absolute inset-0 bg-foreground/30" />
+                    <div className="absolute inset-0 bg-linear-to-t from-foreground/85 via-foreground/25 to-transparent" />
                     <div className="absolute bottom-6 left-6 right-6">
                       <span
                         className={cn(

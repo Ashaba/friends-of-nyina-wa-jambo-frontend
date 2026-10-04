@@ -269,3 +269,113 @@ test("getEvents when the image is null returns an undefined image", async () => 
   // Assert
   expect(events![0].image).toBeUndefined();
 });
+
+/** Builds a Strapi 5 gallery photo entry with the given image field. */
+function galleryPhotoEntry(
+  id: number,
+  image: unknown
+): Record<string, unknown> {
+  return {
+    id,
+    documentId: `g${id}`,
+    caption: "Pilgrims at the Kibeho shrine",
+    takenOn: "2025-11-28",
+    image,
+    createdAt: "2025-11-29T00:00:00.000Z",
+    updatedAt: "2025-11-29T00:00:00.000Z",
+    publishedAt: "2025-11-29T00:00:00.000Z",
+  };
+}
+
+test("getGalleryPhotos requests published photos newest first with their image", async () => {
+  // Arrange
+  stubJsonResponse({ data: [], meta: {} });
+
+  // Act
+  const { getGalleryPhotos } = await loadStrapi();
+  await getGalleryPhotos();
+
+  // Assert
+  const [url, init] = vi.mocked(fetch).mock.calls[0];
+  const { pathname, searchParams } = new URL(String(url));
+  expect(pathname).toBe("/api/gallery-photos");
+  expect(searchParams.get("sort")).toBe("takenOn:desc");
+  expect(searchParams.get("populate")).toBe("image");
+  expect(init?.next?.tags).toContain("strapi-gallery-photos");
+});
+
+test("getGalleryPhotos when the image URL is relative resolves it against the API origin", async () => {
+  // Arrange
+  stubJsonResponse({
+    data: [
+      galleryPhotoEntry(1, {
+        id: 5,
+        documentId: "img5",
+        url: "/uploads/pilgrims.jpg",
+        alternativeText: "Pilgrims singing outside the church",
+      }),
+    ],
+    meta: {},
+  });
+
+  // Act
+  const { getGalleryPhotos } = await loadStrapi();
+  const photos = await getGalleryPhotos();
+
+  // Assert
+  expect(photos).toEqual([
+    {
+      id: 1,
+      src: `${API_URL}/uploads/pilgrims.jpg`,
+      alt: "Pilgrims singing outside the church",
+      caption: "Pilgrims at the Kibeho shrine",
+      takenOn: "2025-11-28",
+    },
+  ]);
+});
+
+test("getGalleryPhotos when the image has no alt text falls back to the caption", async () => {
+  // Arrange
+  stubJsonResponse({
+    data: [
+      galleryPhotoEntry(1, {
+        id: 5,
+        documentId: "img5",
+        url: "https://cdn.example.com/pilgrims.jpg",
+        alternativeText: null,
+      }),
+    ],
+    meta: {},
+  });
+
+  // Act
+  const { getGalleryPhotos } = await loadStrapi();
+  const [photo] = await getGalleryPhotos();
+
+  // Assert
+  expect(photo.alt).toBe("Pilgrims at the Kibeho shrine");
+});
+
+test("getGalleryPhotos when an entry has no image leaves it out", async () => {
+  // Arrange
+  stubJsonResponse({ data: [galleryPhotoEntry(1, null)], meta: {} });
+
+  // Act
+  const { getGalleryPhotos } = await loadStrapi();
+  const photos = await getGalleryPhotos();
+
+  // Assert
+  expect(photos).toEqual([]);
+});
+
+test("getGalleryPhotos when the CMS cannot be reached returns no photos", async () => {
+  // Arrange
+  vi.stubGlobal("fetch", vi.fn().mockRejectedValue(new Error("offline")));
+
+  // Act
+  const { getGalleryPhotos } = await loadStrapi();
+  const photos = await getGalleryPhotos();
+
+  // Assert
+  expect(photos).toEqual([]);
+});

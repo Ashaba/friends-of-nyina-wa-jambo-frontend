@@ -2,6 +2,7 @@ import type { Metadata } from "next";
 import { getEvents } from "@/lib/strapi";
 import { PageLayout } from "@/components/page-layout";
 import { PageHero } from "@/components/page-hero";
+import { sitePhotos } from "@/lib/site-photos";
 import { EventsContent } from "@/components/events-content";
 
 export const metadata: Metadata = {
@@ -17,6 +18,7 @@ export default async function EventsPage(): Promise<React.JSX.Element> {
   return (
     <PageLayout>
       <PageHero
+        photo={sitePhotos.pilgrimsAtTheChurch}
         title="Events & Gatherings"
         subtitle="Come together in faith and community"
         description="Join fellow devotees for pilgrimages, prayer gatherings, retreats, and celebrations honouring Our Lady of Kibeho."

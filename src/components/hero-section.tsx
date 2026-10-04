@@ -2,6 +2,7 @@ import Image from "next/image";
 import Link from "next/link";
 import { Button } from "@/components/ui/button";
 import { ArrowRight } from "lucide-react";
+import { sitePhotos } from "@/lib/site-photos";
 
 export function HeroSection(): React.JSX.Element {
   return (
@@ -9,13 +10,15 @@ export function HeroSection(): React.JSX.Element {
       {/* Background image */}
       <div className="absolute inset-0">
         <Image
-          src="/images/hero-kibeho.svg"
-          alt="The rolling hills of Kibeho, Rwanda"
+          src={sitePhotos.shrineGroundsSky.src}
+          alt={sitePhotos.shrineGroundsSky.alt}
           fill
-          className="object-cover"
-          priority
+          preload
+          placeholder="blur"
+          sizes="100vw"
+          className="object-cover object-[center_70%]"
         />
-        <div className="absolute inset-0 bg-foreground/60" />
+        <div className="absolute inset-0 bg-linear-to-b from-primary/70 via-primary/55 to-foreground/75" />
       </div>
 
       {/* Content */}

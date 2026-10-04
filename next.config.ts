@@ -2,6 +2,11 @@ import type { NextConfig } from "next";
 
 const nextConfig: NextConfig = {
   images: {
+    formats: ["image/avif", "image/webp"],
+    // Next.js refuses to optimize images from private addresses, which
+    // includes a local Strapi. Allowed in development only, so the localhost
+    // pattern below works there and production stays protected.
+    dangerouslyAllowLocalIP: process.env.NODE_ENV === "development",
     remotePatterns: [
       {
         protocol: "https",

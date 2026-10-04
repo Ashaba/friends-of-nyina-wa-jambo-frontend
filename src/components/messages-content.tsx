@@ -4,6 +4,7 @@ import { useState } from "react";
 import Image from "next/image";
 import { ChevronDown } from "lucide-react";
 import { cn } from "@/lib/utils";
+import { sitePhotos } from "@/lib/site-photos";
 
 const visionaries = [
   {
@@ -159,9 +160,11 @@ export function MessagesContent(): React.JSX.Element {
             </div>
             <div className="relative aspect-[4/5] overflow-hidden rounded-lg">
               <Image
-                src="/images/our-lady.svg"
-                alt="Our Lady of Kibeho"
+                src={sitePhotos.outdoorAltar.src}
+                alt={sitePhotos.outdoorAltar.alt}
                 fill
+                placeholder="blur"
+                sizes="(min-width: 1280px) 600px, (min-width: 1024px) 50vw, 100vw"
                 className="object-cover"
               />
             </div>
