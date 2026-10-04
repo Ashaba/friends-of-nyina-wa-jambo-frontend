@@ -18,7 +18,7 @@ export function HeroSection(): React.JSX.Element {
           sizes="100vw"
           className="object-cover object-[center_70%]"
         />
-        <div className="absolute inset-0 bg-linear-to-b from-primary/70 via-primary/55 to-foreground/75" />
+        <div className="absolute inset-0 bg-linear-to-b from-primary/75 via-primary/65 to-foreground/80" />
       </div>
 
       {/* Content */}
