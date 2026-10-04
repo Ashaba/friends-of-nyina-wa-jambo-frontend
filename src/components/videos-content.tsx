@@ -144,6 +144,7 @@ export function VideosContent({
                         src={thumbnail}
                         alt={video.title}
                         fill
+                        sizes="(min-width: 1152px) 368px, (min-width: 1024px) 33vw, (min-width: 768px) 50vw, 100vw"
                         className="object-cover transition-transform duration-300 group-hover:scale-105"
                         crossOrigin="anonymous"
                       />
@@ -204,7 +205,7 @@ export function VideosContent({
           )}
 
           {/* YouTube Channel CTA */}
-          <div className="mt-16 rounded-lg border border-border bg-secondary p-10 text-center">
+          <div className="mt-16 rounded-lg border border-border bg-secondary p-6 text-center sm:p-10">
             <h3 className="mb-3 font-serif text-xl font-bold text-foreground">
               Watch More on YouTube
             </h3>
@@ -216,7 +217,7 @@ export function VideosContent({
             <Button
               asChild
               size="lg"
-              className="bg-[#c4302b] font-semibold text-background hover:bg-[#a82723]"
+              className="h-auto min-h-10 max-w-full whitespace-normal bg-[#c4302b] py-2 font-semibold text-background hover:bg-[#a82723]"
             >
               <a
                 href="https://www.youtube.com/@FriendsOfNyinaWaJambo"

@@ -1,6 +1,7 @@
 import type { Metadata } from "next";
 import { PageLayout } from "@/components/page-layout";
 import { PageHero } from "@/components/page-hero";
+import { sitePhotos } from "@/lib/site-photos";
 import { MessagesContent } from "@/components/messages-content";
 
 export const metadata: Metadata = {
@@ -14,6 +15,7 @@ export default function MessagesPage(): React.JSX.Element {
   return (
     <PageLayout>
       <PageHero
+        photo={sitePhotos.altarBanner}
         title="Messages of Our Lady"
         subtitle="Words given to the visionaries of Kibeho"
         description="Our Lady appeared to three young students in Kibeho, Rwanda between 1981 and 1989, sharing urgent messages of prayer, repentance, and conversion for the whole world."

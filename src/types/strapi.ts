@@ -89,6 +89,12 @@ export interface StrapiVideoFields {
   thumbnail?: StrapiMedia | null;
 }
 
+export interface StrapiGalleryPhotoFields {
+  image: StrapiMedia;
+  caption: string;
+  takenOn: string;
+}
+
 export interface StrapiNewsletterSubscriberFields {
   firstName: string;
   lastName?: string;
@@ -188,6 +194,14 @@ export interface Video {
   category: string;
   publishedDate: string;
   thumbnail?: string;
+}
+
+export interface GalleryPhoto {
+  id: number;
+  src: string;
+  alt: string;
+  caption: string;
+  takenOn: string;
 }
 
 // --- Fetch diagnostics (used for logging CMS fetch attempts/failures) ---

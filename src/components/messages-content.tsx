@@ -4,6 +4,7 @@ import { useState } from "react";
 import Image from "next/image";
 import { ChevronDown } from "lucide-react";
 import { cn } from "@/lib/utils";
+import { sitePhotos } from "@/lib/site-photos";
 
 const visionaries = [
   {
@@ -100,6 +101,22 @@ const keyThemes = [
   },
 ];
 
+// As summarised on the banner beside the shrine church at Kibeho.
+const shrineMessage = [
+  "I am the Mother of the Word.",
+  "The child of Mary accepts his own sufferings.",
+  "Repent without delay.",
+  "Endure sufferings in order to help Jesus to save the world.",
+  "Meditate the Rosary of sorrows of Virgin Mary.",
+  "Pray always for the Church.",
+  "Be strong in faith.",
+  "Pray always for the world.",
+  "\u201cRepent so that you may not fall in hell.\u201d",
+  "Meditate the Rosary.",
+  "Nobody will enter into heaven without suffering.",
+  "Come back to God.",
+];
+
 export function MessagesContent(): React.JSX.Element {
   const [openVisionary, setOpenVisionary] = useState<number | null>(0);
   const [openMessage, setOpenMessage] = useState<string | null>(null);
@@ -159,9 +176,11 @@ export function MessagesContent(): React.JSX.Element {
             </div>
             <div className="relative aspect-[4/5] overflow-hidden rounded-lg">
               <Image
-                src="/images/our-lady.svg"
-                alt="Our Lady of Kibeho"
+                src={sitePhotos.outdoorAltar.src}
+                alt={sitePhotos.outdoorAltar.alt}
                 fill
+                placeholder="blur"
+                sizes="(min-width: 1280px) 600px, (min-width: 1024px) 50vw, 100vw"
                 className="object-cover"
               />
             </div>
@@ -291,6 +310,36 @@ export function MessagesContent(): React.JSX.Element {
               </div>
             ))}
           </div>
+        </div>
+      </section>
+
+      {/* The message as summarised at the shrine */}
+      <section className="bg-secondary px-6 py-20">
+        <div className="mx-auto max-w-4xl">
+          <div className="mb-12 text-center">
+            <p className="mb-3 text-sm font-medium uppercase tracking-[0.15em] text-primary">
+              As Displayed at the Shrine
+            </p>
+            <h2 className="text-balance font-serif text-3xl font-bold text-foreground md:text-4xl">
+              The Message of Our Lady of Kibeho
+            </h2>
+          </div>
+
+          <ol className="grid grid-cols-1 gap-x-10 gap-y-4 rounded-lg border border-border bg-card p-8 md:grid-cols-2 md:p-10">
+            {shrineMessage.map((line, index) => (
+              <li key={line} className="flex gap-4">
+                <span
+                  aria-hidden="true"
+                  className="flex h-8 w-8 shrink-0 items-center justify-center rounded-full bg-primary font-serif text-sm font-bold text-primary-foreground"
+                >
+                  {index + 1}
+                </span>
+                <span className="pt-1 leading-relaxed text-foreground/85">
+                  {line}
+                </span>
+              </li>
+            ))}
+          </ol>
         </div>
       </section>
     </>

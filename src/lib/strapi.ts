@@ -6,11 +6,13 @@ import type {
   StrapiDailyMessageFields,
   StrapiEventFields,
   StrapiVideoFields,
+  StrapiGalleryPhotoFields,
   StrapiFetchOutcome,
   StrapiPostOutcome,
   DailyMessageResult,
   Event,
   Video,
+  GalleryPhoto,
 } from "@/types/strapi";
 
 export type {
@@ -19,6 +21,7 @@ export type {
   StrapiFetchStatus,
   Event,
   Video,
+  GalleryPhoto,
 } from "@/types/strapi";
 
 const STRAPI_API_URL = process.env.STRAPI_API_URL || "";
@@ -342,4 +345,39 @@ export async function getVideos(): Promise<Video[] | null> {
     publishedDate: entry.publishedDate,
     thumbnail: toMediaUrl(entry.thumbnail),
   }));
+}
+
+/**
+ * Fetch published gallery photos from Strapi, newest first.
+ * Returns an empty list when none are published or the CMS is unreachable.
+ */
+export async function getGalleryPhotos(): Promise<GalleryPhoto[]> {
+  const { data: response } = await fetchAPI<
+    StrapiResponse<StrapiGalleryPhotoFields>
+  >(
+    "/gallery-photos",
+    {
+      sort: "takenOn:desc",
+      populate: "image",
+      "pagination[limit]": "100",
+    },
+    ["strapi", "strapi-gallery-photos"]
+  );
+
+  return (response?.data ?? []).flatMap((entry) => {
+    const src = toMediaUrl(entry.image);
+    if (!src) {
+      log.warn("galleryPhoto.missingImage", { id: entry.id });
+      return [];
+    }
+    return [
+      {
+        id: entry.id,
+        src,
+        alt: entry.image.alternativeText || entry.caption,
+        caption: entry.caption,
+        takenOn: entry.takenOn,
+      },
+    ];
+  });
 }

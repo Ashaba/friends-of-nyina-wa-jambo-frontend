@@ -1,6 +1,7 @@
 import type { Metadata } from "next";
 import { PageLayout } from "@/components/page-layout";
 import { PageHero } from "@/components/page-hero";
+import { sitePhotos } from "@/lib/site-photos";
 import { NewsletterContent } from "@/components/newsletter-content";
 
 export const metadata: Metadata = {
@@ -14,6 +15,7 @@ export default function NewsletterPage(): React.JSX.Element {
   return (
     <PageLayout>
       <PageHero
+        photo={sitePhotos.pathToTheShrine}
         title="Newsletter"
         subtitle="Stay connected in faith"
         description="Receive updates on messages, events, prayer intentions, and community news directly in your inbox."

@@ -2,6 +2,7 @@ import Image from "next/image";
 import Link from "next/link";
 import { Button } from "@/components/ui/button";
 import { ArrowRight } from "lucide-react";
+import { sitePhotos } from "@/lib/site-photos";
 
 export function AboutSection(): React.JSX.Element {
   return (
@@ -11,9 +12,11 @@ export function AboutSection(): React.JSX.Element {
           {/* Image */}
           <div className="relative aspect-[4/5] overflow-hidden rounded-lg">
             <Image
-              src="/images/our-lady.svg"
-              alt="Our Lady of Kibeho"
+              src={sitePhotos.ourLadyStatue.src}
+              alt={sitePhotos.ourLadyStatue.alt}
               fill
+              placeholder="blur"
+              sizes="(min-width: 1280px) 600px, (min-width: 1024px) 50vw, 100vw"
               className="object-cover"
             />
           </div>

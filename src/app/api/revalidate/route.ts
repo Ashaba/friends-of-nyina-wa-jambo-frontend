@@ -12,6 +12,7 @@ const MODEL_TO_TAG: Record<string, string> = {
   "daily-message": "strapi-daily-message",
   event: "strapi-events",
   video: "strapi-videos",
+  "gallery-photo": "strapi-gallery-photos",
   "newsletter-subscriber": "strapi-newsletter",
   "prayer-request": "strapi-prayer-requests",
 };
