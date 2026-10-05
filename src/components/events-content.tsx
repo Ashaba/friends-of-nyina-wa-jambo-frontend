@@ -5,6 +5,8 @@ import Image from "next/image";
 import { Calendar, MapPin, Clock, Users, ChevronRight } from "lucide-react";
 import { Button } from "@/components/ui/button";
 import { cn } from "@/lib/utils";
+import { getEventCountdown, type EventCountdown } from "@/lib/countdowns";
+import { describeEventDates } from "@/lib/event-dates";
 import { sitePhotos } from "@/lib/site-photos";
 import type { Event } from "@/types/strapi";
 
@@ -107,27 +109,73 @@ function getTypeColor(type: string): string {
   }
 }
 
-// Event dates are calendar dates, so format them in UTC to keep the visitor's
-// time zone from moving them to the day before.
-const eventDateFormat = new Intl.DateTimeFormat("en", {
-  dateStyle: "long",
-  timeZone: "UTC",
-});
+function EventDateTile({
+  countdown,
+}: {
+  countdown: EventCountdown | undefined;
+}): React.JSX.Element {
+  const tileClassName =
+    "flex h-14 w-14 shrink-0 flex-col items-center justify-center rounded-lg bg-secondary";
+  const statusClassName =
+    "text-xs font-semibold uppercase tracking-wide text-primary";
 
-function describeEventDates({ startDate, endDate, when }: Event): string {
-  if (when) return when;
-  if (!endDate) return eventDateFormat.format(new Date(startDate));
-  return eventDateFormat.formatRange(new Date(startDate), new Date(endDate));
+  switch (countdown?.kind) {
+    case undefined:
+      return (
+        <div className={tileClassName}>
+          <Calendar className="h-5 w-5 text-primary" />
+        </div>
+      );
+    case "upcoming":
+      return (
+        <div className={tileClassName}>
+          <span className="font-serif text-xl font-bold leading-none text-primary">
+            {countdown.daysUntilStart}
+          </span>{" "}
+          <span className="mt-1 text-[10px] uppercase tracking-wide text-muted-foreground">
+            {countdown.daysUntilStart === 1 ? "day" : "days"}
+          </span>
+        </div>
+      );
+    case "startsToday":
+      return (
+        <div className={tileClassName}>
+          <span className={statusClassName}>Today</span>
+        </div>
+      );
+    case "underway":
+      return (
+        <div className={tileClassName}>
+          <span className={statusClassName}>Now</span>
+        </div>
+      );
+    case "past":
+      return (
+        <div className={tileClassName}>
+          <span className={cn(statusClassName, "text-muted-foreground")}>
+            Past
+          </span>
+        </div>
+      );
+  }
 }
 
 interface EventsContentProps {
   cmsEvents?: Event[] | null;
+  /** Today's date in Kibeho, as YYYY-MM-DD. */
+  today: string;
 }
 
 export function EventsContent({
   cmsEvents,
+  today,
 }: EventsContentProps): React.JSX.Element {
-  const events = cmsEvents && cmsEvents.length > 0 ? cmsEvents : fallbackEvents;
+  const showsExamples = !cmsEvents?.length;
+  const events = showsExamples ? fallbackEvents : cmsEvents;
+  // The examples have made-up dates, and "when" text has no single date to
+  // count to.
+  const countdownFor = (event: Event): EventCountdown | undefined =>
+    showsExamples || event.when ? undefined : getEventCountdown(event, today);
   const [filter, setFilter] = useState("All");
   const [expandedEvent, setExpandedEvent] = useState<number | null>(
     events[0]?.id ?? 1
@@ -234,9 +282,7 @@ export function EventsContent({
                   aria-expanded={expandedEvent === event.id}
                 >
                   <div className="flex items-start gap-4">
-                    <div className="flex h-14 w-14 shrink-0 flex-col items-center justify-center rounded-lg bg-secondary">
-                      <Calendar className="h-5 w-5 text-primary" />
-                    </div>
+                    <EventDateTile countdown={countdownFor(event)} />
                     <div>
                       <div className="mb-1 flex items-center gap-2">
                         <span

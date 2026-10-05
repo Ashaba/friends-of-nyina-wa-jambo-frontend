@@ -1,5 +1,7 @@
 import type { Metadata } from "next";
-import { getDailyMessage } from "@/lib/strapi";
+import { getDailyMessage, getEvents } from "@/lib/strapi";
+import { todayInKibeho } from "@/lib/countdowns";
+import { CountdownSection } from "@/components/countdown-section";
 import { SiteHeader } from "@/components/site-header";
 import { SiteFooter } from "@/components/site-footer";
 import { HeroSection } from "@/components/hero-section";
@@ -23,7 +25,10 @@ const organizationJsonLd = {
 };
 
 export default async function Home(): Promise<React.JSX.Element> {
-  const dailyMessage = await getDailyMessage();
+  const [dailyMessage, events] = await Promise.all([
+    getDailyMessage(),
+    getEvents(),
+  ]);
 
   return (
     <>
@@ -42,6 +47,7 @@ export default async function Home(): Promise<React.JSX.Element> {
           fetchStatus={dailyMessage.status}
           fetchDetail={dailyMessage.detail}
         />
+        <CountdownSection today={todayInKibeho()} events={events ?? []} />
         <AboutSection />
         <FeaturesSection />
         <CtaSection />

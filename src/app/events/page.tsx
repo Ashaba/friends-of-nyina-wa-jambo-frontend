@@ -1,5 +1,6 @@
 import type { Metadata } from "next";
 import { getEvents } from "@/lib/strapi";
+import { todayInKibeho } from "@/lib/countdowns";
 import { PageLayout } from "@/components/page-layout";
 import { PageHero } from "@/components/page-hero";
 import { sitePhotos } from "@/lib/site-photos";
@@ -23,7 +24,7 @@ export default async function EventsPage(): Promise<React.JSX.Element> {
         subtitle="Come together in faith and community"
         description="Join fellow devotees for pilgrimages, prayer gatherings, retreats, and celebrations honouring Our Lady of Kibeho."
       />
-      <EventsContent cmsEvents={events} />
+      <EventsContent cmsEvents={events} today={todayInKibeho()} />
     </PageLayout>
   );
 }
