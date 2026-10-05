@@ -63,20 +63,10 @@ export function getFeastSeason(today: string): FeastSeason {
   };
 }
 
-/**
- * The feast season while the site-wide banner is up, from 1 October to the
- * feast. Earlier in the year a count of hundreds of days is just noise.
- */
-export function getFeastBannerSeason(today: string): FeastSeason | undefined {
-  const season = getFeastSeason(today);
-  const bannerStartDate = `${season.feastDate.slice(0, 4)}-10-01`;
-  return today >= bannerStartDate ? season : undefined;
-}
-
 export type EventCountdown =
   | { kind: "upcoming"; daysUntilStart: number }
   | { kind: "startsToday" }
-  | { kind: "underway" }
+  | { kind: "underway"; dayOfEvent: number; lengthInDays: number }
   | { kind: "past" };
 
 /** Where `today` falls relative to an event's start and end dates. */
@@ -88,8 +78,42 @@ export function getEventCountdown(
     return { kind: "upcoming", daysUntilStart: daysBetween(today, startDate) };
   }
   if (today === startDate) return { kind: "startsToday" };
-  if (today <= endDate) return { kind: "underway" };
+  if (today <= endDate) {
+    return {
+      kind: "underway",
+      dayOfEvent: daysBetween(startDate, today) + 1,
+      lengthInDays: daysBetween(startDate, endDate) + 1,
+    };
+  }
   return { kind: "past" };
+}
+
+export interface BannerEvent {
+  event: Event;
+  countdown: Exclude<EventCountdown, { kind: "past" }>;
+}
+
+const BANNER_LEAD_DAYS = 30;
+
+/**
+ * The featured event the site-wide banner counts down to: the soonest one
+ * that is under way or starts within 30 days. Events described by "when" text
+ * have no single date to count to, so they never take the banner.
+ */
+export function getBannerEvent(
+  events: Event[],
+  today: string
+): BannerEvent | undefined {
+  return events
+    .filter((event) => event.featured && !event.when)
+    .toSorted((a, b) => a.startDate.localeCompare(b.startDate))
+    .map((event) => ({ event, countdown: getEventCountdown(event, today) }))
+    .find(
+      (candidate): candidate is BannerEvent =>
+        candidate.countdown.kind !== "past" &&
+        (candidate.countdown.kind !== "upcoming" ||
+          candidate.countdown.daysUntilStart <= BANNER_LEAD_DAYS)
+    );
 }
 
 export interface UpcomingPilgrimage {

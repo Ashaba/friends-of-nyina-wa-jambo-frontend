@@ -2,15 +2,12 @@ import type { Metadata } from "next";
 import { Inter, Playfair_Display } from "next/font/google";
 import { SpeedInsights } from "@vercel/speed-insights/next";
 import { GoogleAnalytics } from "@next/third-parties/google";
-import { FeastBanner } from "@/components/feast-banner";
+import { EventBanner } from "@/components/event-banner";
 import { todayInKibeho } from "@/lib/countdowns";
-import { hideDismissedFeastBannerScript } from "@/lib/feast-banner-dismissal";
+import { hideDismissedEventBannerScript } from "@/lib/event-banner-dismissal";
 import { siteDescription, siteName, siteUrl } from "@/lib/site";
+import { getEvents } from "@/lib/strapi";
 import "./globals.css";
-
-// Rebuilds pages that never fetch from the CMS hourly too, so the feast banner
-// in their pre-built HTML stays close to the real date.
-export const revalidate = 3600;
 
 // Left unset in local and preview environments so their traffic never reaches
 // the production property.
@@ -36,11 +33,13 @@ export const metadata: Metadata = {
   twitter: { card: "summary_large_image" },
 };
 
-export default function RootLayout({
+export default async function RootLayout({
   children,
 }: Readonly<{
   children: React.ReactNode;
-}>): React.ReactElement {
+}>): Promise<React.ReactElement> {
+  const events = await getEvents();
+
   // The banner script marks <html> before React loads.
   return (
     <html
@@ -50,11 +49,11 @@ export default function RootLayout({
     >
       <head>
         <script
-          dangerouslySetInnerHTML={{ __html: hideDismissedFeastBannerScript }}
+          dangerouslySetInnerHTML={{ __html: hideDismissedEventBannerScript }}
         />
       </head>
       <body className="font-sans antialiased">
-        <FeastBanner builtOn={todayInKibeho()} />
+        <EventBanner events={events ?? []} builtOn={todayInKibeho()} />
         {children}
         <SpeedInsights />
         {gaMeasurementId ? <GoogleAnalytics gaId={gaMeasurementId} /> : null}

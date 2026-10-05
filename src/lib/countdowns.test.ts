@@ -1,7 +1,7 @@
 import { expect, test } from "vitest";
 import {
+  getBannerEvent,
   getEventCountdown,
-  getFeastBannerSeason,
   getFeastSeason,
   getUpcomingPilgrimages,
   todayInKibeho,
@@ -65,17 +65,62 @@ test.each([
   expect(getFeastSeason(today)).toEqual(season);
 });
 
-test.each([
-  ["the last day of September", "2026-09-30", undefined],
-  ["1 October", "2026-10-01", "countdown"],
-  ["the novena", "2026-11-21", "novena"],
-  ["the feast", "2026-11-28", "feastDay"],
-  ["the day after the feast", "2026-11-29", undefined],
-  ["New Year's Day", "2027-01-01", undefined],
-])("getFeastBannerSeason on %s", (_scenario, today, kind) => {
+test("getBannerEvent picks the soonest featured event that has not ended", () => {
+  // Arrange
+  const events = [
+    event({ id: 1, startDate: "2026-10-20", featured: true }),
+    event({ id: 2, startDate: "2026-10-05", featured: false }),
+    event({ id: 3, startDate: "2026-09-01", featured: true }),
+    event({ id: 4, startDate: "2026-10-10", featured: true }),
+    event({
+      id: 5,
+      startDate: "2026-10-04",
+      when: "First Saturday of each month",
+      featured: true,
+    }),
+  ];
+
   // Act & Assert
-  expect(getFeastBannerSeason(today)?.kind).toBe(kind);
+  expect(getBannerEvent(events, "2026-10-03")).toEqual({
+    event: events[3],
+    countdown: { kind: "upcoming", daysUntilStart: 7 },
+  });
 });
+
+test("getBannerEvent prefers an event under way to one that starts later", () => {
+  // Arrange
+  const novena = event({
+    id: 1,
+    startDate: "2026-11-19",
+    endDate: "2026-11-27",
+    featured: true,
+  });
+  const feast = event({ id: 2, startDate: "2026-11-28", featured: true });
+
+  // Act & Assert
+  expect(getBannerEvent([feast, novena], "2026-11-21")?.event).toBe(novena);
+});
+
+test.each([
+  ["30 days away", "2026-10-29", 30],
+  ["31 days away", "2026-10-28", undefined],
+])(
+  "getBannerEvent for a featured event %s",
+  (_scenario, today, daysUntilStart) => {
+    // Arrange
+    const feast = event({ startDate: "2026-11-28", featured: true });
+
+    // Act
+    const bannerEvent = getBannerEvent([feast], today);
+
+    // Assert
+    expect(
+      bannerEvent?.countdown.kind === "upcoming"
+        ? bannerEvent.countdown.daysUntilStart
+        : undefined
+    ).toBe(daysUntilStart);
+  }
+);
 
 test.each([
   [
@@ -96,7 +141,12 @@ test.each([
   [
     "an event on its last day",
     { startDate: "2026-10-01", endDate: "2026-10-03" },
-    { kind: "underway" },
+    { kind: "underway", dayOfEvent: 3, lengthInDays: 3 },
+  ],
+  [
+    "an event on its second day",
+    { startDate: "2026-10-02", endDate: "2026-10-10" },
+    { kind: "underway", dayOfEvent: 2, lengthInDays: 9 },
   ],
   [
     "a multi-day event that has ended",
