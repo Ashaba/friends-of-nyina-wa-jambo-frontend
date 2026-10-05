@@ -6,9 +6,9 @@ import { PageHero } from "@/components/page-hero";
 import { GalleryContent } from "@/components/gallery-content";
 
 export const metadata: Metadata = {
-  title: "Gallery | Friends of Nyina wa Jambo",
+  title: "Photos of the Kibeho Shrine",
   description:
-    "Photos from pilgrimages to Kibeho and gatherings of the Friends of Nyina wa Jambo community.",
+    "Photos of the shrine of Our Lady of Kibeho in Rwanda, pilgrimages to the place of the apparitions, and gatherings of the Friends of Nyina wa Jambo.",
   alternates: { canonical: "/gallery" },
 };
 

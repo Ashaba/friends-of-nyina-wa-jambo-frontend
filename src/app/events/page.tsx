@@ -7,9 +7,9 @@ import { sitePhotos } from "@/lib/site-photos";
 import { EventsContent } from "@/components/events-content";
 
 export const metadata: Metadata = {
-  title: "Events | Friends of Nyina wa Jambo",
+  title: "Kibeho Pilgrimages and Events",
   description:
-    "Discover upcoming pilgrimages, prayer gatherings, retreats, and community events organised by the Friends of Nyina wa Jambo.",
+    "Pilgrimages to the Kibeho shrine in Rwanda, the 28 November feast of Our Lady of Kibeho, retreats, and prayer gatherings organised by the Friends of Nyina wa Jambo.",
   alternates: { canonical: "/events" },
 };
 
