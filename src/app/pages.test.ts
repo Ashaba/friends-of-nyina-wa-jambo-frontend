@@ -1,6 +1,7 @@
 import { readdirSync } from "node:fs";
 import { basename, dirname } from "node:path";
 import type { Metadata } from "next";
+import { siteName } from "@/lib/site";
 import sitemap from "./sitemap";
 
 const pages = readdirSync(__dirname, { recursive: true, encoding: "utf8" })
@@ -29,6 +30,15 @@ describe("pages", () => {
       const { metadata }: { metadata: Metadata } = await import(`./${file}`);
 
       expect(metadata.alternates?.canonical).toBe(path);
+    }
+  );
+
+  it.each(pages)(
+    "$path leaves the site name to the title template",
+    async ({ file }) => {
+      const { metadata }: { metadata: Metadata } = await import(`./${file}`);
+
+      expect(String(metadata.title ?? "")).not.toContain(siteName);
     }
   );
 });

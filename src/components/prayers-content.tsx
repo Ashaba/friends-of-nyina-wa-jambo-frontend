@@ -78,13 +78,13 @@ const prayers = [
     id: "peace",
     title: "Prayer for Peace",
     description:
-      "Inspired by the messages of Kibeho, a prayer for peace in our hearts, families, and the world.",
+      "Inspired by the Message of Kibeho, a prayer for peace in our hearts, families, and the world.",
     featured: false,
     sections: [
       {
         heading: "",
         content:
-          "Lord God of peace, hear our prayer.\n\nWe have tried many times and over many years to resolve our conflicts by our own powers and by the force of our arms. So many moments of horror and darkness have come upon us; so many lives have been shattered.\n\nBut our efforts have been in vain. Now, Lord, come to our aid. Grant us peace, teach us peace, guide us toward peace. Open our eyes and our hearts and give us the courage to say: never again war; with war everything is destroyed.\n\nThrough the intercession of Our Lady of Kibeho, who came with the message of peace and repentance, instill in our hearts the courage to embrace forgiveness, reconciliation, and love.\n\nMary, Queen of Peace, pray for us and for the whole world. Amen.",
+          "Lord God of peace, hear our prayer.\n\nWe have tried many times and over many years to resolve our conflicts by our own powers and by the force of our arms. So many moments of horror and darkness have come upon us; so many lives have been shattered.\n\nBut our efforts have been in vain. Now, Lord, come to our aid. Grant us peace, teach us peace, guide us toward peace. Open our eyes and our hearts and give us the courage to say: never again war; with war everything is destroyed.\n\nThrough the intercession of Our Lady of Kibeho, who came with the Message of peace and repentance, instill in our hearts the courage to embrace forgiveness, reconciliation, and love.\n\nMary, Queen of Peace, pray for us and for the whole world. Amen.",
       },
     ],
   },

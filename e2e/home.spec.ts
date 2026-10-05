@@ -47,7 +47,7 @@ test("homepage calls to action are links, not buttons nested in links", async ({
   await page.goto("/");
 
   await expect(
-    page.getByRole("link", { name: /Discover the Messages/i })
+    page.getByRole("link", { name: /Discover the Message/i })
   ).toBeVisible();
   await expect(page.locator("a button, a [role='button']")).toHaveCount(0);
 });

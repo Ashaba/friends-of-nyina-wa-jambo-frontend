@@ -22,7 +22,7 @@ const benefits = [
     icon: BookOpen,
     title: "Daily Message & Reflection",
     description:
-      "Start each day with a message from Our Lady of Kibeho and a guided reflection to deepen your faith.",
+      "Start each day with words from Our Lady of Kibeho and a guided reflection to deepen your faith.",
   },
   {
     icon: Heart,

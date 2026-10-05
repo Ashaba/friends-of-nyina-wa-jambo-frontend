@@ -5,7 +5,7 @@ import { GoogleAnalytics } from "@next/third-parties/google";
 import { EventBanner } from "@/components/event-banner";
 import { todayInKibeho } from "@/lib/countdowns";
 import { hideDismissedEventBannerScript } from "@/lib/event-banner-dismissal";
-import { siteDescription, siteName, siteUrl } from "@/lib/site";
+import { siteDescription, siteKeywords, siteName, siteUrl } from "@/lib/site";
 import { getEvents } from "@/lib/strapi";
 import "./globals.css";
 
@@ -27,8 +27,12 @@ const playfair = Playfair_Display({
 // page and point them all at the homepage.
 export const metadata: Metadata = {
   metadataBase: siteUrl,
-  title: `${siteName} | Our Lady of Kibeho`,
+  title: {
+    default: `Our Lady of Kibeho, Rwanda | ${siteName}`,
+    template: `%s | ${siteName}`,
+  },
   description: siteDescription,
+  keywords: siteKeywords,
   openGraph: { siteName, type: "website", locale: "en" },
   twitter: { card: "summary_large_image" },
 };

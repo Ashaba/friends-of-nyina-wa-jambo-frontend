@@ -43,7 +43,7 @@ export function HeroSection(): React.JSX.Element {
             className="bg-accent px-8 text-base font-semibold text-accent-foreground hover:bg-accent/90"
           >
             <Link href="/messages">
-              Discover the Messages
+              Discover the Message
               <ArrowRight className="ml-2 h-4 w-4" />
             </Link>
           </Button>

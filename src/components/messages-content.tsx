@@ -72,7 +72,7 @@ const visionaries = [
       {
         title: "Reconciliation",
         content:
-          "Marie Claire received strong messages about the need for reconciliation, forgiveness, and unity. These messages proved prophetically significant in the years that followed in Rwanda.",
+          "Through Marie Claire, Our Lady stressed the need for reconciliation, forgiveness, and unity. This part of her Message proved prophetically significant in the years that followed in Rwanda.",
       },
     ],
   },
@@ -87,7 +87,7 @@ const keyThemes = [
   {
     theme: "Repentance",
     description:
-      "A central message was the urgent need for repentance and conversion. Our Lady warned that the world was on the edge of catastrophe due to sin and rebellion against God.",
+      "Central to the Message is the urgent need for repentance and conversion. Our Lady warned that the world was on the edge of catastrophe due to sin and rebellion against God.",
   },
   {
     theme: "Suffering",
@@ -145,8 +145,9 @@ export function MessagesContent(): React.JSX.Element {
                   <strong className="text-foreground">
                     &ldquo;Nyina wa Jambo&rdquo;
                   </strong>
-                  , which means &ldquo;Mother of the Word.&rdquo; She delivered
-                  urgent messages filled with a mother&rsquo;s love.
+                  , which means &ldquo;Mother of the Word.&rdquo; She gave one
+                  urgent Message, filled with a mother&rsquo;s love: a call to
+                  love, repentance, and conversion of hearts.
                 </p>
                 <p>
                   On June 29, 2001, Bishop Augustin Misago of the Diocese of
@@ -321,7 +322,7 @@ export function MessagesContent(): React.JSX.Element {
               As Displayed at the Shrine
             </p>
             <h2 className="text-balance font-serif text-3xl font-bold text-foreground md:text-4xl">
-              The Message of Our Lady of Kibeho
+              The Message of Our Lady of Kibeho, Mother of the Word
             </h2>
           </div>
 

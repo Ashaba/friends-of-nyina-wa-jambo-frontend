@@ -5,7 +5,7 @@ const footerLinks = [
   {
     title: "Discover",
     links: [
-      { name: "Messages of Kibeho", href: "/messages" },
+      { name: "Message of Our Lady of Kibeho", href: "/messages" },
       { name: "Daily Reflection", href: "/messages#daily" },
       { name: "About the Apparitions", href: "/messages#about" },
     ],
@@ -49,7 +49,7 @@ export function SiteFooter(): React.JSX.Element {
             </Link>
             <p className="max-w-xs text-sm leading-relaxed text-primary-foreground/70">
               An organization helping people everywhere learn about Our Lady of
-              Kibeho, Mother of the Word, and her messages of hope, repentance,
+              Kibeho, Mother of the Word, and her Message of hope, repentance,
               and peace.
             </p>
           </div>
