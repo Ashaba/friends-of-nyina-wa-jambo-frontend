@@ -68,7 +68,7 @@ const fallbackEvents: Event[] = [
     location: "Various Parishes Worldwide",
     type: "Recurring",
     description:
-      "A monthly gathering for the First Saturday devotion, including Holy Mass, the Rosary of the Seven Sorrows, confession, and a meditation on the messages of Kibeho.",
+      "A monthly gathering for the First Saturday devotion, including Holy Mass, the Rosary of the Seven Sorrows, confession, and a meditation on the Message of Kibeho.",
     featured: false,
   },
   {
@@ -79,7 +79,7 @@ const fallbackEvents: Event[] = [
     location: "Online",
     type: "Vigil",
     description:
-      "A special prayer vigil for young people on the Solemnity of the Assumption, reflecting on Our Lady’s messages to the young visionaries of Kibeho and their relevance for youth today.",
+      "A special prayer vigil for young people on the Solemnity of the Assumption, reflecting on Our Lady’s Message to the young visionaries of Kibeho and their relevance for youth today.",
     featured: false,
   },
 ];

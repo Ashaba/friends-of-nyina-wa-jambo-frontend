@@ -5,9 +5,9 @@ import { sitePhotos } from "@/lib/site-photos";
 import { PrayersContent } from "@/components/prayers-content";
 
 export const metadata: Metadata = {
-  title: "Prayers | Friends of Nyina wa Jambo",
+  title: "Rosary of the Seven Sorrows",
   description:
-    "Pray the Rosary of the Seven Sorrows and other devotional prayers given through Our Lady of Kibeho.",
+    "Pray the Rosary of the Seven Sorrows of the Blessed Virgin Mary, which Our Lady of Kibeho asked the world to pray, along with other prayers to Our Lady of Sorrows.",
   alternates: { canonical: "/prayers" },
 };
 

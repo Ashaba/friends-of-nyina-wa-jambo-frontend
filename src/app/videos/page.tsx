@@ -6,9 +6,9 @@ import { sitePhotos } from "@/lib/site-photos";
 import { VideosContent } from "@/components/videos-content";
 
 export const metadata: Metadata = {
-  title: "Videos | Friends of Nyina wa Jambo",
+  title: "Kibeho Videos and Testimonies",
   description:
-    "Watch pilgrimage recordings, visionary encounters, prayer guides, and testimonies from the Friends of Nyina wa Jambo community.",
+    "Watch pilgrimages to Kibeho, Rwanda, talks with the visionaries, guided Seven Sorrows Rosary prayers, and testimonies about Our Lady of Kibeho.",
   alternates: { canonical: "/videos" },
 };
 

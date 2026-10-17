@@ -34,21 +34,22 @@ export function AboutSection(): React.JSX.Element {
                 Between November 28, 1981 and November 28, 1989, the Blessed
                 Virgin Mary appeared to three young students at Kibeho College
                 in Rwanda, Africa. These apparitions were officially approved by
-                the Catholic Church on June 29, 2001.
+                the Catholic Church on June 29, 2001, and remain the only
+                Church-approved Marian apparitions on the African continent.
               </p>
               <p>
                 Our Lady identified herself as the{" "}
                 <strong className="text-foreground">
                   &ldquo;Mother of the Word&rdquo;
                 </strong>{" "}
-                and delivered urgent messages calling all humanity to prayer,
-                repentance, conversion of hearts, and reconciliation.
+                and delivered one urgent Message calling all humanity to love,
+                prayer, repentance, conversion of hearts, and reconciliation.
               </p>
               <p>
                 The three visionaries were Alphonsine Mumureke, Nathalie
-                Mukamazimpaka, and Marie Claire Mukangango. Each received
-                distinct messages that together form a powerful call for the
-                entire world.
+                Mukamazimpaka, and Marie Claire Mukangango. Each received a part
+                of the one Message of Our Lady of Kibeho, a call for the entire
+                world.
               </p>
             </div>
             <Button
@@ -57,7 +58,7 @@ export function AboutSection(): React.JSX.Element {
               className="mt-2 border-primary text-primary hover:bg-primary hover:text-primary-foreground"
             >
               <Link href="/messages">
-                Read the Full Messages
+                Read the Full Message
                 <ArrowRight className="ml-2 h-4 w-4" />
               </Link>
             </Button>

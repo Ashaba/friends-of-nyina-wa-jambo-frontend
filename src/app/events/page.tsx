@@ -7,9 +7,9 @@ import { sitePhotos } from "@/lib/site-photos";
 import { EventsContent } from "@/components/events-content";
 
 export const metadata: Metadata = {
-  title: "Events | Friends of Nyina wa Jambo",
+  title: "Events",
   description:
-    "Discover upcoming pilgrimages, prayer gatherings, retreats, and community events organised by the Friends of Nyina wa Jambo.",
+    "Activities, Events, Pilgrimages, Retreats, and Prayers organised by the Friends of Nyina wa Jambo.",
   alternates: { canonical: "/events" },
 };
 
@@ -20,7 +20,7 @@ export default async function EventsPage(): Promise<React.JSX.Element> {
     <PageLayout>
       <PageHero
         photo={sitePhotos.pilgrimsAtTheChurch}
-        title="Events & Gatherings"
+        title="Events & Activities"
         subtitle="Come together in faith and community"
         description="Join fellow devotees for pilgrimages, prayer gatherings, retreats, and celebrations honouring Our Lady of Kibeho."
       />

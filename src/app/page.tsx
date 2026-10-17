@@ -15,13 +15,43 @@ export const metadata: Metadata = {
   alternates: { canonical: "/" },
 };
 
-const organizationJsonLd = {
+const ourLadyOfKibeho = {
+  "@type": "Thing",
+  name: "Our Lady of Kibeho",
+  alternateName: [
+    "Nyina wa Jambo",
+    "Mother of the Word",
+    "Notre-Dame de Kibeho",
+  ],
+  sameAs: "https://en.wikipedia.org/wiki/Our_Lady_of_Kibeho",
+};
+
+const kibeho = {
+  "@type": "Place",
+  name: "Kibeho, Rwanda",
+  sameAs: "https://en.wikipedia.org/wiki/Kibeho",
+};
+
+const homeJsonLd = {
   "@context": "https://schema.org",
-  "@type": "Organization",
-  name: siteName,
-  alternateName: "Nyina wa Jambo",
-  url: siteUrl.href,
-  description: siteDescription,
+  "@graph": [
+    {
+      "@type": "Organization",
+      name: siteName,
+      alternateName: "Nyina wa Jambo",
+      url: siteUrl.href,
+      description: siteDescription,
+      knowsAbout: [ourLadyOfKibeho, kibeho, "Rosary of the Seven Sorrows"],
+    },
+    {
+      "@type": "WebSite",
+      name: siteName,
+      alternateName: "Nyina wa Jambo",
+      url: siteUrl.href,
+      inLanguage: "en",
+      about: ourLadyOfKibeho,
+    },
+  ],
 };
 
 export default async function Home(): Promise<React.JSX.Element> {
@@ -36,7 +66,7 @@ export default async function Home(): Promise<React.JSX.Element> {
         type="application/ld+json"
         // Escaping "<" stops the JSON from closing the script tag early.
         dangerouslySetInnerHTML={{
-          __html: JSON.stringify(organizationJsonLd).replace(/</g, "\\u003c"),
+          __html: JSON.stringify(homeJsonLd).replace(/</g, "\\u003c"),
         }}
       />
       <SiteHeader />

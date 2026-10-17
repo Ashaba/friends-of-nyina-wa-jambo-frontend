@@ -23,7 +23,7 @@ const fallbackVideos: Video[] = [
     title: "Encounter with the Visionary Alphonsine",
     youtubeUrl: "https://www.youtube.com/watch?v=VIDEO_ID_2",
     description:
-      "A rare and moving encounter with Alphonsine Mumureke, the first visionary of Kibeho, as she shares her experience of the apparitions and Our Lady’s enduring messages for the world.",
+      "A rare and moving encounter with Alphonsine Mumureke, the first visionary of Kibeho, as she shares her experience of the apparitions and Our Lady’s enduring Message for the world.",
     category: "Visionary Encounters",
     publishedDate: "2025-09-15",
   },
@@ -41,7 +41,7 @@ const fallbackVideos: Video[] = [
     title: "Testimony: How Kibeho Changed My Life",
     youtubeUrl: "https://www.youtube.com/watch?v=VIDEO_ID_4",
     description:
-      "A powerful testimony from a pilgrim who visited Kibeho and experienced a profound conversion. Hear how the messages of Our Lady brought healing and renewed faith.",
+      "A powerful testimony from a pilgrim who visited Kibeho and experienced a profound conversion. Hear how the Message of Our Lady brought healing and renewed faith.",
     category: "Testimonies",
     publishedDate: "2025-07-10",
   },
@@ -59,7 +59,7 @@ const fallbackVideos: Video[] = [
     title: "Interview with Nathalie Mukamazimpaka",
     youtubeUrl: "https://www.youtube.com/watch?v=VIDEO_ID_6",
     description:
-      "An intimate interview with Nathalie, one of the three visionaries, as she recounts Our Lady’s messages about prayer, penance, and the importance of faith in the modern world.",
+      "An intimate interview with Nathalie, one of the three visionaries, as she recounts Our Lady’s Message of prayer, penance, and the importance of faith in the modern world.",
     category: "Visionary Encounters",
     publishedDate: "2025-05-14",
   },

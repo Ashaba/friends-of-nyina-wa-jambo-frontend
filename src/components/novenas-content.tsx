@@ -61,7 +61,7 @@ const novenadays = [
     theme: "Reconciliation",
     scripture: "“Forgive, and you will be forgiven.” (Luke 6:37)",
     reflection:
-      "The messages of Kibeho carried a profound call to reconciliation, especially significant for Rwanda. Today, let us pray for the grace to forgive those who have hurt us and to seek forgiveness from those we have wounded.",
+      "The Message of Kibeho carried a profound call to reconciliation, especially significant for Rwanda. Today, let us pray for the grace to forgive those who have hurt us and to seek forgiveness from those we have wounded.",
     prayer:
       "Our Lady of Kibeho, you foresaw the terrible violence that was to come and called for reconciliation. Give me the grace to forgive from my heart, to seek peace with all people, and to be an instrument of healing. Amen.",
   },
