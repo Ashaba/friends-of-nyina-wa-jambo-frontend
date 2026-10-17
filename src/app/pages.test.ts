@@ -37,8 +37,13 @@ describe("pages", () => {
     "$path leaves the site name to the title template",
     async ({ file }) => {
       const { metadata }: { metadata: Metadata } = await import(`./${file}`);
+      const { title } = metadata;
+      const text =
+        title && typeof title === "object" && "absolute" in title
+          ? title.absolute
+          : String(title ?? "");
 
-      expect(String(metadata.title ?? "")).not.toContain(siteName);
+      expect(text).not.toContain(siteName);
     }
   );
 });

@@ -5,7 +5,7 @@ import { sitePhotos } from "@/lib/site-photos";
 import { NovenasContent } from "@/components/novenas-content";
 
 export const metadata: Metadata = {
-  title: "Novenas",
+  title: { absolute: "Novenas" },
   description:
     "Join us in praying novenas for the seasons and feasts of the Church year: nine days of prayer, reflection, and intercession, united with fellow devotees.",
   alternates: { canonical: "/novenas" },
