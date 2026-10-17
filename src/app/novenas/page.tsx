@@ -5,9 +5,9 @@ import { sitePhotos } from "@/lib/site-photos";
 import { NovenasContent } from "@/components/novenas-content";
 
 export const metadata: Metadata = {
-  title: "Novena to Our Lady of Kibeho",
+  title: "Novenas",
   description:
-    "Pray the Novena to Our Lady of Kibeho, Mother of the Word. Nine days of prayer to the Virgin Mary with Scripture readings, reflections, and intercessions.",
+    "Join us in praying novenas for the seasons and feasts of the Church year: nine days of prayer, reflection, and intercession, united with fellow devotees.",
   alternates: { canonical: "/novenas" },
 };
 
@@ -18,7 +18,7 @@ export default function NovenasPage(): React.JSX.Element {
         photo={sitePhotos.cloudsAndLight}
         title="Novenas"
         subtitle="Nine days of devoted prayer"
-        description="Unite with fellow devotees in a nine-day novena to Our Lady of Kibeho, reflecting on her Message and seeking her powerful intercession."
+        description="Pray together each day of the novena, reflecting on Scripture and bringing our intentions before God."
       />
       <NovenasContent />
     </PageLayout>

@@ -17,7 +17,7 @@ export default function NewsletterPage(): React.JSX.Element {
       <PageHero
         photo={sitePhotos.pathToTheShrine}
         title="Newsletter"
-        subtitle="Stay connected in faith"
+        subtitle="Stay connected in faith and spread the message of Kibeho"
         description="Receive reflections on the Message of Our Lady, events, prayer intentions, and community news directly in your inbox."
       />
       <NewsletterContent />

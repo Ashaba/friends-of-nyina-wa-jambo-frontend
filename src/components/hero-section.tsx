@@ -43,7 +43,7 @@ export function HeroSection(): React.JSX.Element {
             className="bg-accent px-8 text-base font-semibold text-accent-foreground hover:bg-accent/90"
           >
             <Link href="/messages">
-              Discover the Message
+              More about Her Message
               <ArrowRight className="ml-2 h-4 w-4" />
             </Link>
           </Button>
@@ -53,7 +53,7 @@ export function HeroSection(): React.JSX.Element {
             variant="outline"
             className="border-background/40 bg-background/10 px-8 text-base font-semibold text-background hover:bg-background/20 hover:text-background"
           >
-            <Link href="/prayer-requests">Request a Prayer</Link>
+            <Link href="/prayer-requests">Prayer Request</Link>
           </Button>
         </div>
       </div>

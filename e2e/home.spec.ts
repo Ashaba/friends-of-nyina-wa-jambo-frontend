@@ -36,7 +36,7 @@ test("can navigate to prayers page", async ({ page }) => {
 test("can navigate to events page", async ({ page }) => {
   await page.goto("/events");
   const heading = page.getByRole("heading", {
-    name: /Events & Gatherings/i,
+    name: /Events & Activities/i,
   });
   await expect(heading).toBeVisible();
 });
@@ -47,7 +47,7 @@ test("homepage calls to action are links, not buttons nested in links", async ({
   await page.goto("/");
 
   await expect(
-    page.getByRole("link", { name: /Discover the Message/i })
+    page.getByRole("link", { name: /More about Her Message/i })
   ).toBeVisible();
   await expect(page.locator("a button, a [role='button']")).toHaveCount(0);
 });

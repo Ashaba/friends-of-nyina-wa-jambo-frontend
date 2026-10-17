@@ -7,9 +7,9 @@ import { sitePhotos } from "@/lib/site-photos";
 import { EventsContent } from "@/components/events-content";
 
 export const metadata: Metadata = {
-  title: "Kibeho Pilgrimages and Events",
+  title: "Events",
   description:
-    "Pilgrimages to the Kibeho shrine in Rwanda, the 28 November feast of Our Lady of Kibeho, retreats, and prayer gatherings organised by the Friends of Nyina wa Jambo.",
+    "Activities, Events, Pilgrimages, Retreats, and Prayers organised by the Friends of Nyina wa Jambo.",
   alternates: { canonical: "/events" },
 };
 
@@ -20,7 +20,7 @@ export default async function EventsPage(): Promise<React.JSX.Element> {
     <PageLayout>
       <PageHero
         photo={sitePhotos.pilgrimsAtTheChurch}
-        title="Events & Gatherings"
+        title="Events & Activities"
         subtitle="Come together in faith and community"
         description="Join fellow devotees for pilgrimages, prayer gatherings, retreats, and celebrations honouring Our Lady of Kibeho."
       />

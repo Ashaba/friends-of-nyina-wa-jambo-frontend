@@ -5,9 +5,9 @@ import { sitePhotos } from "@/lib/site-photos";
 import { PrayerRequestForm } from "@/components/prayer-request-form";
 
 export const metadata: Metadata = {
-  title: "Prayer Requests to Our Lady of Kibeho",
+  title: "Prayer Requests",
   description:
-    "Submit your prayer intentions to the Friends of Nyina wa Jambo community. We will pray for you through the intercession of Our Lady of Kibeho.",
+    "Submit your prayer intentions to the Friends of Nyina wa Jambo community. We will pray for you through the intercession of Our Lady, Mother of the Word.",
   alternates: { canonical: "/prayer-requests" },
 };
 

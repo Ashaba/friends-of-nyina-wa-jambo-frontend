@@ -28,8 +28,8 @@ const playfair = Playfair_Display({
 export const metadata: Metadata = {
   metadataBase: siteUrl,
   title: {
-    default: `Our Lady of Kibeho, Rwanda | ${siteName}`,
-    template: `%s | ${siteName}`,
+    default: `Our Lady of Kibeho, Rwanda - ${siteName}`,
+    template: `%s - ${siteName}`,
   },
   description: siteDescription,
   keywords: siteKeywords,

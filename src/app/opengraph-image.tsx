@@ -1,7 +1,7 @@
 import { ImageResponse } from "next/og";
 import { siteName } from "@/lib/site";
 
-export const alt = `${siteName} | Our Lady of Kibeho, Mother of the Word`;
+export const alt = `${siteName} - Our Lady of Kibeho, Mother of the Word`;
 export const size = { width: 1200, height: 630 };
 export const contentType = "image/png";
 
