@@ -35,7 +35,7 @@ test("homepage declares the Our Lady of Kibeho tab and home-screen icons", async
 
   expect(hrefs).toEqual([
     expect.stringContaining("/favicon.ico"),
-    expect.stringContaining("/icon.svg"),
+    expect.stringContaining("/icon.png"),
     expect.stringContaining("/apple-icon.png"),
   ]);
   for (const href of hrefs) {
