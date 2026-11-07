@@ -2,7 +2,8 @@
 
 import { useState } from "react";
 import Link from "next/link";
-import { Menu, X, Cross } from "lucide-react";
+import { Menu, X } from "lucide-react";
+import { SiteLogo } from "@/components/site-logo";
 import { Button } from "@/components/ui/button";
 
 const navigation = [
@@ -23,7 +24,7 @@ export function SiteHeader(): React.JSX.Element {
     <header className="sticky top-0 z-50 border-b border-border bg-background/95 backdrop-blur supports-[backdrop-filter]:bg-background/80">
       <nav className="mx-auto flex max-w-7xl items-center justify-between px-6 py-4 lg:px-8">
         <Link href="/" className="flex items-center gap-2">
-          <Cross className="h-6 w-6 text-primary" />
+          <SiteLogo />
           <div className="flex flex-col">
             <span className="font-serif text-xl font-bold leading-tight text-primary">
               Nyina wa Jambo
