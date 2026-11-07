@@ -24,6 +24,26 @@ test("homepage has working navigation", async ({ page }) => {
   await expect(prayersLink).toBeVisible();
 });
 
+test("homepage declares the Our Lady of Kibeho tab and home-screen icons", async ({
+  page,
+}) => {
+  await page.goto("/");
+
+  const hrefs = await page
+    .locator("head link[rel='icon'], head link[rel='apple-touch-icon']")
+    .evaluateAll((links) => links.map((link) => link.getAttribute("href")));
+
+  expect(hrefs).toEqual([
+    expect.stringContaining("/favicon.ico"),
+    expect.stringContaining("/icon.svg"),
+    expect.stringContaining("/apple-icon.png"),
+  ]);
+  for (const href of hrefs) {
+    const response = await page.request.get(href!);
+    expect(response.ok()).toBe(true);
+  }
+});
+
 test("can navigate to prayers page", async ({ page }) => {
   await page.goto("/prayers");
   const heading = page.getByRole("heading", {

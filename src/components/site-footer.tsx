@@ -1,5 +1,5 @@
 import Link from "next/link";
-import { Cross } from "lucide-react";
+import { SiteLogo } from "@/components/site-logo";
 
 const footerLinks = [
   {
@@ -37,7 +37,7 @@ export function SiteFooter(): React.JSX.Element {
           {/* Brand */}
           <div className="flex flex-col gap-4">
             <Link href="/" className="flex items-center gap-2">
-              <Cross className="h-6 w-6" />
+              <SiteLogo />
               <div className="flex flex-col">
                 <span className="font-serif text-xl font-bold">
                   Nyina wa Jambo
